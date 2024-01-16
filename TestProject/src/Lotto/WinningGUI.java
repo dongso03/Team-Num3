@@ -1,9 +1,21 @@
 package Lotto;
 
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.util.Arrays;
+import java.util.Random;
+import java.util.Set;
+import java.util.TreeSet;
+
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class WinningGUI extends JFrame{
 	public WinningGUI() {
@@ -13,18 +25,113 @@ public class WinningGUI extends JFrame{
 		JLabel lbl = new JLabel("구매 내역: ");
 		lbl.setBounds(73, 24, 84, 15);
 		pnl.add(lbl);
-		add(pnl);
 		
 		String[] list = new String[] {"","1회차","당첨된 것만 보기"};
 		JComboBox comboBox = new JComboBox(list);
+		comboBox.addItemListener(new ItemListener() {
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				
+			}
+		});
 		comboBox.setBounds(169, 21, 178, 21);
 		pnl.add(comboBox);
 		
 		
+		getContentPane().add(pnl);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(40, 88, 363, 64);
+		pnl.add(panel);
+		panel.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setBounds(12, 10, 28, 27);
+		panel.add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setBounds(52, 10, 28, 27);
+		panel.add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_2 = new JLabel("");
+		lblNewLabel_2.setBounds(92, 10, 28, 27);
+		panel.add(lblNewLabel_2);
+		
+		JLabel lblNewLabel_1_1 = new JLabel("");
+		lblNewLabel_1_1.setBounds(132, 10, 28, 27);
+		panel.add(lblNewLabel_1_1);
+		
+		JLabel lblNewLabel_2_1 = new JLabel("");
+		lblNewLabel_2_1.setBounds(171, 9, 28, 27);
+		panel.add(lblNewLabel_2_1);
+		
+		JLabel lblNewLabel_1_1_1 = new JLabel("");
+		lblNewLabel_1_1_1.setBounds(211, 9, 28, 27);
+		panel.add(lblNewLabel_1_1_1);
+		
+		JLabel lblNewLabel_2_1_1 = new JLabel("+");
+		lblNewLabel_2_1_1.setBounds(251, 10, 17, 27);
+		panel.add(lblNewLabel_2_1_1);
+		
+		JLabel lblNewLabel_3 = new JLabel("당첨 번호");
+		lblNewLabel_3.setBounds(102, 39, 57, 15);
+		panel.add(lblNewLabel_3);
+		
+		
+		JLabel lblNewLabel_1_1_1_1 = new JLabel("");
+		lblNewLabel_1_1_1_1.setBounds(292, 10, 28, 27);
+		panel.add(lblNewLabel_1_1_1_1);
+		
+		
+		JLabel lblNewLabel_4 = new JLabel("보너스");
+		lblNewLabel_4.setBounds(292, 39, 57, 15);
+		panel.add(lblNewLabel_4);
+		
+		Random ran = new Random();
+		// 숫자 7개를 랜덤으로 뽑아내는데 6개는 오름차순으로, 하나는 보너스
+		int n1 = ran.nextInt(45) + 1;
+		int n2 = ran.nextInt(45) + 1;
+		int n3 = ran.nextInt(45) + 1;
+		int n4 = ran.nextInt(45) + 1;
+		int n5 = ran.nextInt(45) + 1;
+		int n6 = ran.nextInt(45) + 1;
+		// 보너스
+		int n7 = ran.nextInt(45) + 1;
+		//lblNewLabel_1_1_1_1.
+		Set<Integer> random = new TreeSet<>(Arrays.asList(n1,n2,n3,n4,n5,n6));
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBounds(40, 162, 363, 64);
+		pnl.add(panel_1);
+		panel_1.setLayout(null);
+		
+		JLabel lblNewLabel_5 = new JLabel("New label");
+		lblNewLabel_5.setBounds(0, 0, 305, 64);
+		panel_1.add(lblNewLabel_5);
+		
+		JLabel lblNewLabel_6 = new JLabel("New label");
+		lblNewLabel_6.setBounds(306, 0, 57, 64);
+		panel_1.add(lblNewLabel_6);
+		
+		JButton btnNewButton = new JButton("처음 화면으로 돌아가기");
+		
+		btnNewButton.setBounds(294, 236, 178, 23);
+		pnl.add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("당첨규칙 확인하기");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//다이얼로그 만들기
+				JDialog dia = new MyDialog(WinningGUI.this);
+				dia.setVisible(true);
+				
+			}
+		});
+		btnNewButton_1.setBounds(294, 269, 178, 23);
+		pnl.add(btnNewButton_1);
 		
 		showGUI();
 	}
-
 	private void showGUI() {
 		setSize(500, 500);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -34,5 +141,37 @@ public class WinningGUI extends JFrame{
 	public static void main(String[] args) {
 		new WinningGUI();
 	}
-	
+}
+
+class MyDialog extends JDialog{
+	public MyDialog(JFrame parent) {
+		super(parent); 
+		setTitle("당첨 규칙 확인");
+		setModal(true);
+		JLabel lblRule = new JLabel("당첨 규칙을 정해서 작성하기!");
+		add(lblRule);
+		
+		setSize(300,300);
+		setLocationRelativeTo(parent); 
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE); 
+	}
+}
+
+class winMessage extends JDialog{
+	public winMessage(JFrame parent) {
+		super(parent);
+		setTitle("당첨");
+		// 이미지 넣기
+		JPanel pnl = new JPanel();
+		JLabel lbl = new JLabel("");
+		ImageIcon icon = new ImageIcon("춘식1.png"); // 사진 어떻게 넣지???ㅠㅠㅠ
+		lbl.setIcon(icon);
+		pnl.add(lbl);
+		add(pnl);
+		
+		setSize(300,300);
+		setLocationRelativeTo(parent); 
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		
+	}
 }
