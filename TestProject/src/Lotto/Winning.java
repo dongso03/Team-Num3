@@ -1,5 +1,7 @@
 package Lotto;
 
-public class Winning {
 
+public class Winning{
+	
+	
 }

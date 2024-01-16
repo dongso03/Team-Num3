@@ -1,5 +1,7 @@
 package Lotto;
 
-public class PurchaseGUI {
+public class PurchaseGUI{
 
+		
 }
+
