@@ -24,7 +24,7 @@ public class ChargeGUI extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JDialog jd = new confirmDialog(ChargeGUI.this);
+				JDialog jd = new confirmDialog(ChargeGUI.this, customer);
 				jd.setVisible(true);
 
 			}
