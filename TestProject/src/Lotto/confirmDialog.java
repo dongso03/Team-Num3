@@ -13,17 +13,17 @@ import javax.swing.SpringLayout;
 public 	class confirmDialog extends JDialog {
 	
 	private ChargeGUI chargeGUI;
-	private Customer customer;
+	private Customer customer = new Customer(100,1); // 이거 수정해야됨
+	
 	
 	public confirmDialog(ChargeGUI chargeGUI) {
         super(chargeGUI);
         this.chargeGUI = chargeGUI;
-        this.customer = new Customer();
+        
 		setTitle("확인창");
 		setModal(true);
 		
-		//chargeGUI = new ChargeGUI();
-		customer = new Customer();
+		//customer = new Customer();
 		JPanel pnl = new JPanel();
 		JLabel lblcon = new JLabel("정말 충전하시겠습니까?");
 		JLabel lblcon2 = new JLabel("확인버튼 누를시 시작화면으로");
@@ -45,7 +45,6 @@ public 	class confirmDialog extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String str = chargeGUI.textField.getText();
-				//System.out.println(str);
 				Integer number = Integer.valueOf(str);
 				customer.addToAmount(number);
 				

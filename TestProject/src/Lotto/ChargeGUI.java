@@ -15,7 +15,7 @@ import javax.swing.JDialog;
 public class ChargeGUI extends JFrame {
 	public JTextField textField;
 	private JButton btn;
-	
+	private Customer customer = new Customer(100,1);
 
 	public ChargeGUI() {
 		extracted();
