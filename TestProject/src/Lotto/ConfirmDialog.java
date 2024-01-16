@@ -10,16 +10,17 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 
-public 	class confirmDialog extends JDialog {
-	
+public class ConfirmDialog extends JDialog {
+
 	private ChargeGUI chargeGUI;
 	private Customer customer;
-	public confirmDialog(JFrame parent) {
+
+	public ConfirmDialog(JFrame parent, ChargeGUI chargeGUI) {
 		super(parent);
 		setTitle("확인창");
 		setModal(true);
-		
-		chargeGUI = new ChargeGUI();
+
+		this.chargeGUI = chargeGUI; // 전달된 ChargeGUI 인스턴스 사용
 		customer = new Customer();
 		JPanel pnl = new JPanel();
 		JLabel lblcon = new JLabel("정말 충전하시겠습니까?");
@@ -35,29 +36,30 @@ public 	class confirmDialog extends JDialog {
 		sl_pnl.putConstraint(SpringLayout.WEST, btn2, 0, SpringLayout.WEST, lblcon2);
 		sl_pnl.putConstraint(SpringLayout.WEST, lblcon, 71, SpringLayout.WEST, pnl);
 		sl_pnl.putConstraint(SpringLayout.SOUTH, lblcon, -15, SpringLayout.NORTH, lblcon2);
+
 		btn2.addActionListener(new ActionListener() {
-			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if() {
-				String str =chargeGUI.textField.getText() ;
-				Integer number = Integer.valueOf(str);
-				customer.addToAmount(number);
-				
-				System.out.println(customer.getAmount());
+				String str = chargeGUI.textField.getText();
+				System.out.println(str);
+				try {
+					Integer number = Integer.valueOf(str);
+					customer.addToAmount(number);
+					System.out.println(customer.getAmount());
+				} catch (NumberFormatException ex) {
+					System.out.println("숫자로 변환할 수 없는 형식입니다.");
 				}
-				
+
 			}
 		});
-		
-		
+
 		btn3.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 			}
 		});
-		
+
 		pnl.setLayout(sl_pnl);
 		pnl.add(lblcon);
 		pnl.add(lblcon2);
@@ -65,10 +67,8 @@ public 	class confirmDialog extends JDialog {
 		pnl.add(btn3);
 
 		getContentPane().add(pnl);
-		
 
 		setSize(300, 300);
-		// setLocation(parent.getX()-parent.getWidth(), parent.getY());
 		setLocationRelativeTo(parent);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	}

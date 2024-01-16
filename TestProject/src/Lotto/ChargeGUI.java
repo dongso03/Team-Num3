@@ -15,7 +15,7 @@ import javax.swing.JDialog;
 public class ChargeGUI extends JFrame {
 	public JTextField textField;
 	private JButton btn;
-	
+	ConfirmDialog confirmDialog;
 
 	public ChargeGUI() {
 		extracted();
@@ -24,7 +24,7 @@ public class ChargeGUI extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JDialog jd = new confirmDialog(ChargeGUI.this);
+				JDialog jd = new JDialog(ChargeGUI.this);
 				jd.setVisible(true);
 
 			}
