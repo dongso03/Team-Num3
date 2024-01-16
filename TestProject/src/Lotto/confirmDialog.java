@@ -14,12 +14,15 @@ public 	class confirmDialog extends JDialog {
 	
 	private ChargeGUI chargeGUI;
 	private Customer customer;
-	public confirmDialog(JFrame parent) {
-		super(parent);
+	
+	public confirmDialog(ChargeGUI chargeGUI) {
+        super(chargeGUI);
+        this.chargeGUI = chargeGUI;
+        this.customer = new Customer();
 		setTitle("확인창");
 		setModal(true);
 		
-		chargeGUI = new ChargeGUI();
+		//chargeGUI = new ChargeGUI();
 		customer = new Customer();
 		JPanel pnl = new JPanel();
 		JLabel lblcon = new JLabel("정말 충전하시겠습니까?");
@@ -35,17 +38,19 @@ public 	class confirmDialog extends JDialog {
 		sl_pnl.putConstraint(SpringLayout.WEST, btn2, 0, SpringLayout.WEST, lblcon2);
 		sl_pnl.putConstraint(SpringLayout.WEST, lblcon, 71, SpringLayout.WEST, pnl);
 		sl_pnl.putConstraint(SpringLayout.SOUTH, lblcon, -15, SpringLayout.NORTH, lblcon2);
+		
+		
 		btn2.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if() {
-				String str =chargeGUI.textField.getText() ;
+				String str = chargeGUI.textField.getText();
+				//System.out.println(str);
 				Integer number = Integer.valueOf(str);
 				customer.addToAmount(number);
 				
 				System.out.println(customer.getAmount());
-				}
+				
 				
 			}
 		});
@@ -69,7 +74,7 @@ public 	class confirmDialog extends JDialog {
 
 		setSize(300, 300);
 		// setLocation(parent.getX()-parent.getWidth(), parent.getY());
-		setLocationRelativeTo(parent);
+		setLocationRelativeTo(chargeGUI);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	}
 }
