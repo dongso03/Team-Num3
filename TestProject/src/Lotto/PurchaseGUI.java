@@ -1,6 +1,6 @@
 package Lotto;
 
-<<<<<<< HEAD
+
 import javax.swing.JFrame;
 import java.awt.FlowLayout;
 import java.awt.Panel;
@@ -19,11 +19,7 @@ import javax.swing.JPanel;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
-=======
-public class PurchaseGUI{
->>>>>>> branch 'gayoung' of https://github.com/dongso03/Team-Num3.git
 
-<<<<<<< HEAD
 
 public class PurchaseGUI extends JFrame {
 	public PurchaseGUI() {
@@ -282,8 +278,4 @@ public class PurchaseGUI extends JFrame {
 			btnNum.add(btnNum, String.valueOf(i), i);
 		}
 	}
-=======
-		
->>>>>>> branch 'gayoung' of https://github.com/dongso03/Team-Num3.git
 }
-
