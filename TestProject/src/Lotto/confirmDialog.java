@@ -13,12 +13,14 @@ import javax.swing.SpringLayout;
 public 	class confirmDialog extends JDialog {
 	
 	private ChargeGUI chargeGUI;
-	private Customer customer = new Customer(100,1); // 이거 수정해야됨
+	private Customer customer;
+	//private Customer customer = new Customer(100,1); // 이거 수정해야됨
 	
 	
-	public confirmDialog(ChargeGUI chargeGUI) {
+	public confirmDialog(ChargeGUI chargeGUI, Customer c) {
         super(chargeGUI);
         this.chargeGUI = chargeGUI;
+        this.customer = c;
         
 		setTitle("확인창");
 		setModal(true);
