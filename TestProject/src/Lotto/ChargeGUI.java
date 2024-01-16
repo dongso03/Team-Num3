@@ -15,7 +15,7 @@ import javax.swing.JDialog;
 public class ChargeGUI extends JFrame {
 	public JTextField textField;
 	private JButton btn;
-	ConfirmDialog confirmDialog;
+	
 
 	public ChargeGUI() {
 		extracted();

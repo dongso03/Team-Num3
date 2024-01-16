@@ -114,6 +114,13 @@ public class WinningGUI extends JFrame{
 		panel_1.add(lblNewLabel_6);
 		
 		JButton btnNewButton = new JButton("처음 화면으로 돌아가기");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+//				JDialog dia = new winMessage(WinningGUI.this);
+//				dia.setVisible(true);
+				
+			}
+		});
 		
 		btnNewButton.setBounds(294, 236, 178, 23);
 		pnl.add(btnNewButton);

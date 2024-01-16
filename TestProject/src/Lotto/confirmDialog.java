@@ -10,17 +10,19 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 
-public class ConfirmDialog extends JDialog {
-
+public 	class confirmDialog extends JDialog {
+	
 	private ChargeGUI chargeGUI;
 	private Customer customer;
-
-	public ConfirmDialog(JFrame parent, ChargeGUI chargeGUI) {
-		super(parent);
+	
+	public confirmDialog(ChargeGUI chargeGUI) {
+        super(chargeGUI);
+        this.chargeGUI = chargeGUI;
+        this.customer = new Customer();
 		setTitle("확인창");
 		setModal(true);
-
-		this.chargeGUI = chargeGUI; // 전달된 ChargeGUI 인스턴스 사용
+		
+		//chargeGUI = new ChargeGUI();
 		customer = new Customer();
 		JPanel pnl = new JPanel();
 		JLabel lblcon = new JLabel("정말 충전하시겠습니까?");
@@ -36,30 +38,31 @@ public class ConfirmDialog extends JDialog {
 		sl_pnl.putConstraint(SpringLayout.WEST, btn2, 0, SpringLayout.WEST, lblcon2);
 		sl_pnl.putConstraint(SpringLayout.WEST, lblcon, 71, SpringLayout.WEST, pnl);
 		sl_pnl.putConstraint(SpringLayout.SOUTH, lblcon, -15, SpringLayout.NORTH, lblcon2);
-
+		
+		
 		btn2.addActionListener(new ActionListener() {
+			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String str = chargeGUI.textField.getText();
-				System.out.println(str);
-				try {
-					Integer number = Integer.valueOf(str);
-					customer.addToAmount(number);
-					System.out.println(customer.getAmount());
-				} catch (NumberFormatException ex) {
-					System.out.println("숫자로 변환할 수 없는 형식입니다.");
-				}
-
+				//System.out.println(str);
+				Integer number = Integer.valueOf(str);
+				customer.addToAmount(number);
+				
+				System.out.println(customer.getAmount());
+				
+				
 			}
 		});
-
+		
+		
 		btn3.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 			}
 		});
-
+		
 		pnl.setLayout(sl_pnl);
 		pnl.add(lblcon);
 		pnl.add(lblcon2);
@@ -67,9 +70,11 @@ public class ConfirmDialog extends JDialog {
 		pnl.add(btn3);
 
 		getContentPane().add(pnl);
+		
 
 		setSize(300, 300);
-		setLocationRelativeTo(parent);
+		// setLocation(parent.getX()-parent.getWidth(), parent.getY());
+		setLocationRelativeTo(chargeGUI);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	}
 }
