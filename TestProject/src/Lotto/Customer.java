@@ -56,7 +56,8 @@ public class Customer {
 		return true;
 	}
 	public void addToAmount(int value) {
-        this.amount += value;
-    }
+	    this.amount += value;
+	}
+
 
 }
