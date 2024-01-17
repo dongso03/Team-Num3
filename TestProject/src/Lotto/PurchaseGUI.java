@@ -8,8 +8,11 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
+import java.util.TreeSet;
 import java.awt.event.ActionEvent;
 import javax.swing.SpringLayout;
 import javax.swing.JButton;
@@ -29,252 +32,279 @@ import com.jgoodies.forms.layout.RowSpec;
 import java.awt.GridLayout;
 
 public class PurchaseGUI extends JFrame {
-	private List<JToggleButton> toggleButtons;
-	FirstPage firstpage;
-	JToggleButton btnAuto;
-	JToggleButton togbtn;
+   private List<JToggleButton> toggleButtons;
+   FirstPage firstpage;
+   JToggleButton btnAuto;
+   JToggleButton togbtn;
 
-	private JLabel lblNewLabel_2;
-	private JLabel lblNewLabel_4;
-	private JLabel lblNewLabel_5;
-	private JLabel lblNewLabel_6;
-	private JLabel lblNewLabel_7;
-	private JLabel lblNewLabel_8;
-	private JLabel lblNewLabel_9;
-	private JLabel[] lbl1;
-	private JLabel[] lbl2s;
+   private JLabel lblNewLabel_2;
+   private JLabel lblNewLabel_4;
+   private JLabel lblNewLabel_5;
+   private JLabel lblNewLabel_6;
+   private JLabel lblNewLabel_7;
+   private JLabel lblNewLabel_8;
+   private JLabel lblNewLabel_9;
+   private JLabel[] lbl1;
+   private JLabel[] lbl2s;
 
-	public PurchaseGUI(FirstPage firstpage) {
-		getContentPane().setLayout(null);
-		toggleButtons = new ArrayList<>();
-		Panel panel = new Panel();
-		panel.setBounds(10, 349, 353, 79);
-		getContentPane().add(panel);
-		SpringLayout sl_panel = new SpringLayout();
-		panel.setLayout(sl_panel);
+   public PurchaseGUI(FirstPage firstpage) {
+      getContentPane().setLayout(null);
+      toggleButtons = new ArrayList<>();
+      Panel panel = new Panel();
+      panel.setBounds(10, 349, 353, 79);
+      getContentPane().add(panel);
+      SpringLayout sl_panel = new SpringLayout();
+      panel.setLayout(sl_panel);
+      Random ran = new Random();
 
-		JLabel lblNewLabel = new JLabel("수량");
-		panel.add(lblNewLabel);
+      JLabel lblNewLabel = new JLabel("수량");
+      panel.add(lblNewLabel);
 
-//		String[] list = new String[] { "1", "2", "3", "4", "5" };
-//		JComboBox comboBox = new JComboBox(list);
-		
-		List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
-		JComboBox<Integer> comboBox = new JComboBox<>(numbers.toArray(new Integer[0]));
-		sl_panel.putConstraint(SpringLayout.WEST, comboBox, 102, SpringLayout.WEST, panel);
-		sl_panel.putConstraint(SpringLayout.EAST, comboBox, -146, SpringLayout.EAST, panel);
-		sl_panel.putConstraint(SpringLayout.NORTH, lblNewLabel, 3, SpringLayout.NORTH, comboBox);
-		sl_panel.putConstraint(SpringLayout.EAST, lblNewLabel, -9, SpringLayout.WEST, comboBox);
-		sl_panel.putConstraint(SpringLayout.NORTH, comboBox, 10, SpringLayout.NORTH, panel);
-		panel.add(comboBox);
+//      String[] list = new String[] { "1", "2", "3", "4", "5" };
+//      JComboBox comboBox = new JComboBox(list);
 
-		JButton checkBtn = new JButton("확인");
-		sl_panel.putConstraint(SpringLayout.EAST, checkBtn, -37, SpringLayout.EAST, panel);
-		
-		// 확인 버튼을 눌렀을 때 -------------------------------------------------
-		checkBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				switch(comboBox.getSelectedIndex()) {
-				case 0: // 1장 선택했을 때
-					// 수동 자도 ㅇㅂ 반자동 => 이걸 메소드로 만들자
-					if (!btnAuto.isSelected()) { // 수동인 거임
-						List<Integer> selectedNumbers = new ArrayList<>();
+      List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
+      JComboBox<Integer> comboBox = new JComboBox<>(numbers.toArray(new Integer[0]));
+      sl_panel.putConstraint(SpringLayout.WEST, comboBox, 102, SpringLayout.WEST, panel);
+      sl_panel.putConstraint(SpringLayout.EAST, comboBox, -146, SpringLayout.EAST, panel);
+      sl_panel.putConstraint(SpringLayout.NORTH, lblNewLabel, 3, SpringLayout.NORTH, comboBox);
+      sl_panel.putConstraint(SpringLayout.EAST, lblNewLabel, -9, SpringLayout.WEST, comboBox);
+      sl_panel.putConstraint(SpringLayout.NORTH, comboBox, 10, SpringLayout.NORTH, panel);
+      panel.add(comboBox);
 
-						for (JToggleButton button : toggleButtons) {
-							if (button.isSelected()) {
-								int num = Integer.parseInt(button.getText());
-								selectedNumbers.add(num);
-							}
-						}
-						Collections.sort(selectedNumbers); // 숫자로 바뀐 녀석들이 오름차순으로 정렬했음
+      JButton checkBtn = new JButton("확인");
+      sl_panel.putConstraint(SpringLayout.EAST, checkBtn, -37, SpringLayout.EAST, panel);
 
-						for (int i = 2; i < 8; i++) {
-							lbl1[1].setText("수동");
-							lbl1[i].setText(String.valueOf(selectedNumbers.get(i - 2)));
-						}
+      // 확인 버튼을 눌렀을 때 -------------------------------------------------
+      checkBtn.addActionListener(new ActionListener() {
+         public void actionPerformed(ActionEvent e) {
+            switch (comboBox.getSelectedIndex()) {
+            case 0: // 1장 선택했을 때
+               // 수동 자도 ㅇㅂ 반자동 => 이걸 메소드로 만들자
+               if (!btnAuto.isSelected()) { // 수동인 거임
+                  List<Integer> selectedNumbers = new ArrayList<>();
 
-					}
-				}
-//				if (!btnAuto.isSelected()) { // 수동인 거임
-//					List<Integer> selectedNumbers = new ArrayList<>();
+                  for (JToggleButton button : toggleButtons) {
+                     if (button.isSelected()) {
+                        int num = Integer.parseInt(button.getText());
+                        selectedNumbers.add(num);
+                     }
+                  }
+                  Collections.sort(selectedNumbers); // 숫자로 바뀐 녀석들이 오름차순으로 정렬했음
+
+                  for (int i = 2; i < 8; i++) {
+                     lbl1[1].setText("수동");
+                     lbl1[i].setText(String.valueOf(selectedNumbers.get(i - 2)));
+                  }
+               } else { // 자동 버튼을 클릭했을 때
+                  // all 자동
+                  // List<Integer> selectedNumbers = new ArrayList<>();
+                  Set<Integer> uniqueNumbers = new HashSet<>();
+                  int selectCount = 0;
+
+                  for (JToggleButton button : toggleButtons) {
+                     if (button.isSelected()) { // 중복되지 않고 랜덤 숫자 6개 만들기
+                        selectCount++;
+                     }
+                  }
+                  
+                  if(selectCount == 0) {  // all 자동
+                     while (uniqueNumbers.size() < 7) {
+                           int randomNumber = ran.nextInt(45) + 1;
+                           uniqueNumbers.add(randomNumber);
+                       }
+                     List<Integer> uniqueList = new ArrayList<>(uniqueNumbers);
+                     Collections.sort(uniqueList); // 인덱스 0~ 6까지 숫자 다 뽑아내라
+                     for (int i = 2; i < 8; i++) {
+                        lbl1[1].setText("자동");
+                        lbl1[i].setText(String.valueOf(uniqueList.get(i - 2)));
+                     }
+                  } else if(0< selectCount && selectCount < 6) { // 반자동
+                     // 선택된 숫자들 불러오고 나머지 숫자들은 랜덤. 중복되면 안되고 오름차순!
+//                     List<Integer> selectedNumbers = new ArrayList<>();
 //
-//					for (JToggleButton button : toggleButtons) {
-//						if (button.isSelected()) {
-//							int num = Integer.parseInt(button.getText());
-//							selectedNumbers.add(num);
-//						}
-//					}
-//					Collections.sort(selectedNumbers); // 숫자로 바뀐 녀석들이 오름차순으로 정렬했음
+//                     for (JToggleButton button : toggleButtons) {
+//                        if (button.isSelected()) {
+//                           int num = Integer.parseInt(button.getText());
+//                           selectedNumbers.add(num);
+//                        }
+//                     }
+//                     Collections.sort(selectedNumbers); // 숫자로 바뀐 녀석들이 오름차순으로 정렬했음
 //
-//					for (int i = 2; i < 8; i++) {
-//						lbl1[i].setText(String.valueOf(selectedNumbers.get(i - 2)));
-//					}
-//
-//				}
-				for (JToggleButton button : toggleButtons) {
-					button.setSelected(false);
-				}
-			}
-		});
-		panel.add(checkBtn);
+//                     for (int i = 2; i < 8; i++) {
+//                        lbl1[1].setText("수동");
+//                        lbl1[i].setText(String.valueOf(selectedNumbers.get(i - 2)));
+                     
+                  }
+                  
+               }
 
-		JButton btnReset = new JButton("초기화");
-		sl_panel.putConstraint(SpringLayout.NORTH, btnReset, 12, SpringLayout.SOUTH, comboBox);
-		sl_panel.putConstraint(SpringLayout.NORTH, checkBtn, 0, SpringLayout.NORTH, btnReset);
-		sl_panel.putConstraint(SpringLayout.EAST, btnReset, -243, SpringLayout.EAST, panel);
-		btnReset.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				for (JToggleButton button : toggleButtons) {
+            }
 
-					button.setSelected(false);
-				}
-			}
-		});
-		panel.add(btnReset);
-		Random ran = new Random();
+            for (JToggleButton button : toggleButtons) {
+               button.setSelected(false);
+            }
+         }
+      });
+      panel.add(checkBtn);
 
-		btnAuto = new JToggleButton("자동");
-		sl_panel.putConstraint(SpringLayout.NORTH, btnAuto, 12, SpringLayout.SOUTH, comboBox);
-		sl_panel.putConstraint(SpringLayout.WEST, btnAuto, 23, SpringLayout.EAST, btnReset);
-		panel.add(btnAuto);
-		btnAuto.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (comboBox.getSelectedItem().toString().equals("1")) {
+      JButton btnReset = new JButton("초기화");
+      sl_panel.putConstraint(SpringLayout.NORTH, btnReset, 12, SpringLayout.SOUTH, comboBox);
+      sl_panel.putConstraint(SpringLayout.NORTH, checkBtn, 0, SpringLayout.NORTH, btnReset);
+      sl_panel.putConstraint(SpringLayout.EAST, btnReset, -243, SpringLayout.EAST, panel);
+      btnReset.addActionListener(new ActionListener() {
+         public void actionPerformed(ActionEvent e) {
+            for (JToggleButton button : toggleButtons) {
 
-				} else if (comboBox.getSelectedItem().toString().equals("2")) {
+               button.setSelected(false);
+            }
+         }
+      });
+      panel.add(btnReset);
+      // Random ran = new Random();
 
-				} else if (comboBox.getSelectedItem().toString().equals("3")) {
+      btnAuto = new JToggleButton("자동");
+      sl_panel.putConstraint(SpringLayout.NORTH, btnAuto, 12, SpringLayout.SOUTH, comboBox);
+      sl_panel.putConstraint(SpringLayout.WEST, btnAuto, 23, SpringLayout.EAST, btnReset);
+      panel.add(btnAuto);
+      btnAuto.addActionListener(new ActionListener() {
+         @Override
+         public void actionPerformed(ActionEvent e) {
+            if (comboBox.getSelectedItem().toString().equals("1")) {
 
-				} else if (comboBox.getSelectedItem().toString().equals("4")) {
+            } else if (comboBox.getSelectedItem().toString().equals("2")) {
 
-				} else if (comboBox.getSelectedItem().toString().equals("5")) {
+            } else if (comboBox.getSelectedItem().toString().equals("3")) {
 
-				}
-			}
-		});
-		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(369, 10, 405, 418);
-		getContentPane().add(panel_2);
+            } else if (comboBox.getSelectedItem().toString().equals("4")) {
 
-		panel_2.setLayout(null);
+            } else if (comboBox.getSelectedItem().toString().equals("5")) {
 
-		JLabel lblNewLabel_1 = new JLabel("선택번호 확인");
-		lblNewLabel_1.setBounds(164, 5, 76, 15);
-		panel_2.add(lblNewLabel_1);
+            }
+         }
+      });
+      JPanel panel_2 = new JPanel();
+      panel_2.setBounds(369, 10, 405, 418);
+      getContentPane().add(panel_2);
 
-		JPanel panel_3 = new JPanel();
-		panel_3.setBounds(24, 50, 301, 35);
-		panel_2.add(panel_3);
-		panel_3.setLayout(new GridLayout(1, 0, 0, 0));
-		lbl1 = new JLabel[8];
-		for (int i = 0; i < 8; i++) {
-			lbl1[i] = new JLabel("d");
-			panel_3.add(lbl1[i]);
-		}
+      panel_2.setLayout(null);
 
-		// 오른쪽 숫자들 초기화하는 버튼
-		JButton btnNewButton = new JButton("초기화");
-		btnNewButton.setBounds(328, 50, 65, 23);
-		panel_2.add(btnNewButton);
+      JLabel lblNewLabel_1 = new JLabel("선택번호 확인");
+      lblNewLabel_1.setBounds(164, 5, 76, 15);
+      panel_2.add(lblNewLabel_1);
 
-		JPanel panel_4 = new JPanel();
-		panel_4.setBounds(23, 95, 302, 35);
-		panel_2.add(panel_4);
-		panel_4.setLayout(new GridLayout(1, 0, 0, 0));
-		lbl2s = new JLabel[8];
-		for (int i = 0; i < 8; i++) {
-			lbl2s[i] = new JLabel("d");
-			panel_4.add(lbl2s[i]);
-		}
+      JPanel panel_3 = new JPanel();
+      panel_3.setBounds(24, 50, 301, 35);
+      panel_2.add(panel_3);
+      panel_3.setLayout(new GridLayout(1, 0, 0, 0));
+      lbl1 = new JLabel[8];
+      for (int i = 0; i < 8; i++) {
+         lbl1[i] = new JLabel("d");
+         panel_3.add(lbl1[i]);
+      }
 
-		JPanel panel_5 = new JPanel();
-		panel_5.setBounds(24, 140, 302, 35);
-		panel_2.add(panel_5);
-		panel_5.setLayout(new GridLayout(1, 0, 0, 0));
-		JLabel[] lbl3 = new JLabel[8];
-		for (int i = 0; i < 8; i++) {
-			lbl3[i] = new JLabel("d");
-			panel_5.add(lbl3[i]);
-		}
+      // 오른쪽 숫자들 초기화하는 버튼
+      JButton btnNewButton = new JButton("초기화");
+      btnNewButton.setBounds(328, 50, 65, 23);
+      panel_2.add(btnNewButton);
 
-		JPanel panel_6 = new JPanel();
-		panel_6.setBounds(24, 185, 301, 35);
-		panel_2.add(panel_6);
-		panel_6.setLayout(new GridLayout(1, 0, 0, 0));
-		JLabel[] lbl4 = new JLabel[8];
-		for (int i = 0; i < 8; i++) {
-			lbl4[i] = new JLabel("d");
-			panel_6.add(lbl4[i]);
-		}
+      JPanel panel_4 = new JPanel();
+      panel_4.setBounds(23, 95, 302, 35);
+      panel_2.add(panel_4);
+      panel_4.setLayout(new GridLayout(1, 0, 0, 0));
+      lbl2s = new JLabel[8];
+      for (int i = 0; i < 8; i++) {
+         lbl2s[i] = new JLabel("d");
+         panel_4.add(lbl2s[i]);
+      }
 
-		JPanel panel_7 = new JPanel();
-		panel_7.setBounds(24, 230, 301, 35);
-		panel_2.add(panel_7);
-		panel_7.setLayout(new GridLayout(1, 0, 0, 0));
-		JLabel[] lbl5 = new JLabel[8];
-		for (int i = 0; i < 8; i++) {
-			lbl5[i] = new JLabel("d");
-			panel_7.add(lbl5[i]);
-		}
+      JPanel panel_5 = new JPanel();
+      panel_5.setBounds(24, 140, 302, 35);
+      panel_2.add(panel_5);
+      panel_5.setLayout(new GridLayout(1, 0, 0, 0));
+      JLabel[] lbl3 = new JLabel[8];
+      for (int i = 0; i < 8; i++) {
+         lbl3[i] = new JLabel("d");
+         panel_5.add(lbl3[i]);
+      }
 
-		btnNewButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				for (int i = 2; i < 8; i++) {
-					lbl1[1].setText("미지정");
-					lbl1[i].setText("");
-				}
+      JPanel panel_6 = new JPanel();
+      panel_6.setBounds(24, 185, 301, 35);
+      panel_2.add(panel_6);
+      panel_6.setLayout(new GridLayout(1, 0, 0, 0));
+      JLabel[] lbl4 = new JLabel[8];
+      for (int i = 0; i < 8; i++) {
+         lbl4[i] = new JLabel("d");
+         panel_6.add(lbl4[i]);
+      }
 
-			}
-		});
+      JPanel panel_7 = new JPanel();
+      panel_7.setBounds(24, 230, 301, 35);
+      panel_2.add(panel_7);
+      panel_7.setLayout(new GridLayout(1, 0, 0, 0));
+      JLabel[] lbl5 = new JLabel[8];
+      for (int i = 0; i < 8; i++) {
+         lbl5[i] = new JLabel("d");
+         panel_7.add(lbl5[i]);
+      }
 
-		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(12, 10, 345, 317);
-		getContentPane().add(panel_1);
+      btnNewButton.addActionListener(new ActionListener() {
+         @Override
+         public void actionPerformed(ActionEvent e) {
+            for (int i = 2; i < 8; i++) {
+               lbl1[1].setText("미지정");
+               lbl1[i].setText("");
+            }
 
-		for (int i = 1; i <= 45; i++) {
-			togbtn = new JToggleButton(String.valueOf(i));
-			togbtn.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					handleToggleButtonAction(togbtn);
-				}
-			});
-			panel_1.add(togbtn);
-			toggleButtons.add(togbtn);
-		}
+         }
+      });
 
-		showGUI();
-	}
+      JPanel panel_1 = new JPanel();
+      panel_1.setBounds(12, 10, 345, 317);
+      getContentPane().add(panel_1);
 
-	private void handleToggleButtonAction(JToggleButton togbtn) {
-		int selectedCount = 0;
-		this.togbtn = togbtn;
-		List<JToggleButton> a = new ArrayList<>();
+      for (int i = 1; i <= 45; i++) {
+         togbtn = new JToggleButton(String.valueOf(i));
+         togbtn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+               handleToggleButtonAction(togbtn);
+            }
+         });
+         panel_1.add(togbtn);
+         toggleButtons.add(togbtn);
+      }
 
-		for (JToggleButton button : toggleButtons) {
-			if (button.isSelected()) {
-				a.add(button);
-				selectedCount++;
-			}
-		}
+      showGUI();
+   }
 
-		if (selectedCount == 7) {
-			JOptionPane.showMessageDialog(this, "최대 6개까지 선택 가능합니다.");
-			// 모든 토글 버튼을 대상으로 확인하여 선택이 되어있는 경우 선택 취소
-			a.get(6).setSelected(false);
+   private void handleToggleButtonAction(JToggleButton togbtn) {
+      int selectedCount = 0;
+      this.togbtn = togbtn;
+      List<JToggleButton> a = new ArrayList<>();
 
-		}
-	}
+      for (JToggleButton button : toggleButtons) {
+         if (button.isSelected()) {
+            a.add(button);
+            selectedCount++;
+         }
+      }
 
-	private void showGUI() {
-		setSize(815, 501);
-		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		setVisible(false);
-	}
+      if (selectedCount == 7) {
+         JOptionPane.showMessageDialog(this, "최대 6개까지 선택 가능합니다.");
+         // 모든 토글 버튼을 대상으로 확인하여 선택이 되어있는 경우 선택 취소
+         a.get(6).setSelected(false);
 
-	public static void main(String[] args) {
-		FirstPage firstpage = new FirstPage();
-		new PurchaseGUI(firstpage);
-	}
+      }
+   }
+
+   private void showGUI() {
+      setSize(815, 501);
+      setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+      setVisible(false);
+   }
+
+   public static void main(String[] args) {
+      FirstPage firstpage = new FirstPage();
+      new PurchaseGUI(firstpage);
+   }
 }
