@@ -17,7 +17,9 @@ public class FirstPage extends JFrame {
 	
 	public FirstPage() {
 		
-		chargGUI = new ChargeGUI();
+		chargGUI = new ChargeGUI(this);
+		winningGUI = new WinningGUI(this);
+		purchaseGUI = new PurchaseGUI(this);
 		
 		extracted();
 		btnCharge.addActionListener(new ActionListener() {
@@ -25,20 +27,22 @@ public class FirstPage extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
 				chargGUI.setVisible(true);
+				
 			}
 		});
 		
 		btnPuchase.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				purchaseGUI = new PurchaseGUI();
+				setVisible(false);
+				purchaseGUI.setVisible(true);;
 			}
 		});
 		btnWinning.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				dispose();
-				winningGUI = new WinningGUI();
+				setVisible(false);
+				winningGUI.setVisible(true);;
 			}
 		});
 		showGUI();
