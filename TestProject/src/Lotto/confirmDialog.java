@@ -61,6 +61,7 @@ public class confirmDialog extends JDialog {
 		btn3.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				chargeGUI.textField.setText("");
 				dispose();
 			}
 		});

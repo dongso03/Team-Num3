@@ -3,6 +3,7 @@ package Lotto;
 import javax.swing.JFrame;
 import javax.swing.SpringLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -28,10 +29,7 @@ public class ChargeGUI extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JDialog jd = new confirmDialog(ChargeGUI.this, customer);
-				jd.setVisible(true);
-				lblNewLabel.setText("(현재 잔액: " + customer.getAmount() +"원)");
-
+				handleConfirmButtonClick();
 			}
 		});
 
@@ -52,6 +50,32 @@ public class ChargeGUI extends JFrame {
 		showGUI();
 
 	}
+	private void handleConfirmButtonClick() {
+ 
+        String str = textField.getText();
+
+        // 입력값이 비어있을 경우 알림을 표시하고 함수 종료
+        if (str.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "충전 금액을 입력해주세요.", "알림", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        Integer number ;
+       
+        	
+        	try {
+        		number =  Integer.valueOf(str);
+        		JDialog jd = new confirmDialog(ChargeGUI.this, customer);
+				jd.setVisible(true);
+				lblNewLabel.setText("(현재 잔액: " + customer.getAmount() +"원)");
+        		
+        		
+        	} catch (NumberFormatException e) {
+        		//System.err.println("Invalid number format: " + e.getMessage());
+        		JOptionPane.showMessageDialog(this, "유효한 숫자를 입력해주세요.", "오류", JOptionPane.ERROR_MESSAGE);
+        	}
+       
+    }
 
 	private void showGUI() {
 		setSize(500, 500);
