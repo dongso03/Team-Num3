@@ -200,6 +200,49 @@ public class PurchaseGUI extends JFrame {
 		JButton btnNewButton = new JButton("초기화");
 		btnNewButton.setBounds(328, 50, 65, 23);
 		panel_2.add(btnNewButton);
+		
+		JPanel panel_4 = new JPanel();
+		panel_4.setBounds(23, 95, 302, 35);
+		panel_2.add(panel_4);
+		panel_4.setLayout(new GridLayout(1, 0, 0, 0));
+		JLabel[] lbl2 = new JLabel[8]; 
+		for (int i = 0; i < 8; i++) {
+		    lbl2[i] = new JLabel("d"); 
+		    panel_4.add(lbl2[i]); 
+		}
+		
+		JPanel panel_5 = new JPanel();
+		panel_5.setBounds(24, 140, 302, 35);
+		panel_2.add(panel_5);
+		panel_5.setLayout(new GridLayout(1, 0, 0, 0));
+		JLabel[] lbl3 = new JLabel[8]; 
+		for (int i = 0; i < 8; i++) {
+		    lbl3[i] = new JLabel("d"); 
+		    panel_5.add(lbl3[i]); 
+		}
+		
+		
+		JPanel panel_6 = new JPanel();
+		panel_6.setBounds(24, 185, 301, 35);
+		panel_2.add(panel_6);
+		panel_6.setLayout(new GridLayout(1, 0, 0, 0));
+		JLabel[] lbl4 = new JLabel[8]; 
+		for (int i = 0; i < 8; i++) {
+		    lbl4[i] = new JLabel("d"); 
+		    panel_6.add(lbl4[i]); 
+		}
+		
+		
+		JPanel panel_7 = new JPanel();
+		panel_7.setBounds(24, 230, 301, 35);
+		panel_2.add(panel_7);
+		panel_7.setLayout(new GridLayout(1, 0, 0, 0));
+		JLabel[] lbl5 = new JLabel[8]; 
+		for (int i = 0; i < 8; i++) {
+		    lbl5[i] = new JLabel("d"); 
+		    panel_7.add(lbl5[i]); 
+		}
+		
 		btnNewButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -232,34 +275,25 @@ public class PurchaseGUI extends JFrame {
 	}
 
 	private void handleToggleButtonAction(JToggleButton togbtn) {
-		int selectedCount = 0;
-		this.togbtn = togbtn;
-		List<JToggleButton> a = new ArrayList<>();
-		
-		for (JToggleButton button : toggleButtons) {
-			if (button.isSelected()) {
-				
-				selectedCount++;
-			}
-		}
+	      int selectedCount = 0;
+	      this.togbtn = togbtn;
+	      List<JToggleButton> a = new ArrayList<>();
+	      
+	      for (JToggleButton button : toggleButtons) {
+	         if (button.isSelected()) {
+	            a.add(button);
+	            selectedCount++;
+	         }
+	      }
 
-		if (selectedCount == 7) {
-			JOptionPane.showMessageDialog(this, "최대 6개까지 선택 가능합니다.");
-			// 모든 토글 버튼을 대상으로 확인하여 선택이 되어있는 경우 선택 취소
-	        for(int i = 0; i < 7; i++) {
-	        	if(i == 6) {
-	        		
-	        	}
-	        }
-			
-			
-			for (JToggleButton button : toggleButtons) {
-	            if (button.isSelected()) {
-	                button.setSelected(false);
-	            }
-	        }
-		}
-	}
+	      if (selectedCount == 7) {
+	         JOptionPane.showMessageDialog(this, "최대 6개까지 선택 가능합니다.");
+	         // 모든 토글 버튼을 대상으로 확인하여 선택이 되어있는 경우 선택 취소
+	           a.get(6).setSelected(false);
+	         
+
+	      }
+	   }
 
 	private void showGUI() {
 		setSize(815, 501);
