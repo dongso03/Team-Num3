@@ -17,19 +17,20 @@ public class FirstPage extends JFrame {
 	
 	public FirstPage() {
 		
+		chargGUI = new ChargeGUI();
+		
 		extracted();
 		btnCharge.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				dispose();
-				chargGUI = new ChargeGUI();
+				setVisible(false);
+				chargGUI.setVisible(true);
 			}
 		});
 		
 		btnPuchase.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				dispose();
 				purchaseGUI = new PurchaseGUI();
 			}
 		});

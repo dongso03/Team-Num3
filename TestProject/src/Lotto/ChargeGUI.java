@@ -16,6 +16,8 @@ public class ChargeGUI extends JFrame {
 	public JTextField textField;
 	private JButton btn;
 	private Customer customer = new Customer(100,1);
+	private JButton btnReset;
+	FirstPage firstPage;
 
 	public ChargeGUI() {
 		extracted();
@@ -26,18 +28,29 @@ public class ChargeGUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				JDialog jd = new confirmDialog(ChargeGUI.this, customer);
 				jd.setVisible(true);
+				
 
 			}
 		});
 
+		btnReset.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+                if (firstPage != null) {
+                    firstPage.setVisible(true);
+                }
+
+			}
+		});
 		showGUI();
 
 	}
 
 	private void showGUI() {
 		setSize(500, 500);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setVisible(true);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		setVisible(false);
 	}
 
 
@@ -62,6 +75,11 @@ public class ChargeGUI extends JFrame {
 		springLayout.putConstraint(SpringLayout.WEST, btn, 338, SpringLayout.WEST, getContentPane());
 		springLayout.putConstraint(SpringLayout.EAST, btn, -41, SpringLayout.EAST, getContentPane());
 		getContentPane().add(btn);
+		
+		btnReset = new JButton("시작화면 돌아가기");
+		springLayout.putConstraint(SpringLayout.NORTH, btnReset, 77, SpringLayout.SOUTH, textField);
+		springLayout.putConstraint(SpringLayout.WEST, btnReset, 0, SpringLayout.WEST, textField);
+		getContentPane().add(btnReset);
 	}
 
 	
