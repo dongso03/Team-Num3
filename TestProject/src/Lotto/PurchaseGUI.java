@@ -32,7 +32,7 @@ public class PurchaseGUI extends JFrame {
 	FirstPage firstpage;
 	JToggleButton btnAuto;
 	JToggleButton togbtn;
-	JLabel[][] labels;
+	
 	private JLabel lblNewLabel_2;
 	private JLabel lblNewLabel_4;
 	private JLabel lblNewLabel_5;
@@ -40,6 +40,8 @@ public class PurchaseGUI extends JFrame {
 	private JLabel lblNewLabel_7;
 	private JLabel lblNewLabel_8;
 	private JLabel lblNewLabel_9;
+	private JLabel[] lbl1;
+	private JLabel[] lbl2s;
 
 	public PurchaseGUI(FirstPage firstpage) {
 		getContentPane().setLayout(null);
@@ -68,7 +70,7 @@ public class PurchaseGUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (!btnAuto.isSelected()) { // 수동인 거임
 					List<Integer> selectedNumbers = new ArrayList<>();
-					lblNewLabel_2.setText("수동");
+					
 					for (JToggleButton button : toggleButtons) {
 						if (button.isSelected()) {
 							int num = Integer.parseInt(button.getText());
@@ -76,43 +78,13 @@ public class PurchaseGUI extends JFrame {
 						}
 					}
 					Collections.sort(selectedNumbers); // 숫자로 바뀐 녀석들이 오름차순으로 정렬했음
-					if (selectedNumbers.size() > 0) {
-						lblNewLabel_4.setText(String.valueOf(selectedNumbers.get(0)));
-					} else {
-						lblNewLabel_4.setText("");
-					}
-					if (selectedNumbers.size() > 1) {
-						lblNewLabel_5.setText(String.valueOf(selectedNumbers.get(1)));
-					} else {
-						lblNewLabel_5.setText("");
-					}
-					if (selectedNumbers.size() > 1) {
-						lblNewLabel_6.setText(String.valueOf(selectedNumbers.get(2)));
-					} else {
-						lblNewLabel_6.setText("");
-					}
-					if (selectedNumbers.size() > 1) {
-						lblNewLabel_7.setText(String.valueOf(selectedNumbers.get(3)));
-					} else {
-						lblNewLabel_7.setText("");
-					}
-					if (selectedNumbers.size() > 1) {
-						lblNewLabel_8.setText(String.valueOf(selectedNumbers.get(4)));
-					} else {
-						lblNewLabel_8.setText("");
-					}
-					if (selectedNumbers.size() > 1) {
-						lblNewLabel_9.setText(String.valueOf(selectedNumbers.get(5)));
-					} else {
-						lblNewLabel_9.setText("");
+					
+					for(int i = 2; i<8; i++) {
+						for(int j = 0;j<6; j++) {
+						lbl1[i].setText(String.valueOf(selectedNumbers.get(j)));
+						}
 					}
 
-//                     lblNewLabel_4.setText(String.valueOf(selectedNumbers.indexOf(0)));
-//                     lblNewLabel_5.setText(String.valueOf(selectedNumbers.indexOf(1)));
-//                     lblNewLabel_6.setText(String.valueOf(selectedNumbers.indexOf(2)));
-//                     lblNewLabel_7.setText(String.valueOf(selectedNumbers.indexOf(3)));
-//                     lblNewLabel_8.setText(String.valueOf(selectedNumbers.indexOf(4)));
-//                     lblNewLabel_9.setText(String.valueOf(selectedNumbers.indexOf(5)));
 
 				}
 				for (JToggleButton button : toggleButtons) {
@@ -170,37 +142,12 @@ public class PurchaseGUI extends JFrame {
 		panel_3.setBounds(24, 50, 301, 35);
 		panel_2.add(panel_3);
 		panel_3.setLayout(new GridLayout(1, 0, 0, 0));
-		JLabel[] lbl1 = new JLabel[8]; 
+		lbl1 = new JLabel[8]; 
 		for (int i = 0; i < 8; i++) {
 		    lbl1[i] = new JLabel("d"); 
 		    panel_3.add(lbl1[i]); 
 		}
 		
-//		JLabel lblNewLabel_3 = new JLabel("A");
-//		panel_3.add(lblNewLabel_3);
-//
-//		// 이 라벨에서 미지정,수동,자동,반자동 표현
-//		lblNewLabel_2 = new JLabel("미지정");
-//		panel_3.add(lblNewLabel_2);
-//		// 확인 버튼을 눌렸을 때 자동이 선택되어 있으면 자동이나 반자동, 자동이 선택되어 있지 않다면 수동으로 라벨 표시
-//
-//		lblNewLabel_4 = new JLabel("");
-//		panel_3.add(lblNewLabel_4);
-//
-//		lblNewLabel_5 = new JLabel("");
-//		panel_3.add(lblNewLabel_5);
-//
-//		lblNewLabel_6 = new JLabel("");
-//		panel_3.add(lblNewLabel_6);
-//
-//		lblNewLabel_7 = new JLabel("");
-//		panel_3.add(lblNewLabel_7);
-//
-//		lblNewLabel_8 = new JLabel("");
-//		panel_3.add(lblNewLabel_8);
-//
-//		lblNewLabel_9 = new JLabel("");
-//		panel_3.add(lblNewLabel_9);
 
 		JButton btnNewButton = new JButton("초기화");
 		btnNewButton.setBounds(328, 50, 65, 23);
@@ -210,10 +157,10 @@ public class PurchaseGUI extends JFrame {
 		panel_4.setBounds(23, 95, 302, 35);
 		panel_2.add(panel_4);
 		panel_4.setLayout(new GridLayout(1, 0, 0, 0));
-		JLabel[] lbl2 = new JLabel[8]; 
+		lbl2s = new JLabel[8]; 
 		for (int i = 0; i < 8; i++) {
-		    lbl2[i] = new JLabel("d"); 
-		    panel_4.add(lbl2[i]); 
+		    lbl2s[i] = new JLabel("d"); 
+		    panel_4.add(lbl2s[i]); 
 		}
 		
 		JPanel panel_5 = new JPanel();
