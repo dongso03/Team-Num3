@@ -66,6 +66,7 @@ public class PurchaseGUI extends JFrame {
 
 		JButton checkBtn = new JButton("확인");
 		sl_panel.putConstraint(SpringLayout.EAST, checkBtn, -37, SpringLayout.EAST, panel);
+		// 확인 버튼을 눌렀을 때
 		checkBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (!btnAuto.isSelected()) { // 수동인 거임
@@ -80,9 +81,8 @@ public class PurchaseGUI extends JFrame {
 					Collections.sort(selectedNumbers); // 숫자로 바뀐 녀석들이 오름차순으로 정렬했음
 					
 					for(int i = 2; i<8; i++) {
-						for(int j = 0;j<6; j++) {
-						lbl1[i].setText(String.valueOf(selectedNumbers.get(j)));
-						}
+						lbl1[i].setText(String.valueOf(selectedNumbers.get(i-2)));
+						
 					}
 
 
