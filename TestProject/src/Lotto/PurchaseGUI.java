@@ -68,7 +68,7 @@ public class PurchaseGUI extends JFrame {
 		sl_panel.putConstraint(SpringLayout.EAST, checkBtn, -37, SpringLayout.EAST, panel);
 		checkBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (!btnAuto.isSelected()) { // 수동인 거임
+				if (!btnAuto.isSelected()&&comboBox.getSelectedItem().toString().equals("1")) { // 수동인 거임
 					List<Integer> selectedNumbers = new ArrayList<>();
 					
 					for (JToggleButton button : toggleButtons) {
@@ -80,9 +80,7 @@ public class PurchaseGUI extends JFrame {
 					Collections.sort(selectedNumbers); // 숫자로 바뀐 녀석들이 오름차순으로 정렬했음
 					
 					for(int i = 2; i<8; i++) {
-						for(int j = 0;j<6; j++) {
-						lbl1[i].setText(String.valueOf(selectedNumbers.get(j)));
-						}
+						lbl1[i].setText(String.valueOf(selectedNumbers.get(i-2)));
 					}
 
 
@@ -101,6 +99,7 @@ public class PurchaseGUI extends JFrame {
 		btnReset.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				for (JToggleButton button : toggleButtons) {
+				
 					button.setSelected(false);
 				}
 			}
@@ -198,12 +197,10 @@ public class PurchaseGUI extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				lblNewLabel_4.setText("");
-				lblNewLabel_5.setText("");
-				lblNewLabel_6.setText("");
-				lblNewLabel_7.setText("");
-				lblNewLabel_8.setText("");
-				lblNewLabel_9.setText("");
+				for(int i =2; i<8;i++) {
+					lbl1[1].setText("미지정");
+				lbl1[i].setText("");
+				}
 
 			}
 		});
