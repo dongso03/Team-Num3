@@ -4,6 +4,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
@@ -94,36 +95,26 @@ public class WinningGUI extends JFrame{
 		Random ran = new Random();
 		// 숫자 7개를 랜덤으로 뽑아내는데 6개는 오름차순으로, 하나는 보너스
 		// n1~n7까지 숫자가 중복안되게 수정 필요!!!!
-		Integer n1 = ran.nextInt(45) + 1;
-		Integer n2 = ran.nextInt(45) + 1;
-		Integer n3 = ran.nextInt(45) + 1;
-		Integer n4 = ran.nextInt(45) + 1;
-		Integer n5 = ran.nextInt(45) + 1;
-		Integer n6 = ran.nextInt(45) + 1;
-//		String n2 = String.valueOf(ran.nextInt(45) + 1);
-//		String n3 = String.valueOf(ran.nextInt(45) + 1);
-//		String n4 = String.valueOf(ran.nextInt(45) + 1);
-//		String n5 = String.valueOf(ran.nextInt(45) + 1);
-//		String n6 = String.valueOf(ran.nextInt(45) + 1);
-	
-		// 보너스
-		String n7 = String.valueOf(ran.nextInt(45) + 1);
-		result_7.setText(n7);
-		Set<Integer> random = new TreeSet<>(Arrays.asList(n1,n2,n3,n4,n5,n6));
-		Iterator<Integer> iter = random.iterator();
-		List<Integer> resultList = new ArrayList<>();
-		while(iter.hasNext()) {
-			resultList.add(iter.next());
-		}
-		result_1.setText(String.valueOf(resultList.get(0)));
-		result_2.setText(String.valueOf(resultList.get(1)));
-		result_3.setText(String.valueOf(resultList.get(2)));
-		result_4.setText(String.valueOf(resultList.get(3)));
-		result_5.setText(String.valueOf(resultList.get(4)));
-		result_6.setText(String.valueOf(resultList.get(5)));
-		
-		
-		
+		//----------------------------
+		Set<Integer> uniqueNumbers = new HashSet<>();
+
+        // 중복되지 않는 6개의 난수 생성(보너스 숫자 포함x)
+        while (uniqueNumbers.size() < 7) {
+            int randomNumber = ran.nextInt(45) + 1;
+            uniqueNumbers.add(randomNumber);
+        }
+
+       // List<Integer> uniqueList = new ArrayList<>(uniqueNumbers);
+        Set<Integer> resultList = new TreeSet<>(uniqueNumbers);
+        List<Integer> uniqueList = new ArrayList<>(resultList);
+        result_1.setText(String.valueOf(uniqueList.get(0)));
+		result_2.setText(String.valueOf(uniqueList.get(1)));
+		result_3.setText(String.valueOf(uniqueList.get(2)));
+		result_4.setText(String.valueOf(uniqueList.get(4)));
+		result_5.setText(String.valueOf(uniqueList.get(5)));
+		result_6.setText(String.valueOf(uniqueList.get(6)));
+		result_7.setText(String.valueOf(uniqueList.get(3)));
+        
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(40, 162, 363, 64);
