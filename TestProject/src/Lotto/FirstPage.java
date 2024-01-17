@@ -35,14 +35,14 @@ public class FirstPage extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				purchaseGUI.setVisible(true);;
+				purchaseGUI.setVisible(true);
 			}
 		});
 		btnWinning.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				winningGUI.setVisible(true);;
+				winningGUI.setVisible(true);
 			}
 		});
 		showGUI();

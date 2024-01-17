@@ -23,7 +23,6 @@ public class ChargeGUI extends JFrame {
 
 	public ChargeGUI(FirstPage firstPage) {
 		extracted();
-		lblNewLabel.setText("(현재 잔액: " + customer.getAmount() +"원)");
 		
 		btn.addActionListener(new ActionListener() {
 
@@ -34,6 +33,7 @@ public class ChargeGUI extends JFrame {
 
 			}
 		});
+		lblNewLabel.setText("(현재 잔액: " + customer.getAmount() +"원)");
 
 		btnReset.addActionListener(new ActionListener() {
 			@Override

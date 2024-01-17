@@ -29,8 +29,9 @@ import com.jgoodies.forms.layout.RowSpec;
 public class PurchaseGUI extends JFrame {
 	 private List<JToggleButton> toggleButtons;
 	private JButton btnAuto;
+	FirstPage firstpage;
 	
-	public PurchaseGUI() {
+	public PurchaseGUI(FirstPage firstpage) {
 		getContentPane().setLayout(null);
 		 toggleButtons = new ArrayList<>();
 		Panel panel = new Panel();
@@ -158,10 +159,11 @@ public class PurchaseGUI extends JFrame {
 	    }
 	private void showGUI(){
 		setSize(815,501);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setVisible(true);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		setVisible(false);
 	}
 	public static void main(String[] args) {
-		new PurchaseGUI();
+		FirstPage firstpage = new FirstPage();
+		new PurchaseGUI(firstpage);
 	}
 }
