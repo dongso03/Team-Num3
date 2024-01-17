@@ -22,7 +22,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class WinningGUI extends JFrame{
-	public WinningGUI() {
+	FirstPage firstPage;
+	
+	public WinningGUI(FirstPage firstPage) {
 		setTitle("당첨확인");
 		JPanel pnl = new JPanel();
 		pnl.setLayout(null);
@@ -132,8 +134,8 @@ public class WinningGUI extends JFrame{
 		JButton btnNewButton = new JButton("처음 화면으로 돌아가기");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-//				JDialog dia = new winMessage(WinningGUI.this);
-//				dia.setVisible(true);
+				firstPage.setVisible(true);
+				dispose();
 				
 			}
 		});
@@ -157,12 +159,13 @@ public class WinningGUI extends JFrame{
 	}
 	private void showGUI() {
 		setSize(500, 500);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setVisible(true);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		setVisible(false);
 	}
 
 	public static void main(String[] args) {
-		new WinningGUI();
+		FirstPage firstPage = new FirstPage();
+		new WinningGUI(firstPage);
 	}
 }
 
@@ -171,10 +174,16 @@ class MyDialog extends JDialog{
 		super(parent); 
 		setTitle("당첨 규칙 확인");
 		setModal(true);
-		JLabel lblRule = new JLabel("당첨 규칙을 정해서 작성하기!");
+		String labelText = "<html>* 로또는 온라인복권입니다.<br/>"
+				+ "온라인복권이란 복권 발행시스템을 갖춘 중앙전산센터와 정보통신망으로 연결된 단말기를 통해 복권의 발행 및 판매가 이루어지는 복권으로 인터넷복권과는 다른 개념입니다.<br/>"
+				+ "<br/>"
+				+ "* 자동, 반자동, 수동으로 고객이 선택하여 구입할 수 있습니다.<br/>"
+				+ "“자동선택”을 선택하거나 판매인에게 요청하여 45개의 번호 중 6개 번호를 임의로 부여받는 방법, 1개~5개 번호 중 원하는 번호를 선택하고 나머지 번호는 임의로 부여받는 방법, 고객이 6개 번호를 모두 직접 선택하는 방법 중에서 원하는 대로 구입할 수 있습니다."
+				+ "</html>";
+		JLabel lblRule = new JLabel(labelText);
 		add(lblRule);
 		
-		setSize(300,300);
+		setSize(400,400);
 		setLocationRelativeTo(parent); 
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE); 
 	}

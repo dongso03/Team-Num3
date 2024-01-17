@@ -28,16 +28,16 @@ public 	class confirmDialog extends JDialog {
 		//customer = new Customer();
 		JPanel pnl = new JPanel();
 		JLabel lblcon = new JLabel("정말 충전하시겠습니까?");
-		JLabel lblcon2 = new JLabel("확인버튼 누를시 시작화면으로");
+		JLabel lblcon2 = new JLabel("");
 		JButton btn2 = new JButton("확인");
 		JButton btn3 = new JButton("취소");
 		SpringLayout sl_pnl = new SpringLayout();
+		sl_pnl.putConstraint(SpringLayout.NORTH, btn2, 0, SpringLayout.NORTH, btn3);
+		sl_pnl.putConstraint(SpringLayout.WEST, btn2, 0, SpringLayout.WEST, lblcon);
+		sl_pnl.putConstraint(SpringLayout.NORTH, btn3, 37, SpringLayout.SOUTH, lblcon);
+		sl_pnl.putConstraint(SpringLayout.EAST, btn3, 0, SpringLayout.EAST, lblcon2);
 		sl_pnl.putConstraint(SpringLayout.NORTH, lblcon2, 98, SpringLayout.NORTH, pnl);
 		sl_pnl.putConstraint(SpringLayout.EAST, lblcon2, -62, SpringLayout.EAST, pnl);
-		sl_pnl.putConstraint(SpringLayout.NORTH, btn3, 22, SpringLayout.SOUTH, lblcon2);
-		sl_pnl.putConstraint(SpringLayout.WEST, btn3, 165, SpringLayout.WEST, pnl);
-		sl_pnl.putConstraint(SpringLayout.NORTH, btn2, 0, SpringLayout.NORTH, btn3);
-		sl_pnl.putConstraint(SpringLayout.WEST, btn2, 0, SpringLayout.WEST, lblcon2);
 		sl_pnl.putConstraint(SpringLayout.WEST, lblcon, 71, SpringLayout.WEST, pnl);
 		sl_pnl.putConstraint(SpringLayout.SOUTH, lblcon, -15, SpringLayout.NORTH, lblcon2);
 		
@@ -51,6 +51,9 @@ public 	class confirmDialog extends JDialog {
 				customer.addToAmount(number);
 				
 				System.out.println(customer.getAmount());
+				chargeGUI.textField.setText("");
+				setVisible(false); 
+				
 				
 				
 			}
