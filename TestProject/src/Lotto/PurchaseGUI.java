@@ -6,6 +6,7 @@ import java.awt.Panel;
 import java.awt.Button;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
@@ -32,7 +33,7 @@ public class PurchaseGUI extends JFrame {
 	FirstPage firstpage;
 	JToggleButton btnAuto;
 	JToggleButton togbtn;
-	
+
 	private JLabel lblNewLabel_2;
 	private JLabel lblNewLabel_4;
 	private JLabel lblNewLabel_5;
@@ -55,8 +56,11 @@ public class PurchaseGUI extends JFrame {
 		JLabel lblNewLabel = new JLabel("수량");
 		panel.add(lblNewLabel);
 
-		String[] list = new String[] { "1", "2", "3", "4", "5" };
-		JComboBox comboBox = new JComboBox(list);
+//		String[] list = new String[] { "1", "2", "3", "4", "5" };
+//		JComboBox comboBox = new JComboBox(list);
+		
+		List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
+		JComboBox<Integer> comboBox = new JComboBox<>(numbers.toArray(new Integer[0]));
 		sl_panel.putConstraint(SpringLayout.WEST, comboBox, 102, SpringLayout.WEST, panel);
 		sl_panel.putConstraint(SpringLayout.EAST, comboBox, -146, SpringLayout.EAST, panel);
 		sl_panel.putConstraint(SpringLayout.NORTH, lblNewLabel, 3, SpringLayout.NORTH, comboBox);
@@ -66,27 +70,47 @@ public class PurchaseGUI extends JFrame {
 
 		JButton checkBtn = new JButton("확인");
 		sl_panel.putConstraint(SpringLayout.EAST, checkBtn, -37, SpringLayout.EAST, panel);
-		// 확인 버튼을 눌렀을 때
+		
+		// 확인 버튼을 눌렀을 때 -------------------------------------------------
 		checkBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (!btnAuto.isSelected()) { // 수동인 거임
-					List<Integer> selectedNumbers = new ArrayList<>();
-					
-					for (JToggleButton button : toggleButtons) {
-						if (button.isSelected()) {
-							int num = Integer.parseInt(button.getText());
-							selectedNumbers.add(num);
+				switch(comboBox.getSelectedIndex()) {
+				case 0: // 1장 선택했을 때
+					// 수동 자도 ㅇㅂ 반자동 => 이걸 메소드로 만들자
+					if (!btnAuto.isSelected()) { // 수동인 거임
+						List<Integer> selectedNumbers = new ArrayList<>();
+
+						for (JToggleButton button : toggleButtons) {
+							if (button.isSelected()) {
+								int num = Integer.parseInt(button.getText());
+								selectedNumbers.add(num);
+							}
 						}
-					}
-					Collections.sort(selectedNumbers); // 숫자로 바뀐 녀석들이 오름차순으로 정렬했음
-					
-					for(int i = 2; i<8; i++) {
-						lbl1[i].setText(String.valueOf(selectedNumbers.get(i-2)));
-						
-					}
+						Collections.sort(selectedNumbers); // 숫자로 바뀐 녀석들이 오름차순으로 정렬했음
 
+						for (int i = 2; i < 8; i++) {
+							lbl1[1].setText("수동");
+							lbl1[i].setText(String.valueOf(selectedNumbers.get(i - 2)));
+						}
 
+					}
 				}
+//				if (!btnAuto.isSelected()) { // 수동인 거임
+//					List<Integer> selectedNumbers = new ArrayList<>();
+//
+//					for (JToggleButton button : toggleButtons) {
+//						if (button.isSelected()) {
+//							int num = Integer.parseInt(button.getText());
+//							selectedNumbers.add(num);
+//						}
+//					}
+//					Collections.sort(selectedNumbers); // 숫자로 바뀐 녀석들이 오름차순으로 정렬했음
+//
+//					for (int i = 2; i < 8; i++) {
+//						lbl1[i].setText(String.valueOf(selectedNumbers.get(i - 2)));
+//					}
+//
+//				}
 				for (JToggleButton button : toggleButtons) {
 					button.setSelected(false);
 				}
@@ -101,6 +125,7 @@ public class PurchaseGUI extends JFrame {
 		btnReset.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				for (JToggleButton button : toggleButtons) {
+
 					button.setSelected(false);
 				}
 			}
@@ -142,69 +167,64 @@ public class PurchaseGUI extends JFrame {
 		panel_3.setBounds(24, 50, 301, 35);
 		panel_2.add(panel_3);
 		panel_3.setLayout(new GridLayout(1, 0, 0, 0));
-		lbl1 = new JLabel[8]; 
+		lbl1 = new JLabel[8];
 		for (int i = 0; i < 8; i++) {
-		    lbl1[i] = new JLabel("d"); 
-		    panel_3.add(lbl1[i]); 
+			lbl1[i] = new JLabel("d");
+			panel_3.add(lbl1[i]);
 		}
-		
 
 		// 오른쪽 숫자들 초기화하는 버튼
 		JButton btnNewButton = new JButton("초기화");
 		btnNewButton.setBounds(328, 50, 65, 23);
 		panel_2.add(btnNewButton);
-		
+
 		JPanel panel_4 = new JPanel();
 		panel_4.setBounds(23, 95, 302, 35);
 		panel_2.add(panel_4);
 		panel_4.setLayout(new GridLayout(1, 0, 0, 0));
-		lbl2s = new JLabel[8]; 
+		lbl2s = new JLabel[8];
 		for (int i = 0; i < 8; i++) {
-		    lbl2s[i] = new JLabel("d"); 
-		    panel_4.add(lbl2s[i]); 
+			lbl2s[i] = new JLabel("d");
+			panel_4.add(lbl2s[i]);
 		}
-		
+
 		JPanel panel_5 = new JPanel();
 		panel_5.setBounds(24, 140, 302, 35);
 		panel_2.add(panel_5);
 		panel_5.setLayout(new GridLayout(1, 0, 0, 0));
-		JLabel[] lbl3 = new JLabel[8]; 
+		JLabel[] lbl3 = new JLabel[8];
 		for (int i = 0; i < 8; i++) {
-		    lbl3[i] = new JLabel("d"); 
-		    panel_5.add(lbl3[i]); 
+			lbl3[i] = new JLabel("d");
+			panel_5.add(lbl3[i]);
 		}
-		
-		
+
 		JPanel panel_6 = new JPanel();
 		panel_6.setBounds(24, 185, 301, 35);
 		panel_2.add(panel_6);
 		panel_6.setLayout(new GridLayout(1, 0, 0, 0));
-		JLabel[] lbl4 = new JLabel[8]; 
+		JLabel[] lbl4 = new JLabel[8];
 		for (int i = 0; i < 8; i++) {
-		    lbl4[i] = new JLabel("d"); 
-		    panel_6.add(lbl4[i]); 
+			lbl4[i] = new JLabel("d");
+			panel_6.add(lbl4[i]);
 		}
-		
-		
+
 		JPanel panel_7 = new JPanel();
 		panel_7.setBounds(24, 230, 301, 35);
 		panel_2.add(panel_7);
 		panel_7.setLayout(new GridLayout(1, 0, 0, 0));
-		JLabel[] lbl5 = new JLabel[8]; 
+		JLabel[] lbl5 = new JLabel[8];
 		for (int i = 0; i < 8; i++) {
-		    lbl5[i] = new JLabel("d"); 
-		    panel_7.add(lbl5[i]); 
+			lbl5[i] = new JLabel("d");
+			panel_7.add(lbl5[i]);
 		}
-		
+
 		btnNewButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				lblNewLabel_4.setText("");
-				lblNewLabel_5.setText("");
-				lblNewLabel_6.setText("");
-				lblNewLabel_7.setText("");
-				lblNewLabel_8.setText("");
-				lblNewLabel_9.setText("");
+				for (int i = 2; i < 8; i++) {
+					lbl1[1].setText("미지정");
+					lbl1[i].setText("");
+				}
 
 			}
 		});
@@ -228,25 +248,24 @@ public class PurchaseGUI extends JFrame {
 	}
 
 	private void handleToggleButtonAction(JToggleButton togbtn) {
-	      int selectedCount = 0;
-	      this.togbtn = togbtn;
-	      List<JToggleButton> a = new ArrayList<>();
-	      
-	      for (JToggleButton button : toggleButtons) {
-	         if (button.isSelected()) {
-	            a.add(button);
-	            selectedCount++;
-	         }
-	      }
+		int selectedCount = 0;
+		this.togbtn = togbtn;
+		List<JToggleButton> a = new ArrayList<>();
 
-	      if (selectedCount == 7) {
-	         JOptionPane.showMessageDialog(this, "최대 6개까지 선택 가능합니다.");
-	         // 모든 토글 버튼을 대상으로 확인하여 선택이 되어있는 경우 선택 취소
-	           a.get(6).setSelected(false);
-	         
+		for (JToggleButton button : toggleButtons) {
+			if (button.isSelected()) {
+				a.add(button);
+				selectedCount++;
+			}
+		}
 
-	      }
-	   }
+		if (selectedCount == 7) {
+			JOptionPane.showMessageDialog(this, "최대 6개까지 선택 가능합니다.");
+			// 모든 토글 버튼을 대상으로 확인하여 선택이 되어있는 경우 선택 취소
+			a.get(6).setSelected(false);
+
+		}
+	}
 
 	private void showGUI() {
 		setSize(815, 501);
