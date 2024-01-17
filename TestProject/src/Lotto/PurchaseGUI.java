@@ -277,5 +277,14 @@ public class PurchaseGUI extends JFrame {
 		for (int i = 1; i < 45; i++) {
 			btnNum.add(btnNum, String.valueOf(i), i);
 		}
+	showGUI();
+	}
+	private void showGUI(){
+		setSize(815,501);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setVisible(true);
+	}
+	public static void main(String[] args) {
+		new PurchaseGUI();
 	}
 }
