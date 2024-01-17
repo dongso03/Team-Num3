@@ -19,7 +19,7 @@ public class ChargeGUI extends JFrame {
 	private JButton btnReset;
 	FirstPage firstPage;
 
-	public ChargeGUI() {
+	public ChargeGUI(FirstPage firstPage) {
 		extracted();
 		
 		btn.addActionListener(new ActionListener() {
@@ -36,11 +36,8 @@ public class ChargeGUI extends JFrame {
 		btnReset.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				dispose();
-                if (firstPage != null) {
                     firstPage.setVisible(true);
-                }
-
+                    dispose();
 			}
 		});
 		showGUI();
@@ -84,7 +81,8 @@ public class ChargeGUI extends JFrame {
 
 	
 	public static void main(String[] args) {
-		new ChargeGUI();
+		FirstPage firstPage = new FirstPage();
+		new ChargeGUI(firstPage);
 
 	}
 

@@ -17,7 +17,7 @@ public class FirstPage extends JFrame {
 	
 	public FirstPage() {
 		
-		chargGUI = new ChargeGUI();
+		chargGUI = new ChargeGUI(this);
 		
 		extracted();
 		btnCharge.addActionListener(new ActionListener() {
