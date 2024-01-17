@@ -189,21 +189,3 @@ class MyDialog extends JDialog{
 	}
 }
 
-class winMessage extends JDialog{
-	public winMessage(JFrame parent) {
-		super(parent);
-		setTitle("당첨");
-		// 이미지 넣기
-		JPanel pnl = new JPanel();
-		JLabel lbl = new JLabel("");
-		ImageIcon icon = new ImageIcon("춘식1.png"); // 사진 어떻게 넣지???ㅠㅠㅠ
-		lbl.setIcon(icon);
-		pnl.add(lbl);
-		add(pnl);
-		
-		setSize(300,300);
-		setLocationRelativeTo(parent); 
-		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		
-	}
-}

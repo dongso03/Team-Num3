@@ -71,7 +71,6 @@ public class ChargeGUI extends JFrame {
         		
         		
         	} catch (NumberFormatException e) {
-        		//System.err.println("Invalid number format: " + e.getMessage());
         		JOptionPane.showMessageDialog(this, "유효한 숫자를 입력해주세요.", "오류", JOptionPane.ERROR_MESSAGE);
         	}
        

@@ -50,7 +50,7 @@ public class confirmDialog extends JDialog {
 				Integer number = Integer.valueOf(str);
 				customer.addToAmount(number);
 				
-				System.out.println(customer.getAmount());
+				//System.out.println(customer.getAmount());
 				chargeGUI.textField.setText("");
 				setVisible(false); 
 				
