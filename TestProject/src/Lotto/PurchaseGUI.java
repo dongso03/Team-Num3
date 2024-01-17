@@ -149,6 +149,7 @@ public class PurchaseGUI extends JFrame {
 		}
 		
 
+		// 오른쪽 숫자들 초기화하는 버튼
 		JButton btnNewButton = new JButton("초기화");
 		btnNewButton.setBounds(328, 50, 65, 23);
 		panel_2.add(btnNewButton);
