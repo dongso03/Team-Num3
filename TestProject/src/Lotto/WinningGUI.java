@@ -2,7 +2,10 @@ package Lotto;
 
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import java.util.TreeSet;
@@ -45,29 +48,30 @@ public class WinningGUI extends JFrame{
 		pnl.add(panel);
 		panel.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setBounds(12, 10, 28, 27);
-		panel.add(lblNewLabel);
+		// 당첨 숫자 라벨
+		JLabel result_1 = new JLabel("");
+		result_1.setBounds(12, 10, 28, 27);
+		panel.add(result_1);
 		
-		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setBounds(52, 10, 28, 27);
-		panel.add(lblNewLabel_1);
+		JLabel result_2 = new JLabel("");
+		result_2.setBounds(52, 10, 28, 27);
+		panel.add(result_2);
 		
-		JLabel lblNewLabel_2 = new JLabel("");
-		lblNewLabel_2.setBounds(92, 10, 28, 27);
-		panel.add(lblNewLabel_2);
+		JLabel result_3 = new JLabel("");
+		result_3.setBounds(92, 10, 28, 27);
+		panel.add(result_3);
 		
-		JLabel lblNewLabel_1_1 = new JLabel("");
-		lblNewLabel_1_1.setBounds(132, 10, 28, 27);
-		panel.add(lblNewLabel_1_1);
+		JLabel result_4 = new JLabel("");
+		result_4.setBounds(132, 10, 28, 27);
+		panel.add(result_4);
 		
-		JLabel lblNewLabel_2_1 = new JLabel("");
-		lblNewLabel_2_1.setBounds(171, 9, 28, 27);
-		panel.add(lblNewLabel_2_1);
+		JLabel result_5 = new JLabel("");
+		result_5.setBounds(171, 9, 28, 27);
+		panel.add(result_5);
 		
-		JLabel lblNewLabel_1_1_1 = new JLabel("");
-		lblNewLabel_1_1_1.setBounds(211, 9, 28, 27);
-		panel.add(lblNewLabel_1_1_1);
+		JLabel result_6 = new JLabel("");
+		result_6.setBounds(211, 9, 28, 27);
+		panel.add(result_6);
 		
 		JLabel lblNewLabel_2_1_1 = new JLabel("+");
 		lblNewLabel_2_1_1.setBounds(251, 10, 17, 27);
@@ -78,9 +82,9 @@ public class WinningGUI extends JFrame{
 		panel.add(lblNewLabel_3);
 		
 		
-		JLabel lblNewLabel_1_1_1_1 = new JLabel("");
-		lblNewLabel_1_1_1_1.setBounds(292, 10, 28, 27);
-		panel.add(lblNewLabel_1_1_1_1);
+		JLabel result_7 = new JLabel("");
+		result_7.setBounds(292, 10, 28, 27);
+		panel.add(result_7);
 		
 		
 		JLabel lblNewLabel_4 = new JLabel("보너스");
@@ -89,16 +93,37 @@ public class WinningGUI extends JFrame{
 		
 		Random ran = new Random();
 		// 숫자 7개를 랜덤으로 뽑아내는데 6개는 오름차순으로, 하나는 보너스
-		int n1 = ran.nextInt(45) + 1;
-		int n2 = ran.nextInt(45) + 1;
-		int n3 = ran.nextInt(45) + 1;
-		int n4 = ran.nextInt(45) + 1;
-		int n5 = ran.nextInt(45) + 1;
-		int n6 = ran.nextInt(45) + 1;
+		// n1~n7까지 숫자가 중복안되게 수정 필요!!!!
+		Integer n1 = ran.nextInt(45) + 1;
+		Integer n2 = ran.nextInt(45) + 1;
+		Integer n3 = ran.nextInt(45) + 1;
+		Integer n4 = ran.nextInt(45) + 1;
+		Integer n5 = ran.nextInt(45) + 1;
+		Integer n6 = ran.nextInt(45) + 1;
+//		String n2 = String.valueOf(ran.nextInt(45) + 1);
+//		String n3 = String.valueOf(ran.nextInt(45) + 1);
+//		String n4 = String.valueOf(ran.nextInt(45) + 1);
+//		String n5 = String.valueOf(ran.nextInt(45) + 1);
+//		String n6 = String.valueOf(ran.nextInt(45) + 1);
+	
 		// 보너스
-		int n7 = ran.nextInt(45) + 1;
-		//lblNewLabel_1_1_1_1.
+		String n7 = String.valueOf(ran.nextInt(45) + 1);
+		result_7.setText(n7);
 		Set<Integer> random = new TreeSet<>(Arrays.asList(n1,n2,n3,n4,n5,n6));
+		Iterator<Integer> iter = random.iterator();
+		List<Integer> resultList = new ArrayList<>();
+		while(iter.hasNext()) {
+			resultList.add(iter.next());
+		}
+		result_1.setText(String.valueOf(resultList.get(0)));
+		result_2.setText(String.valueOf(resultList.get(1)));
+		result_3.setText(String.valueOf(resultList.get(2)));
+		result_4.setText(String.valueOf(resultList.get(3)));
+		result_5.setText(String.valueOf(resultList.get(4)));
+		result_6.setText(String.valueOf(resultList.get(5)));
+		
+		
+		
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(40, 162, 363, 64);
