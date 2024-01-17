@@ -170,32 +170,37 @@ public class PurchaseGUI extends JFrame {
 		panel_3.setBounds(24, 50, 301, 35);
 		panel_2.add(panel_3);
 		panel_3.setLayout(new GridLayout(1, 0, 0, 0));
-
-		JLabel lblNewLabel_3 = new JLabel("A");
-		panel_3.add(lblNewLabel_3);
-
-		// 이 라벨에서 미지정,수동,자동,반자동 표현
-		lblNewLabel_2 = new JLabel("미지정");
-		panel_3.add(lblNewLabel_2);
-		// 확인 버튼을 눌렸을 때 자동이 선택되어 있으면 자동이나 반자동, 자동이 선택되어 있지 않다면 수동으로 라벨 표시
-
-		lblNewLabel_4 = new JLabel("");
-		panel_3.add(lblNewLabel_4);
-
-		lblNewLabel_5 = new JLabel("");
-		panel_3.add(lblNewLabel_5);
-
-		lblNewLabel_6 = new JLabel("");
-		panel_3.add(lblNewLabel_6);
-
-		lblNewLabel_7 = new JLabel("");
-		panel_3.add(lblNewLabel_7);
-
-		lblNewLabel_8 = new JLabel("");
-		panel_3.add(lblNewLabel_8);
-
-		lblNewLabel_9 = new JLabel("");
-		panel_3.add(lblNewLabel_9);
+		JLabel[] lbl1 = new JLabel[8]; 
+		for (int i = 0; i < 8; i++) {
+		    lbl1[i] = new JLabel("d"); 
+		    panel_3.add(lbl1[i]); 
+		}
+		
+//		JLabel lblNewLabel_3 = new JLabel("A");
+//		panel_3.add(lblNewLabel_3);
+//
+//		// 이 라벨에서 미지정,수동,자동,반자동 표현
+//		lblNewLabel_2 = new JLabel("미지정");
+//		panel_3.add(lblNewLabel_2);
+//		// 확인 버튼을 눌렸을 때 자동이 선택되어 있으면 자동이나 반자동, 자동이 선택되어 있지 않다면 수동으로 라벨 표시
+//
+//		lblNewLabel_4 = new JLabel("");
+//		panel_3.add(lblNewLabel_4);
+//
+//		lblNewLabel_5 = new JLabel("");
+//		panel_3.add(lblNewLabel_5);
+//
+//		lblNewLabel_6 = new JLabel("");
+//		panel_3.add(lblNewLabel_6);
+//
+//		lblNewLabel_7 = new JLabel("");
+//		panel_3.add(lblNewLabel_7);
+//
+//		lblNewLabel_8 = new JLabel("");
+//		panel_3.add(lblNewLabel_8);
+//
+//		lblNewLabel_9 = new JLabel("");
+//		panel_3.add(lblNewLabel_9);
 
 		JButton btnNewButton = new JButton("초기화");
 		btnNewButton.setBounds(328, 50, 65, 23);
