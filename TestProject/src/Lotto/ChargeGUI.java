@@ -30,10 +30,10 @@ public class ChargeGUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				JDialog jd = new confirmDialog(ChargeGUI.this, customer);
 				jd.setVisible(true);
+				lblNewLabel.setText("(현재 잔액: " + customer.getAmount() +"원)");
 
 			}
 		});
-		lblNewLabel.setText("(현재 잔액: " + customer.getAmount() +"원)");
 
 		btnReset.addActionListener(new ActionListener() {
 			@Override
@@ -85,7 +85,7 @@ public class ChargeGUI extends JFrame {
 		springLayout.putConstraint(SpringLayout.WEST, btnReset, 0, SpringLayout.WEST, textField);
 		getContentPane().add(btnReset);
 		
-		lblNewLabel = new JLabel("");
+		lblNewLabel = new JLabel("(현재 잔액: " + customer.getAmount() +"원)");
 		springLayout.putConstraint(SpringLayout.NORTH, lblNewLabel, 8, SpringLayout.SOUTH, textField);
 		springLayout.putConstraint(SpringLayout.WEST, lblNewLabel, 163, SpringLayout.WEST, getContentPane());
 		springLayout.putConstraint(SpringLayout.EAST, lblNewLabel, 0, SpringLayout.EAST, textField);

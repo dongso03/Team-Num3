@@ -7,16 +7,16 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 
-public 	class confirmDialog extends JDialog {
-	
+public class confirmDialog extends JDialog {
+
 	private ChargeGUI chargeGUI;
-	//private Customer customer;
-	private Customer customer = new Customer(100,1); // 이거 수정해야됨
-	
-	
+	// private Customer customer;
+	private Customer customer = new Customer(100, 1); // 이거 수정해야됨
+
 	public confirmDialog(ChargeGUI chargeGUI,Customer c) {
         super(chargeGUI);
         this.chargeGUI = chargeGUI;
@@ -53,8 +53,6 @@ public 	class confirmDialog extends JDialog {
 				System.out.println(customer.getAmount());
 				chargeGUI.textField.setText("");
 				setVisible(false); 
-				
-				
 				
 			}
 		});
