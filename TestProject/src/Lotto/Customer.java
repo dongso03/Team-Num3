@@ -3,7 +3,7 @@ package Lotto;
 public class Customer {
 	// 금액저장
 	// 로또번호 저장
-	private int amount;
+	private int amount = 100;
 	private int lottoNums;
 
 	public Customer(int amount, int lottoNums) {
