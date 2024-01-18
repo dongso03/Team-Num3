@@ -16,7 +16,7 @@ public class FirstPage extends JFrame {
 	private WinningGUI winningGUI;
 	public static Customer customer;
 	public FirstPage() {
-		customer = new Customer(1000, 1);
+		customer = new Customer(1000,1);
 		chargGUI = new ChargeGUI(this);
 		winningGUI = new WinningGUI(this);
 		purchaseGUI = new PurchaseGUI(this, chargGUI);

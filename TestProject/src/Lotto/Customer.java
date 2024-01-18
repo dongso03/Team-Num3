@@ -1,16 +1,23 @@
 package Lotto;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
 public  class Customer {
 	// 금액저장
 	// 로또번호 저장
 	private int amount ;
 	private int lottoNums;
+	public static List<List<Integer>> lottoList = new ArrayList<>();
 
 	public Customer(int amount, int lottoNums) {
 		super();
 		this.amount = amount;
 		this.lottoNums = lottoNums;
 	}
+
+
 
 	public Customer() {
 	}

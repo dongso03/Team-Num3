@@ -19,6 +19,7 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -45,7 +46,7 @@ public class PurchaseGUI extends JFrame {
 	private JLabel lblNewLabel_7;
 	private JLabel lblNewLabel_8;
 	private JLabel lblNewLabel_9;
-	private JLabel[] lbl1;
+	public JLabel[] lbl1;
 	private JLabel[] lbl2;
 	public JLabel lblNewLabel_10;
 	private JLabel lblNewLabel_12;
@@ -754,6 +755,12 @@ public class PurchaseGUI extends JFrame {
 		panel_9.add(lblNewLabel_11);
 		
 		JButton btnNewButton_2 = new JButton("구매");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JDialog jdp =new ConfirmPurchaseDialog(PurchaseGUI.this);
+				jdp.setVisible(true);
+			}
+		});
 		btnNewButton_2.setBounds(296, 10, 97, 55);
 		panel_9.add(btnNewButton_2);
 		
