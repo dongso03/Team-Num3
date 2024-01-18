@@ -14,12 +14,12 @@ public class FirstPage extends JFrame {
 	private ChargeGUI chargGUI;
 	private PurchaseGUI purchaseGUI;
 	private WinningGUI winningGUI;
-	
+	public static Customer customer;
 	public FirstPage() {
-		
+		customer = new Customer(1000, 1);
 		chargGUI = new ChargeGUI(this);
 		winningGUI = new WinningGUI(this);
-		purchaseGUI = new PurchaseGUI(this);
+		purchaseGUI = new PurchaseGUI(this, chargGUI);
 		
 		extracted();
 		btnCharge.addActionListener(new ActionListener() {
@@ -36,6 +36,7 @@ public class FirstPage extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
 				purchaseGUI.setVisible(true);
+				purchaseGUI.lblNewLabel_10.setText("(현재 잔액: " + FirstPage.customer.getAmount() +"원)");
 			}
 		});
 		btnWinning.addActionListener(new ActionListener() {
@@ -87,6 +88,7 @@ private void showGUI(){
 		getContentPane().add(btnWinning);
 	}
 	public static void main(String[] args) {
-		new FirstPage();
+		FirstPage firstPage =new FirstPage();
+		ChargeGUI chargeGUI = new ChargeGUI(firstPage);
 	}
 }

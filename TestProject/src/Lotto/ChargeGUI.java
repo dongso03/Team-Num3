@@ -17,14 +17,14 @@ import javax.swing.JDialog;
 public class ChargeGUI extends JFrame {
 	public JTextField textField;
 	private JButton btn;
-	private Customer customer = new Customer(100, 1);
+	PurchaseGUI purchaseGUI;
 	private JButton btnReset;
 	FirstPage firstPage;
 	private JLabel lblNewLabel;
 
 	public ChargeGUI(FirstPage firstPage) {
 		extracted();
-		
+	
 		btn.addActionListener(new ActionListener() {
 
 			@Override
@@ -65,10 +65,11 @@ public class ChargeGUI extends JFrame {
         	
         	try {
         		number =  Integer.valueOf(str);
-        		JDialog jd = new confirmDialog(ChargeGUI.this, customer);
+        		JDialog jd = new confirmDialog(ChargeGUI.this);
 				jd.setVisible(true);
-				lblNewLabel.setText("(현재 잔액: " + customer.getAmount() +"원)");
-        		
+				 
+				lblNewLabel.setText("(현재 잔액: " + FirstPage.customer.getAmount() +"원)");
+				
         		
         	} catch (NumberFormatException e) {
         		JOptionPane.showMessageDialog(this, "유효한 숫자를 입력해주세요.", "오류", JOptionPane.ERROR_MESSAGE);
@@ -96,7 +97,7 @@ public class ChargeGUI extends JFrame {
 		springLayout.putConstraint(SpringLayout.WEST, textField, 42, SpringLayout.EAST, lbl);
 		getContentPane().add(textField);
 		textField.setColumns(10);
-
+		
 		btn = new JButton("확인");
 		springLayout.putConstraint(SpringLayout.NORTH, btn, -4, SpringLayout.NORTH, lbl);
 		springLayout.putConstraint(SpringLayout.WEST, btn, 338, SpringLayout.WEST, getContentPane());
@@ -108,7 +109,7 @@ public class ChargeGUI extends JFrame {
 		springLayout.putConstraint(SpringLayout.WEST, btnReset, 0, SpringLayout.WEST, textField);
 		getContentPane().add(btnReset);
 		
-		lblNewLabel = new JLabel("(현재 잔액: " + customer.getAmount() +"원)");
+		lblNewLabel = new JLabel("(현재 잔액: " + FirstPage.customer.getAmount() +"원)");
 		springLayout.putConstraint(SpringLayout.NORTH, lblNewLabel, 8, SpringLayout.SOUTH, textField);
 		springLayout.putConstraint(SpringLayout.WEST, lblNewLabel, 163, SpringLayout.WEST, getContentPane());
 		springLayout.putConstraint(SpringLayout.EAST, lblNewLabel, 0, SpringLayout.EAST, textField);
@@ -117,6 +118,7 @@ public class ChargeGUI extends JFrame {
 
 	public static void main(String[] args) {
 		FirstPage firstPage = new FirstPage();
+		
 		new ChargeGUI(firstPage);
 
 	}
