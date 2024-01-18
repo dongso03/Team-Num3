@@ -8,8 +8,11 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
+import java.util.TreeSet;
 import java.awt.event.ActionEvent;
 import javax.swing.SpringLayout;
 import javax.swing.JButton;
@@ -48,19 +51,20 @@ public class PurchaseGUI extends JFrame {
 		getContentPane().setLayout(null);
 		toggleButtons = new ArrayList<>();
 		Panel panel = new Panel();
-		panel.setBounds(10, 349, 353, 79);
+		panel.setBounds(10, 394, 353, 31);
 		getContentPane().add(panel);
 		SpringLayout sl_panel = new SpringLayout();
 		panel.setLayout(sl_panel);
+		Random ran = new Random();
 
 		JLabel lblNewLabel = new JLabel("수량");
 		panel.add(lblNewLabel);
 
-//		String[] list = new String[] { "1", "2", "3", "4", "5" };
-//		JComboBox comboBox = new JComboBox(list);
-		
-		List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
-		JComboBox<Integer> comboBox = new JComboBox<>(numbers.toArray(new Integer[0]));
+		String[] list = new String[] { "1", "2", "3", "4", "5" };
+		JComboBox comboBox = new JComboBox(list);
+
+//		List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
+//		JComboBox<Integer> comboBox = new JComboBox<>();
 		sl_panel.putConstraint(SpringLayout.WEST, comboBox, 102, SpringLayout.WEST, panel);
 		sl_panel.putConstraint(SpringLayout.EAST, comboBox, -146, SpringLayout.EAST, panel);
 		sl_panel.putConstraint(SpringLayout.NORTH, lblNewLabel, 3, SpringLayout.NORTH, comboBox);
@@ -69,12 +73,13 @@ public class PurchaseGUI extends JFrame {
 		panel.add(comboBox);
 
 		JButton checkBtn = new JButton("확인");
-		sl_panel.putConstraint(SpringLayout.EAST, checkBtn, -37, SpringLayout.EAST, panel);
-		
+		sl_panel.putConstraint(SpringLayout.NORTH, checkBtn, -4, SpringLayout.NORTH, lblNewLabel);
+		sl_panel.putConstraint(SpringLayout.WEST, checkBtn, 18, SpringLayout.EAST, comboBox);
+
 		// 확인 버튼을 눌렀을 때 -------------------------------------------------
 		checkBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				switch(comboBox.getSelectedIndex()) {
+				switch (comboBox.getSelectedIndex()) {
 				case 0: // 1장 선택했을 때
 					// 수동 자도 ㅇㅂ 반자동 => 이걸 메소드로 만들자
 					if (!btnAuto.isSelected()) { // 수동인 거임
@@ -92,67 +97,66 @@ public class PurchaseGUI extends JFrame {
 							lbl1[1].setText("수동");
 							lbl1[i].setText(String.valueOf(selectedNumbers.get(i - 2)));
 						}
+					} else { // 자동 버튼을 클릭했을 때
+						// all 자동
+						// List<Integer> selectedNumbers = new ArrayList<>();
+						Set<Integer> uniqueNumbers = new HashSet<>();
+						int selectCount = 0;
 
+						for (JToggleButton button : toggleButtons) {
+							if (button.isSelected()) { // 중복되지 않고 랜덤 숫자 6개 만들기
+								selectCount++;
+							}
+						}
+						
+						if(selectCount == 0) {  // all 자동
+							while (uniqueNumbers.size() < 7) {
+					            int randomNumber = ran.nextInt(45) + 1;
+					            uniqueNumbers.add(randomNumber);
+					        }
+							List<Integer> uniqueList = new ArrayList<>(uniqueNumbers);
+							Collections.sort(uniqueList); // 인덱스 0~ 6까지 숫자 다 뽑아내라
+							for (int i = 2; i < 8; i++) {
+								lbl1[1].setText("자동");
+								lbl1[i].setText(String.valueOf(uniqueList.get(i - 2)));
+							}
+						} else if(0< selectCount && selectCount < 6) { // 반자동
+							// 선택된 숫자들 불러오고 나머지 숫자들은 랜덤. 중복되면 안되고 오름차순!
+//							List<Integer> selectedNumbers = new ArrayList<>();
+//
+//							for (JToggleButton button : toggleButtons) {
+//								if (button.isSelected()) {
+//									int num = Integer.parseInt(button.getText());
+//									selectedNumbers.add(num);
+//								}
+//							}
+//							Collections.sort(selectedNumbers); // 숫자로 바뀐 녀석들이 오름차순으로 정렬했음
+//
+//							for (int i = 2; i < 8; i++) {
+//								lbl1[1].setText("수동");
+//								lbl1[i].setText(String.valueOf(selectedNumbers.get(i - 2)));
+							
+						}
+						
 					}
+					break;
+				case 1:
+					
+					break;
+				case 2:
+					break;
+				case 3:
+					break;
+				case 4:
+					break;
 				}
-//				if (!btnAuto.isSelected()) { // 수동인 거임
-//					List<Integer> selectedNumbers = new ArrayList<>();
-//
-//					for (JToggleButton button : toggleButtons) {
-//						if (button.isSelected()) {
-//							int num = Integer.parseInt(button.getText());
-//							selectedNumbers.add(num);
-//						}
-//					}
-//					Collections.sort(selectedNumbers); // 숫자로 바뀐 녀석들이 오름차순으로 정렬했음
-//
-//					for (int i = 2; i < 8; i++) {
-//						lbl1[i].setText(String.valueOf(selectedNumbers.get(i - 2)));
-//					}
-//
-//				}
+
 				for (JToggleButton button : toggleButtons) {
 					button.setSelected(false);
 				}
 			}
 		});
 		panel.add(checkBtn);
-
-		JButton btnReset = new JButton("초기화");
-		sl_panel.putConstraint(SpringLayout.NORTH, btnReset, 12, SpringLayout.SOUTH, comboBox);
-		sl_panel.putConstraint(SpringLayout.NORTH, checkBtn, 0, SpringLayout.NORTH, btnReset);
-		sl_panel.putConstraint(SpringLayout.EAST, btnReset, -243, SpringLayout.EAST, panel);
-		btnReset.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				for (JToggleButton button : toggleButtons) {
-
-					button.setSelected(false);
-				}
-			}
-		});
-		panel.add(btnReset);
-		Random ran = new Random();
-
-		btnAuto = new JToggleButton("자동");
-		sl_panel.putConstraint(SpringLayout.NORTH, btnAuto, 12, SpringLayout.SOUTH, comboBox);
-		sl_panel.putConstraint(SpringLayout.WEST, btnAuto, 23, SpringLayout.EAST, btnReset);
-		panel.add(btnAuto);
-		btnAuto.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (comboBox.getSelectedItem().toString().equals("1")) {
-
-				} else if (comboBox.getSelectedItem().toString().equals("2")) {
-
-				} else if (comboBox.getSelectedItem().toString().equals("3")) {
-
-				} else if (comboBox.getSelectedItem().toString().equals("4")) {
-
-				} else if (comboBox.getSelectedItem().toString().equals("5")) {
-
-				}
-			}
-		});
 		JPanel panel_2 = new JPanel();
 		panel_2.setBounds(369, 10, 405, 418);
 		getContentPane().add(panel_2);
@@ -232,6 +236,48 @@ public class PurchaseGUI extends JFrame {
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(12, 10, 345, 317);
 		getContentPane().add(panel_1);
+		
+		JPanel panel_8 = new JPanel();
+		panel_8.setBounds(10, 337, 353, 31);
+		getContentPane().add(panel_8);
+		panel_8.setLayout(null);
+		
+				JButton btnReset = new JButton("초기화");
+				btnReset.setBounds(98, 10, 69, 23);
+				panel_8.add(btnReset);
+				sl_panel.putConstraint(SpringLayout.NORTH, btnReset, 0, SpringLayout.NORTH, checkBtn);
+				sl_panel.putConstraint(SpringLayout.WEST, btnReset, 25, SpringLayout.WEST, panel);
+				// Random ran = new Random();
+
+				btnAuto = new JToggleButton("자동");
+				btnAuto.setBounds(193, 10, 57, 23);
+				panel_8.add(btnAuto);
+				sl_panel.putConstraint(SpringLayout.NORTH, btnAuto, 0, SpringLayout.NORTH, checkBtn);
+				sl_panel.putConstraint(SpringLayout.EAST, btnAuto, -34, SpringLayout.WEST, checkBtn);
+				btnAuto.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						if (comboBox.getSelectedItem().toString().equals("1")) {
+
+						} else if (comboBox.getSelectedItem().toString().equals("2")) {
+
+						} else if (comboBox.getSelectedItem().toString().equals("3")) {
+
+						} else if (comboBox.getSelectedItem().toString().equals("4")) {
+
+						} else if (comboBox.getSelectedItem().toString().equals("5")) {
+
+						}
+					}
+				});
+				btnReset.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						for (JToggleButton button : toggleButtons) {
+
+							button.setSelected(false);
+						}
+					}
+				});
 
 		for (int i = 1; i <= 45; i++) {
 			togbtn = new JToggleButton(String.valueOf(i));
@@ -268,7 +314,7 @@ public class PurchaseGUI extends JFrame {
 	}
 
 	private void showGUI() {
-		setSize(815, 501);
+		setSize(815, 567);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setVisible(false);
 	}
