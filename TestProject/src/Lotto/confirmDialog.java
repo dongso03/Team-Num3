@@ -15,12 +15,13 @@ public class confirmDialog extends JDialog {
 
 	private ChargeGUI chargeGUI;
 	// private Customer customer;
-	private Customer customer = new Customer(100, 1); // 이거 수정해야됨
+	
+	
 
-	public confirmDialog(ChargeGUI chargeGUI,Customer c) {
+	public confirmDialog(ChargeGUI chargeGUI) {
         super(chargeGUI);
         this.chargeGUI = chargeGUI;
-        this.customer = c;
+        
         
 		setTitle("확인창");
 		setModal(true);
@@ -48,8 +49,10 @@ public class confirmDialog extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				String str = chargeGUI.textField.getText();
 				Integer number = Integer.valueOf(str);
-				customer.addToAmount(number);
+				int a = FirstPage.customer.addToAmount(number);
+				FirstPage.customer.setAmount(a);
 				
+			
 				//System.out.println(customer.getAmount());
 				chargeGUI.textField.setText("");
 				setVisible(false); 

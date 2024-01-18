@@ -1,9 +1,9 @@
 package Lotto;
 
-public class Customer {
+public  class Customer {
 	// 금액저장
 	// 로또번호 저장
-	private int amount = 100;
+	private int amount ;
 	private int lottoNums;
 
 	public Customer(int amount, int lottoNums) {
@@ -55,8 +55,8 @@ public class Customer {
 			return false;
 		return true;
 	}
-	public void addToAmount(int value) {
-	    this.amount += value;
+	public int addToAmount(int value) {
+	    return this.amount += value;
 	}
 
 

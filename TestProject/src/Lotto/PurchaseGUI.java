@@ -36,7 +36,8 @@ public class PurchaseGUI extends JFrame {
 	FirstPage firstpage;
 	JToggleButton btnAuto;
 	JToggleButton togbtn;
-
+	ChargeGUI chargeGUI;
+	
 	private JLabel lblNewLabel_2;
 	private JLabel lblNewLabel_4;
 	private JLabel lblNewLabel_5;
@@ -46,8 +47,11 @@ public class PurchaseGUI extends JFrame {
 	private JLabel lblNewLabel_9;
 	private JLabel[] lbl1;
 	private JLabel[] lbl2s;
+	public JLabel lblNewLabel_10;
 
-	public PurchaseGUI(FirstPage firstpage) {
+	public PurchaseGUI(FirstPage firstpage,ChargeGUI chargeGUI) {
+		 this.firstpage= firstpage;
+		 this.chargeGUI=chargeGUI;
 		getContentPane().setLayout(null);
 		toggleButtons = new ArrayList<>();
 		Panel panel = new Panel();
@@ -149,7 +153,7 @@ public class PurchaseGUI extends JFrame {
 		});
 		panel.add(checkBtn);
 		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(369, 10, 405, 418);
+		panel_2.setBounds(369, 10, 405, 290);
 		getContentPane().add(panel_2);
 
 		panel_2.setLayout(null);
@@ -245,6 +249,42 @@ public class PurchaseGUI extends JFrame {
 		panel_8.add(btnAuto);
 		sl_panel.putConstraint(SpringLayout.NORTH, btnAuto, 0, SpringLayout.NORTH, checkBtn);
 		sl_panel.putConstraint(SpringLayout.EAST, btnAuto, -34, SpringLayout.WEST, checkBtn);
+		
+		JPanel panel_9 = new JPanel();
+		panel_9.setBounds(375, 337, 405, 88);
+		getContentPane().add(panel_9);
+		panel_9.setLayout(null);
+		
+		JLabel lblNewLabel_3 = new JLabel("보유금액");
+		lblNewLabel_3.setBounds(12, 10, 57, 15);
+		panel_9.add(lblNewLabel_3);
+		
+		JButton btnNewButton_1 = new JButton("충전");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+				chargeGUI.setVisible(true);
+				
+				if(chargeGUI != null) {
+					chargeGUI.setVisible(true);
+				}
+				dispose();
+			}
+		});
+		btnNewButton_1.setBounds(76, 6, 57, 23);
+		panel_9.add(btnNewButton_1);
+		
+		lblNewLabel_10 = new JLabel("보유금액: "+FirstPage.customer.getAmount());
+		lblNewLabel_10.setBounds(12, 46, 121, 15);
+		panel_9.add(lblNewLabel_10);
+		
+		JLabel lblNewLabel_11 = new JLabel("결제금액");
+		lblNewLabel_11.setBounds(182, 10, 57, 15);
+		panel_9.add(lblNewLabel_11);
+		
+		JButton btnNewButton_2 = new JButton("구매");
+		btnNewButton_2.setBounds(296, 42, 97, 23);
+		panel_9.add(btnNewButton_2);
 		btnAuto.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -323,9 +363,13 @@ public class PurchaseGUI extends JFrame {
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setVisible(false);
 	}
+	 public void setFirstPage(FirstPage firstPage) {
+	        this.firstpage = firstPage;
+	    }
 
 	public static void main(String[] args) {
 		FirstPage firstpage = new FirstPage();
-		new PurchaseGUI(firstpage);
+		ChargeGUI chargeGUI= new ChargeGUI(firstpage);
+		new PurchaseGUI(firstpage,chargeGUI);
 	}
 }
