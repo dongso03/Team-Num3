@@ -56,6 +56,11 @@ public class PurchaseGUI extends JFrame {
 	private JLabel[] lbl3;
 	private JLabel[] lbl4;
 	private JLabel[] lbl5;
+	private JPanel panel_3;
+	private JPanel panel_4;
+	private JPanel panel_5;
+	private JPanel panel_6;
+	private JPanel panel_7;
 
 	public PurchaseGUI(FirstPage firstpage, ChargeGUI chargeGUI) {
 		this.firstpage = firstpage;
@@ -94,7 +99,25 @@ public class PurchaseGUI extends JFrame {
 			int selectCount = 0;
 
 			public void actionPerformed(ActionEvent e) {
-//				List<JLabel[]> resultLine = new ArrayList<>(Arrays.asList(lbl1, lbl2, lbl3, lbl4, lbl5));
+				List<JPanel> totalPnl = new ArrayList<>(Arrays.asList(panel_3,panel_4,panel_5,panel_6,panel_7)); 
+				List<JLabel[]> resultLine = new ArrayList<>(Arrays.asList(lbl1, lbl2, lbl3, lbl4, lbl5));
+				
+//				Iterator<JLabel[]> iter = resultLine.iterator();
+//				while(iter.hasNext()) {
+//					JLabel[] labels = iter.next();
+//				}
+				
+				
+				
+				for( JPanel p : totalPnl) {
+					for(JLabel[] l :resultLine ) {
+						for(JLabel lbl : l) {
+							if(lbl.getText().equals("")) {
+								lbl.setText(String.valueOf(selectedNumbers.addAll(getSelectedNumbers())));
+							}
+						}
+					}
+				}
 //				Iterator<JLabel[]> iter = resultLine.iterator();
 //				while (iter.hasNext()) {
 //					JLabel[] labels = iter.next();
@@ -652,7 +675,7 @@ public class PurchaseGUI extends JFrame {
 		lblNewLabel_1.setBounds(164, 5, 76, 15);
 		panel_2.add(lblNewLabel_1);
 
-		JPanel panel_3 = new JPanel();
+		panel_3 = new JPanel();
 		panel_3.setBounds(24, 50, 371, 35);
 		panel_2.add(panel_3);
 		panel_3.setLayout(new GridLayout(1, 0, 0, 0));
@@ -679,7 +702,7 @@ public class PurchaseGUI extends JFrame {
 		btnReset_1.setBounds(407, 50, 89, 23);
 		panel_2.add(btnReset_1);
 
-		JPanel panel_4 = new JPanel();
+		panel_4 = new JPanel();
 		panel_4.setBounds(23, 95, 372, 35);
 		panel_2.add(panel_4);
 		panel_4.setLayout(new GridLayout(1, 0, 0, 0));
@@ -690,7 +713,7 @@ public class PurchaseGUI extends JFrame {
 			panel_4.add(lbl2[i]);
 		}
 
-		JPanel panel_5 = new JPanel();
+		panel_5 = new JPanel();
 		panel_5.setBounds(24, 140, 371, 35);
 		panel_2.add(panel_5);
 		panel_5.setLayout(new GridLayout(1, 0, 0, 0));
@@ -701,7 +724,7 @@ public class PurchaseGUI extends JFrame {
 			panel_5.add(lbl3[i]);
 		}
 
-		JPanel panel_6 = new JPanel();
+		panel_6 = new JPanel();
 		panel_6.setBounds(24, 185, 371, 35);
 		panel_2.add(panel_6);
 		panel_6.setLayout(new GridLayout(1, 0, 0, 0));
@@ -712,7 +735,7 @@ public class PurchaseGUI extends JFrame {
 			panel_6.add(lbl4[i]);
 		}
 
-		JPanel panel_7 = new JPanel();
+		panel_7 = new JPanel();
 		panel_7.setBounds(24, 230, 371, 35);
 		panel_2.add(panel_7);
 		panel_7.setLayout(new GridLayout(1, 0, 0, 0));
