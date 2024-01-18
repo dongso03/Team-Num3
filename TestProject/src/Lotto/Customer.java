@@ -55,8 +55,8 @@ public class Customer {
 			return false;
 		return true;
 	}
-	public void addToAmount(int value) {
-	    this.amount += value;
+	public int addToAmount(int value) {
+	    return this.amount += value;
 	}
 
 

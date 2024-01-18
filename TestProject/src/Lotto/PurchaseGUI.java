@@ -26,11 +26,12 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JPanel;
-import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.FormLayout;  
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import java.awt.GridLayout;
 
+// 가짜 가짜 가짜
 public class PurchaseGUI extends JFrame {
 	private List<JToggleButton> toggleButtons;
 	FirstPage firstpage;
@@ -45,7 +46,11 @@ public class PurchaseGUI extends JFrame {
 	private JLabel lblNewLabel_8;
 	private JLabel lblNewLabel_9;
 	private JLabel[] lbl1;
-	private JLabel[] lbl2s;
+	private JLabel[] lbl2;
+	private JLabel[] lbl3;
+	private JLabel[] lbl4;
+	private JLabel[] lbl5;
+
 
 	public PurchaseGUI(FirstPage firstpage) {
 		getContentPane().setLayout(null);
@@ -63,8 +68,6 @@ public class PurchaseGUI extends JFrame {
 		String[] list = new String[] { "1", "2", "3", "4", "5" };
 		JComboBox comboBox = new JComboBox(list);
 
-//		List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
-//		JComboBox<Integer> comboBox = new JComboBox<>();
 		sl_panel.putConstraint(SpringLayout.WEST, comboBox, 102, SpringLayout.WEST, panel);
 		sl_panel.putConstraint(SpringLayout.EAST, comboBox, -146, SpringLayout.EAST, panel);
 		sl_panel.putConstraint(SpringLayout.NORTH, lblNewLabel, 3, SpringLayout.NORTH, comboBox);
@@ -78,7 +81,7 @@ public class PurchaseGUI extends JFrame {
 
 		// 확인 버튼을 눌렀을 때 -------------------------------------------------
 		checkBtn.addActionListener(new ActionListener() {
-			private List<Integer> selectedNumbers = new ArrayList<>();
+			private List<Integer> selectedNumbers = new ArrayList<>(); // 수량 선택 case끝나면 remove
 			int selectCount = 0;
 
 			public void actionPerformed(ActionEvent e) {
@@ -100,45 +103,513 @@ public class PurchaseGUI extends JFrame {
 								selectCount++;
 							}
 						}
-								// all 자동
+						// all 자동
 						if (selectCount == 0 || selectCount == 6) {
 							while (notDuplicate.size() < 7) {
 								int randomNumber = ran.nextInt(45) + 1;
 								notDuplicate.add(randomNumber);
 							}
 							List<Integer> lottoResult = new ArrayList<>(notDuplicate);
-							Collections.sort(lottoResult); // 인덱스 0~ 6까지 숫자 다 뽑아내라
+							Collections.sort(lottoResult);
 							for (int i = 2; i < 8; i++) {
 								lbl1[1].setText("자동");
 								lbl1[i].setText(String.valueOf(lottoResult.get(i - 2)));
-							}   // 반자동인 경우
-						} else if (0 < selectCount && selectCount < 6) { // 사용자가 1개 이상 5개 이하로 숫자를 선택시
+							} // 반자동인 경우
+						} else if (0 < selectCount && selectCount < 6) { 
 							selectedNumbers.addAll(getSelectedNumbers());
 							// Set<Integer> notDuplicate 중복을 허용하지 않는 set에 선택한 숫자들 전부 넣어주기
 							notDuplicate.addAll(selectedNumbers);
-							while (notDuplicate.size() < 7) { // 숫자들이 중복되지 않으면서, 크기가 6이 넘지 않게
+							while (notDuplicate.size() < 7) { 
 								int r = ran.nextInt(45) + 1;
 								notDuplicate.add(r);
 							}
 							// 오름차순으로 정렬하기위해 set -> list로 변환해줌
 							List<Integer> lottoResult = new ArrayList<>(notDuplicate);
-							Collections.sort(lottoResult); // 오름차순으로 정렬
+							Collections.sort(lottoResult); 
 							for (int i = 2; i < 8; i++) {
 								lbl1[1].setText("반자동");
 								lbl1[i].setText(String.valueOf(lottoResult.get(i - 2)));
 							}
 						}
 					}
-
+					selectedNumbers.removeAll(getSelectedNumbers());
+					selectCount = 0;
 					break;
-				case 1:
 
+				case 1: // 2장 선택
+					if (!btnAuto.isSelected()) { // 수동일 때
+						selectedNumbers.addAll(getSelectedNumbers());
+						Collections.sort(selectedNumbers);
+
+						for (int i = 2; i < 8; i++) {
+							lbl1[1].setText("수동");
+							lbl1[i].setText(String.valueOf(selectedNumbers.get(i - 2)));
+						}
+						for (int i = 2; i < 8; i++) {
+							lbl2[1].setText("수동");
+							lbl2[i].setText(String.valueOf(selectedNumbers.get(i - 2)));
+						}
+					} else { // 자동 또는 반자동
+						
+						
+						for (JToggleButton button : toggleButtons) {
+							if (button.isSelected()) {
+								selectCount++;
+							}
+						}
+						if (selectCount == 0 || selectCount == 6) { // all 자동
+							Set<Integer> notDuplicate = new HashSet<>(); 
+							Set<Integer> notDuplicate2 = new HashSet<>();
+							while (notDuplicate.size() < 7) {
+								int randomNumber = ran.nextInt(45) + 1;
+								notDuplicate.add(randomNumber);
+							}
+							while (notDuplicate2.size() < 7) {
+								int randomNumber = ran.nextInt(45) + 1;
+								notDuplicate2.add(randomNumber);
+							}
+							List<Integer> lottoResult = new ArrayList<>(notDuplicate);
+							List<Integer> lottoResult2 = new ArrayList<>(notDuplicate2);
+							Collections.sort(lottoResult); 
+							Collections.sort(lottoResult2);
+							for (int i = 2; i < 8; i++) {
+								lbl1[1].setText("자동");
+								lbl1[i].setText(String.valueOf(lottoResult.get(i - 2)));
+							}
+							for (int i = 2; i < 8; i++) {
+								lbl2[1].setText("자동");
+								lbl2[i].setText(String.valueOf(lottoResult2.get(i - 2)));
+							}
+							
+						} else if (0 < selectCount && selectCount < 6) { // 반자동
+							Set<Integer> notDuplicate = new HashSet<>(); 
+							Set<Integer> notDuplicate2 = new HashSet<>();
+							
+							selectedNumbers.addAll(getSelectedNumbers());
+							notDuplicate.addAll(selectedNumbers);
+							notDuplicate2.addAll(selectedNumbers);
+							while (notDuplicate.size() < 7) { 
+								int r = ran.nextInt(45) + 1;
+								notDuplicate.add(r);
+							}
+							while (notDuplicate2.size() < 7) { 
+								int r = ran.nextInt(45) + 1;
+								notDuplicate2.add(r);
+							}
+							List<Integer> lottoResult = new ArrayList<>(notDuplicate);
+							List<Integer> lottoResult2 = new ArrayList<>(notDuplicate2);
+							Collections.sort(lottoResult); 
+							Collections.sort(lottoResult2); 
+							for (int i = 2; i < 8; i++) {
+								lbl1[1].setText("반자동");
+								lbl1[i].setText(String.valueOf(lottoResult.get(i - 2)));
+							}
+							for (int i = 2; i < 8; i++) {
+								lbl2[1].setText("반자동");
+								lbl2[i].setText(String.valueOf(lottoResult2.get(i - 2)));
+							}
+							
+						}
+					}
+					selectedNumbers.removeAll(getSelectedNumbers());
+					selectCount = 0;
 					break;
-				case 2:
+				case 2:// 3장 선택시
+					if (!btnAuto.isSelected()) { // 수동일 때
+						selectedNumbers.addAll(getSelectedNumbers());
+						Collections.sort(selectedNumbers);
+
+						for (int i = 2; i < 8; i++) {
+							lbl1[1].setText("수동");
+							lbl1[i].setText(String.valueOf(selectedNumbers.get(i - 2)));
+						}
+						for (int i = 2; i < 8; i++) {
+							lbl2[1].setText("수동");
+							lbl2[i].setText(String.valueOf(selectedNumbers.get(i - 2)));
+						}
+						for (int i = 2; i < 8; i++) {
+							lbl3[1].setText("수동");
+							lbl3[i].setText(String.valueOf(selectedNumbers.get(i - 2)));
+						}
+					} else { // 자동 또는 반자동
+						
+						
+						for (JToggleButton button : toggleButtons) {
+							if (button.isSelected()) { 
+								selectCount++;
+							}
+						}
+						if (selectCount == 0 || selectCount == 6) { // all 자동
+							Set<Integer> notDuplicate = new HashSet<>(); 
+							Set<Integer> notDuplicate2 = new HashSet<>();
+							Set<Integer> notDuplicate3 = new HashSet<>();
+							while (notDuplicate.size() < 7) {
+								int randomNumber = ran.nextInt(45) + 1;
+								notDuplicate.add(randomNumber);
+							}
+							while (notDuplicate2.size() < 7) {
+								int randomNumber = ran.nextInt(45) + 1;
+								notDuplicate2.add(randomNumber);
+							}
+							while (notDuplicate3.size() < 7) {
+								int randomNumber = ran.nextInt(45) + 1;
+								notDuplicate3.add(randomNumber);
+							}
+							List<Integer> lottoResult = new ArrayList<>(notDuplicate);
+							List<Integer> lottoResult2 = new ArrayList<>(notDuplicate2);
+							List<Integer> lottoResult3 = new ArrayList<>(notDuplicate3);
+							Collections.sort(lottoResult); 
+							Collections.sort(lottoResult2);
+							Collections.sort(lottoResult3);
+							for (int i = 2; i < 8; i++) {
+								lbl1[1].setText("자동");
+								lbl1[i].setText(String.valueOf(lottoResult.get(i - 2)));
+							}
+							for (int i = 2; i < 8; i++) {
+								lbl2[1].setText("자동");
+								lbl2[i].setText(String.valueOf(lottoResult2.get(i - 2)));
+							}
+							for (int i = 2; i < 8; i++) {
+								lbl3[1].setText("자동");
+								lbl3[i].setText(String.valueOf(lottoResult3.get(i - 2)));
+							}
+							
+						} else if (0 < selectCount && selectCount < 6) { // 반자동
+							Set<Integer> notDuplicate = new HashSet<>(); 
+							Set<Integer> notDuplicate2 = new HashSet<>();
+							Set<Integer> notDuplicate3 = new HashSet<>();
+							
+							selectedNumbers.addAll(getSelectedNumbers());
+							notDuplicate.addAll(selectedNumbers);
+							notDuplicate2.addAll(selectedNumbers);
+							notDuplicate3.addAll(selectedNumbers);
+							while (notDuplicate.size() < 7) {
+								int r = ran.nextInt(45) + 1;
+								notDuplicate.add(r);
+							}
+							while (notDuplicate2.size() < 7) { 
+								int r = ran.nextInt(45) + 1;
+								notDuplicate2.add(r);
+							}
+							while (notDuplicate3.size() < 7) { 
+								int r = ran.nextInt(45) + 1;
+								notDuplicate3.add(r);
+							}
+							List<Integer> lottoResult = new ArrayList<>(notDuplicate);
+							List<Integer> lottoResult2 = new ArrayList<>(notDuplicate2);
+							List<Integer> lottoResult3 = new ArrayList<>(notDuplicate3);
+							Collections.sort(lottoResult); 
+							Collections.sort(lottoResult2); 
+							Collections.sort(lottoResult3); 
+							for (int i = 2; i < 8; i++) {
+								lbl1[1].setText("반자동");
+								lbl1[i].setText(String.valueOf(lottoResult.get(i - 2)));
+							}
+							for (int i = 2; i < 8; i++) {
+								lbl2[1].setText("반자동");
+								lbl2[i].setText(String.valueOf(lottoResult2.get(i - 2)));
+							}
+							for (int i = 2; i < 8; i++) {
+								lbl3[1].setText("반자동");
+								lbl3[i].setText(String.valueOf(lottoResult3.get(i - 2)));
+							}
+							
+						}
+					}
+					selectedNumbers.removeAll(getSelectedNumbers());
+					selectCount = 0;
+					
 					break;
 				case 3:
+					if (!btnAuto.isSelected()) { // 수동일 때
+						selectedNumbers.addAll(getSelectedNumbers());
+						Collections.sort(selectedNumbers);
+
+						for (int i = 2; i < 8; i++) {
+							lbl1[1].setText("수동");
+							lbl1[i].setText(String.valueOf(selectedNumbers.get(i - 2)));
+						}
+						for (int i = 2; i < 8; i++) {
+							lbl2[1].setText("수동");
+							lbl2[i].setText(String.valueOf(selectedNumbers.get(i - 2)));
+						}
+						for (int i = 2; i < 8; i++) {
+							lbl3[1].setText("수동");
+							lbl3[i].setText(String.valueOf(selectedNumbers.get(i - 2)));
+						}
+						for (int i = 2; i < 8; i++) {
+							lbl4[1].setText("수동");
+							lbl4[i].setText(String.valueOf(selectedNumbers.get(i - 2)));
+						}
+					} else { // 자동 또는 반자동
+						
+						
+						for (JToggleButton button : toggleButtons) {
+							if (button.isSelected()) { 
+								selectCount++;
+							}
+						}
+						if (selectCount == 0 || selectCount == 6) { // all 자동
+							Set<Integer> notDuplicate = new HashSet<>(); 
+							Set<Integer> notDuplicate2 = new HashSet<>();
+							Set<Integer> notDuplicate3 = new HashSet<>();
+							Set<Integer> notDuplicate4 = new HashSet<>();
+							while (notDuplicate.size() < 7) {
+								int randomNumber = ran.nextInt(45) + 1;
+								notDuplicate.add(randomNumber);
+							}
+							while (notDuplicate2.size() < 7) {
+								int randomNumber = ran.nextInt(45) + 1;
+								notDuplicate2.add(randomNumber);
+							}
+							while (notDuplicate3.size() < 7) {
+								int randomNumber = ran.nextInt(45) + 1;
+								notDuplicate3.add(randomNumber);
+							}
+							while (notDuplicate4.size() < 7) {
+								int randomNumber = ran.nextInt(45) + 1;
+								notDuplicate4.add(randomNumber);
+							}
+							List<Integer> lottoResult = new ArrayList<>(notDuplicate);
+							List<Integer> lottoResult2 = new ArrayList<>(notDuplicate2);
+							List<Integer> lottoResult3 = new ArrayList<>(notDuplicate3);
+							List<Integer> lottoResult4 = new ArrayList<>(notDuplicate4);
+							Collections.sort(lottoResult);
+							Collections.sort(lottoResult2);
+							Collections.sort(lottoResult3);
+							Collections.sort(lottoResult4);
+							for (int i = 2; i < 8; i++) {
+								lbl1[1].setText("자동");
+								lbl1[i].setText(String.valueOf(lottoResult.get(i - 2)));
+							}
+							for (int i = 2; i < 8; i++) {
+								lbl2[1].setText("자동");
+								lbl2[i].setText(String.valueOf(lottoResult2.get(i - 2)));
+							}
+							for (int i = 2; i < 8; i++) {
+								lbl3[1].setText("자동");
+								lbl3[i].setText(String.valueOf(lottoResult3.get(i - 2)));
+							}
+							for (int i = 2; i < 8; i++) {
+								lbl4[1].setText("자동");
+								lbl4[i].setText(String.valueOf(lottoResult4.get(i - 2)));
+							}
+							
+						} else if (0 < selectCount && selectCount < 6) { // 반자동
+							Set<Integer> notDuplicate = new HashSet<>(); 
+							Set<Integer> notDuplicate2 = new HashSet<>();
+							Set<Integer> notDuplicate3 = new HashSet<>();
+							Set<Integer> notDuplicate4 = new HashSet<>();
+							
+							selectedNumbers.addAll(getSelectedNumbers());
+							notDuplicate.addAll(selectedNumbers);
+							notDuplicate2.addAll(selectedNumbers);
+							notDuplicate3.addAll(selectedNumbers);
+							notDuplicate4.addAll(selectedNumbers);
+							while (notDuplicate.size() < 7) { 
+								int r = ran.nextInt(45) + 1;
+								notDuplicate.add(r);
+							}
+							while (notDuplicate2.size() < 7) {
+								int r = ran.nextInt(45) + 1;
+								notDuplicate2.add(r);
+							}
+							while (notDuplicate3.size() < 7) { 
+								int r = ran.nextInt(45) + 1;
+								notDuplicate3.add(r);
+							}
+							while (notDuplicate4.size() < 7) { 
+								int r = ran.nextInt(45) + 1;
+								notDuplicate4.add(r);
+							}
+							List<Integer> lottoResult = new ArrayList<>(notDuplicate);
+							List<Integer> lottoResult2 = new ArrayList<>(notDuplicate2);
+							List<Integer> lottoResult3 = new ArrayList<>(notDuplicate3);
+							List<Integer> lottoResult4 = new ArrayList<>(notDuplicate3);
+							Collections.sort(lottoResult); 
+							Collections.sort(lottoResult2); 
+							Collections.sort(lottoResult3); 
+							Collections.sort(lottoResult4); 
+							for (int i = 2; i < 8; i++) {
+								lbl1[1].setText("반자동");
+								lbl1[i].setText(String.valueOf(lottoResult.get(i - 2)));
+							}
+							for (int i = 2; i < 8; i++) {
+								lbl2[1].setText("반자동");
+								lbl2[i].setText(String.valueOf(lottoResult2.get(i - 2)));
+							}
+							for (int i = 2; i < 8; i++) {
+								lbl3[1].setText("반자동");
+								lbl3[i].setText(String.valueOf(lottoResult3.get(i - 2)));
+							}
+							for (int i = 2; i < 8; i++) {
+								lbl4[1].setText("반자동");
+								lbl4[i].setText(String.valueOf(lottoResult4.get(i - 2)));
+							}
+							
+						}
+					}
+					selectedNumbers.removeAll(getSelectedNumbers());
+					selectCount = 0;
 					break;
 				case 4:
+					if (!btnAuto.isSelected()) { // 수동일 때
+						selectedNumbers.addAll(getSelectedNumbers());
+						Collections.sort(selectedNumbers);
+
+						for (int i = 2; i < 8; i++) {
+							lbl1[1].setText("수동");
+							lbl1[i].setText(String.valueOf(selectedNumbers.get(i - 2)));
+						}
+						for (int i = 2; i < 8; i++) {
+							lbl2[1].setText("수동");
+							lbl2[i].setText(String.valueOf(selectedNumbers.get(i - 2)));
+						}
+						for (int i = 2; i < 8; i++) {
+							lbl3[1].setText("수동");
+							lbl3[i].setText(String.valueOf(selectedNumbers.get(i - 2)));
+						}
+						for (int i = 2; i < 8; i++) {
+							lbl4[1].setText("수동");
+							lbl4[i].setText(String.valueOf(selectedNumbers.get(i - 2)));
+						}
+						for (int i = 2; i < 8; i++) {
+							lbl5[1].setText("수동");
+							lbl5[i].setText(String.valueOf(selectedNumbers.get(i - 2)));
+						}
+					} else { // 자동 또는 반자동
+						
+						
+						for (JToggleButton button : toggleButtons) {
+							if (button.isSelected()) { 
+								selectCount++;
+							}
+						}
+						if (selectCount == 0 || selectCount == 6) { // all 자동
+							Set<Integer> notDuplicate = new HashSet<>(); 
+							Set<Integer> notDuplicate2 = new HashSet<>();
+							Set<Integer> notDuplicate3 = new HashSet<>();
+							Set<Integer> notDuplicate4 = new HashSet<>();
+							Set<Integer> notDuplicate5 = new HashSet<>();
+							while (notDuplicate.size() < 7) {
+								int randomNumber = ran.nextInt(45) + 1;
+								notDuplicate.add(randomNumber);
+							}
+							while (notDuplicate2.size() < 7) {
+								int randomNumber = ran.nextInt(45) + 1;
+								notDuplicate2.add(randomNumber);
+							}
+							while (notDuplicate3.size() < 7) {
+								int randomNumber = ran.nextInt(45) + 1;
+								notDuplicate3.add(randomNumber);
+							}
+							while (notDuplicate4.size() < 7) {
+								int randomNumber = ran.nextInt(45) + 1;
+								notDuplicate4.add(randomNumber);
+							}
+							while (notDuplicate5.size() < 7) {
+								int randomNumber = ran.nextInt(45) + 1;
+								notDuplicate5.add(randomNumber);
+							}
+							List<Integer> lottoResult = new ArrayList<>(notDuplicate);
+							List<Integer> lottoResult2 = new ArrayList<>(notDuplicate2);
+							List<Integer> lottoResult3 = new ArrayList<>(notDuplicate3);
+							List<Integer> lottoResult4 = new ArrayList<>(notDuplicate4);
+							List<Integer> lottoResult5 = new ArrayList<>(notDuplicate5);
+							Collections.sort(lottoResult); 
+							Collections.sort(lottoResult2);
+							Collections.sort(lottoResult3);
+							Collections.sort(lottoResult4);
+							Collections.sort(lottoResult5);
+							for (int i = 2; i < 8; i++) {
+								lbl1[1].setText("자동");
+								lbl1[i].setText(String.valueOf(lottoResult.get(i - 2)));
+							}
+							for (int i = 2; i < 8; i++) {
+								lbl2[1].setText("자동");
+								lbl2[i].setText(String.valueOf(lottoResult2.get(i - 2)));
+							}
+							for (int i = 2; i < 8; i++) {
+								lbl3[1].setText("자동");
+								lbl3[i].setText(String.valueOf(lottoResult3.get(i - 2)));
+							}
+							for (int i = 2; i < 8; i++) {
+								lbl4[1].setText("자동");
+								lbl4[i].setText(String.valueOf(lottoResult4.get(i - 2)));
+							}
+							for (int i = 2; i < 8; i++) {
+								lbl5[1].setText("자동");
+								lbl5[i].setText(String.valueOf(lottoResult5.get(i - 2)));
+							}
+							
+						} else if (0 < selectCount && selectCount < 6) { // 반자동
+							Set<Integer> notDuplicate = new HashSet<>(); 
+							Set<Integer> notDuplicate2 = new HashSet<>();
+							Set<Integer> notDuplicate3 = new HashSet<>();
+							Set<Integer> notDuplicate4 = new HashSet<>();
+							Set<Integer> notDuplicate5 = new HashSet<>();
+							
+							selectedNumbers.addAll(getSelectedNumbers());
+							notDuplicate.addAll(selectedNumbers);
+							notDuplicate2.addAll(selectedNumbers);
+							notDuplicate3.addAll(selectedNumbers);
+							notDuplicate4.addAll(selectedNumbers);
+							notDuplicate5.addAll(selectedNumbers);
+							while (notDuplicate.size() < 7) { 
+								int r = ran.nextInt(45) + 1;
+								notDuplicate.add(r);
+							}
+							while (notDuplicate2.size() < 7) { 
+								int r = ran.nextInt(45) + 1;
+								notDuplicate2.add(r);
+							}
+							while (notDuplicate3.size() < 7) { 
+								int r = ran.nextInt(45) + 1;
+								notDuplicate3.add(r);
+							}
+							while (notDuplicate4.size() < 7) {
+								int r = ran.nextInt(45) + 1;
+								notDuplicate4.add(r);
+							}
+							while (notDuplicate5.size() < 7) { 
+								int r = ran.nextInt(45) + 1;
+								notDuplicate5.add(r);
+							}
+							List<Integer> lottoResult = new ArrayList<>(notDuplicate);
+							List<Integer> lottoResult2 = new ArrayList<>(notDuplicate2);
+							List<Integer> lottoResult3 = new ArrayList<>(notDuplicate3);
+							List<Integer> lottoResult4 = new ArrayList<>(notDuplicate4);
+							List<Integer> lottoResult5 = new ArrayList<>(notDuplicate5);
+							Collections.sort(lottoResult); 
+							Collections.sort(lottoResult2); 
+							Collections.sort(lottoResult3); 
+							Collections.sort(lottoResult4); 
+							Collections.sort(lottoResult5); 
+							for (int i = 2; i < 8; i++) {
+								lbl1[1].setText("반자동");
+								lbl1[i].setText(String.valueOf(lottoResult.get(i - 2)));
+							}
+							for (int i = 2; i < 8; i++) {
+								lbl2[1].setText("반자동");
+								lbl2[i].setText(String.valueOf(lottoResult2.get(i - 2)));
+							}
+							for (int i = 2; i < 8; i++) {
+								lbl3[1].setText("반자동");
+								lbl3[i].setText(String.valueOf(lottoResult3.get(i - 2)));
+							}
+							for (int i = 2; i < 8; i++) {
+								lbl4[1].setText("반자동");
+								lbl4[i].setText(String.valueOf(lottoResult4.get(i - 2)));
+							}
+							for (int i = 2; i < 8; i++) {
+								lbl5[1].setText("반자동");
+								lbl5[i].setText(String.valueOf(lottoResult5.get(i - 2)));
+							}
+							
+						}
+					}
+					selectedNumbers.removeAll(getSelectedNumbers());
+					selectCount = 0;
 					break;
 				}
 
@@ -177,17 +648,17 @@ public class PurchaseGUI extends JFrame {
 		panel_4.setBounds(23, 95, 302, 35);
 		panel_2.add(panel_4);
 		panel_4.setLayout(new GridLayout(1, 0, 0, 0));
-		lbl2s = new JLabel[8];
+		lbl2 = new JLabel[8];
 		for (int i = 0; i < 8; i++) {
-			lbl2s[i] = new JLabel("d");
-			panel_4.add(lbl2s[i]);
+			lbl2[i] = new JLabel("d");
+			panel_4.add(lbl2[i]);
 		}
 
 		JPanel panel_5 = new JPanel();
 		panel_5.setBounds(24, 140, 302, 35);
 		panel_2.add(panel_5);
 		panel_5.setLayout(new GridLayout(1, 0, 0, 0));
-		JLabel[] lbl3 = new JLabel[8];
+		lbl3 = new JLabel[8];
 		for (int i = 0; i < 8; i++) {
 			lbl3[i] = new JLabel("d");
 			panel_5.add(lbl3[i]);
@@ -197,7 +668,7 @@ public class PurchaseGUI extends JFrame {
 		panel_6.setBounds(24, 185, 301, 35);
 		panel_2.add(panel_6);
 		panel_6.setLayout(new GridLayout(1, 0, 0, 0));
-		JLabel[] lbl4 = new JLabel[8];
+		lbl4 = new JLabel[8];
 		for (int i = 0; i < 8; i++) {
 			lbl4[i] = new JLabel("d");
 			panel_6.add(lbl4[i]);
@@ -207,7 +678,7 @@ public class PurchaseGUI extends JFrame {
 		panel_7.setBounds(24, 230, 301, 35);
 		panel_2.add(panel_7);
 		panel_7.setLayout(new GridLayout(1, 0, 0, 0));
-		JLabel[] lbl5 = new JLabel[8];
+		lbl5 = new JLabel[8];
 		for (int i = 0; i < 8; i++) {
 			lbl5[i] = new JLabel("d");
 			panel_7.add(lbl5[i]);
@@ -245,22 +716,6 @@ public class PurchaseGUI extends JFrame {
 		panel_8.add(btnAuto);
 		sl_panel.putConstraint(SpringLayout.NORTH, btnAuto, 0, SpringLayout.NORTH, checkBtn);
 		sl_panel.putConstraint(SpringLayout.EAST, btnAuto, -34, SpringLayout.WEST, checkBtn);
-		btnAuto.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (comboBox.getSelectedItem().toString().equals("1")) {
-
-				} else if (comboBox.getSelectedItem().toString().equals("2")) {
-
-				} else if (comboBox.getSelectedItem().toString().equals("3")) {
-
-				} else if (comboBox.getSelectedItem().toString().equals("4")) {
-
-				} else if (comboBox.getSelectedItem().toString().equals("5")) {
-
-				}
-			}
-		});
 		btnReset.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				for (JToggleButton button : toggleButtons) {
@@ -284,7 +739,6 @@ public class PurchaseGUI extends JFrame {
 		showGUI();
 	}
 
-	
 	// 토글 버튼에서 숫자를 추출하고, 그 숫자들을 리스트로 반환 메소드
 	private List<Integer> getSelectedNumbers() {
 		List<Integer> selectedNumbers = new ArrayList<>();
@@ -296,7 +750,6 @@ public class PurchaseGUI extends JFrame {
 		}
 		return selectedNumbers;
 	}
-	
 
 	private void handleToggleButtonAction(JToggleButton togbtn) {
 		int selectedCount = 0;
