@@ -52,6 +52,20 @@ public class ConfirmPurchaseDialog extends JDialog {
 		getContentPane().setLayout(null);
 
 	}
+/*	private void minusvalue() {
+		btnOkay = new JButton("확인");
+		btnOkay.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnOkay.setBounds(31, 115, 97, 23);
+		getContentPane().add(btnOkay);
+
+		JLabel lblNewLabel = new JLabel("올바른 충전값을 입력해주세요.");
+		lblNewLabel.setBounds(68, 68, 131, 15);
+		getContentPane().add(lblNewLabel);
+	}*/
+	
 
 	private void extracted() {
 		btnOkay = new JButton("확인");
