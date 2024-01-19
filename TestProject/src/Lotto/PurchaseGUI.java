@@ -61,8 +61,8 @@ public class PurchaseGUI extends JFrame {
    private JPanel panel_5;
    private JPanel panel_6;
    private JPanel panel_7;
-   private List<Integer> selectedNumbers= new ArrayList<>();
-   
+   private List<Integer> selectedNumbers = new ArrayList<>();
+   int sumSelectedCombo = 0;
 
    public PurchaseGUI(FirstPage firstpage, ChargeGUI chargeGUI) {
       this.firstpage = firstpage;
@@ -75,8 +75,6 @@ public class PurchaseGUI extends JFrame {
       SpringLayout sl_panel = new SpringLayout();
       panel.setLayout(sl_panel);
       Random ran = new Random();
-      
-      
 
       JLabel lblNewLabel = new JLabel("수량");
       panel.add(lblNewLabel);
@@ -97,68 +95,65 @@ public class PurchaseGUI extends JFrame {
 
       // 확인 버튼을 눌렀을 때 -------------------------------------------------
       checkBtn.addActionListener(new ActionListener() {
-         //private List<Integer> selectedNumbers = new ArrayList<>(); 
+         // private List<Integer> selectedNumbers = new ArrayList<>();
          int selectCount = 0;
-         
+
          private Map<Integer, JLabel[]> map = new HashMap<>();
-         
+
          public void actionPerformed(ActionEvent e) {
-            
+
             map.put(1, lbl1);
             map.put(2, lbl2);
             map.put(3, lbl3);
             map.put(4, lbl4);
-            map.put(5, lbl5); 
+            map.put(5, lbl5);
 
-            
-            int selectedCombo = comboBox.getSelectedIndex() + 1;
-            
-            
-            for (int i = 1; i <= selectedCombo; i++) { // 사용자가 몇 장을 선택했는지에 따라
-               JLabel[] currentLabel = map.get(i);
-               int currentLabelIndex = 0;
+            int selectedCombo = comboBox.getSelectedIndex() + 1; // 2번째 선택 : 2장 선택
+            sumSelectedCombo += selectedCombo; // 5이 됨. => lbl4,5가 채워져야됨(map의 키가 4,5임)
 
-               
-               if (!btnAuto.isSelected()) { // 수동 버튼
-                  if(selectCount == 0) {
-                     try {
-                        selectedNumbers.addAll(getSelectedNumbers());
-                        Collections.sort(selectedNumbers);
+            if (sumSelectedCombo < 6) {
 
-                        for (int j = 2; j < 8; j++) {
-                           currentLabel[1].setText("수동");
-                           currentLabel[j].setText(String.valueOf(selectedNumbers.get(j - 2)));
+               for (int i = sumSelectedCombo - selectedCombo; i < sumSelectedCombo; i++) { // lbl2,3,4에 추가되어야 됨
+                  JLabel[] currentLabel = map.get(i + 1);
+                  int currentLabelIndex = 0;
+
+                  if (!btnAuto.isSelected()) { // 수동 버튼
+                     if (selectCount == 0) {
+                        if (selectCount != 0) {
+                           selectedNumbers.addAll(getSelectedNumbers());
+                           Collections.sort(selectedNumbers);
+
+                           for (int j = 2; j < 8; j++) {
+                              currentLabel[1].setText("수동");
+                              currentLabel[j].setText(String.valueOf(selectedNumbers.get(j - 2)));
+                           }
+                        } else {
+                           JOptionPane.showMessageDialog(null, "숫자가 선택되지 않았습니다.");
+                        }
+
+                     }
+
+                  } else { // 자동 버튼 눌렀을 때
+                     Set<Integer> nonDuplicateNumber = new HashSet<>();
+
+                     for (JToggleButton button : toggleButtons) {
+                        if (button.isSelected()) {
+                           selectCount++;
                         }
                      }
-                     catch(IndexOutOfBoundsException ee) {
-                        JOptionPane.showMessageDialog(null, "숫자가 선택되지 않았습니다.");
+
+                     if (selectCount == 0 || selectCount == 6) {
+                        자동으로_숫자_생성(currentLabel, nonDuplicateNumber);
+                     } else if (0 < selectCount && selectCount < 6) {
+                        반자동으로_숫자_생성(currentLabel, nonDuplicateNumber);
                      }
                   }
-//                  selectedNumbers.addAll(getSelectedNumbers());
-//                  Collections.sort(selectedNumbers);
-//
-//                  for (int j = 2; j < 8; j++) {
-//                     currentLabel[1].setText("수동");
-//                     currentLabel[j].setText(String.valueOf(selectedNumbers.get(j - 2)));
-//                  }
-               } else { // 자동 버튼 눌렀을 때
-                  Set<Integer> nonDuplicateNumber = new HashSet<>();
+                  selectedNumbers.clear();
+                  selectCount = 0;
 
-                  for (JToggleButton button : toggleButtons) {
-                     if (button.isSelected()) {
-                        selectCount++;
-                     }
-                  }
-
-                  if (selectCount == 0 || selectCount == 6) {
-                     자동으로_숫자_생성(currentLabel, nonDuplicateNumber);
-                  } else if (0 < selectCount && selectCount < 6) {
-                     반자동으로_숫자_생성(currentLabel, nonDuplicateNumber);
-                  }
                }
-               selectedNumbers.clear();
-               selectCount = 0;
-
+            } else {
+               JOptionPane.showMessageDialog(null, "한 번에 다섯 장 이상은 구매할 수 없습니다.");
             }
 
             for (JToggleButton button : toggleButtons) {
@@ -166,7 +161,7 @@ public class PurchaseGUI extends JFrame {
             }
          }
       });
-      //-----------------------------------------------------------------
+      // -----------------------------------------------------------------
       panel.add(checkBtn);
       JPanel panel_2 = new JPanel();
       panel_2.setBounds(369, 10, 519, 293);
@@ -188,11 +183,6 @@ public class PurchaseGUI extends JFrame {
          lbl1[0] = new JLabel("A");
          panel_3.add(lbl1[i]);
       }
-
-      // 오른쪽 숫자들 초기화하는 버튼
-      JButton btnReset_1 = new JButton("초기화");
-      btnReset_1.setBounds(407, 50, 89, 23);
-      panel_2.add(btnReset_1);
 
       panel_4 = new JPanel();
       panel_4.setBounds(23, 95, 372, 35);
@@ -243,6 +233,11 @@ public class PurchaseGUI extends JFrame {
       sl_panel.putConstraint(SpringLayout.NORTH, btnReset, 0, SpringLayout.NORTH, checkBtn);
       sl_panel.putConstraint(SpringLayout.WEST, btnReset, 25, SpringLayout.WEST, panel);
 
+      // 오른쪽 숫자들 초기화하는 버튼
+      JButton btnReset_1 = new JButton("초기화");
+      btnReset_1.setBounds(407, 50, 89, 23);
+      panel_2.add(btnReset_1);
+
       JButton btnReset_2 = new JButton("초기화");
       btnReset_2.setBounds(407, 96, 89, 23);
       panel_2.add(btnReset_2);
@@ -271,8 +266,8 @@ public class PurchaseGUI extends JFrame {
             for (int i = 2; i < 8; i++) {
                lbl1[1].setText("미지정");
                lbl1[i].setText("");
+               sumSelectedCombo--;
             }
-            
 
          }
       });
@@ -282,6 +277,7 @@ public class PurchaseGUI extends JFrame {
             for (int i = 2; i < 8; i++) {
                lbl2[1].setText("미지정");
                lbl2[i].setText("");
+               sumSelectedCombo--;
             }
 
          }
@@ -292,6 +288,7 @@ public class PurchaseGUI extends JFrame {
             for (int i = 2; i < 8; i++) {
                lbl3[1].setText("미지정");
                lbl3[i].setText("");
+               sumSelectedCombo--;
             }
 
          }
@@ -302,6 +299,7 @@ public class PurchaseGUI extends JFrame {
             for (int i = 2; i < 8; i++) {
                lbl4[1].setText("미지정");
                lbl4[i].setText("");
+               sumSelectedCombo--;
             }
 
          }
@@ -312,6 +310,7 @@ public class PurchaseGUI extends JFrame {
             for (int i = 2; i < 8; i++) {
                lbl5[1].setText("미지정");
                lbl5[i].setText("");
+               sumSelectedCombo--;
             }
 
          }
@@ -364,7 +363,7 @@ public class PurchaseGUI extends JFrame {
       JButton btnNewButton_2 = new JButton("구매");
       btnNewButton_2.addActionListener(new ActionListener() {
          public void actionPerformed(ActionEvent e) {
-            JDialog jdp =new ConfirmPurchaseDialog(PurchaseGUI.this);
+            JDialog jdp = new ConfirmPurchaseDialog(PurchaseGUI.this);
             jdp.setVisible(true);
          }
       });
@@ -406,7 +405,7 @@ public class PurchaseGUI extends JFrame {
 
          }
       });
-      
+
       btnReset.addActionListener(new ActionListener() {
          public void actionPerformed(ActionEvent e) {
             for (JToggleButton button : toggleButtons) {
@@ -432,7 +431,7 @@ public class PurchaseGUI extends JFrame {
 
    // 토글 버튼에서 숫자를 추출하고, 그 숫자들을 리스트로 반환 메소드
    private List<Integer> getSelectedNumbers() {
-      //List<Integer> selectedNumbers = new ArrayList<>();
+      // List<Integer> selectedNumbers = new ArrayList<>();
       for (JToggleButton button : toggleButtons) {
          if (button.isSelected()) {
             int num = Integer.parseInt(button.getText());
@@ -461,6 +460,7 @@ public class PurchaseGUI extends JFrame {
 
       }
    }
+
    // 자동으로 숫자를 생성하는 메소드
    private void 자동으로_숫자_생성(JLabel[] currentLabel, Set<Integer> nonDuplicateNumber) {
       Random r = new Random();
@@ -479,7 +479,8 @@ public class PurchaseGUI extends JFrame {
       }
    }
 
-   // 반자동으로 숫자를 생성하는 메소드--------------------------------------------------------------
+   // 반자동으로 숫자를 생성하는
+   // 메소드--------------------------------------------------------------
    private void 반자동으로_숫자_생성(JLabel[] currentLabel, Set<Integer> nonDuplicateNumber) {
       selectedNumbers.addAll(getSelectedNumbers());
       nonDuplicateNumber.addAll(selectedNumbers);
