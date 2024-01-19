@@ -59,6 +59,21 @@ public class ChargeGUI extends JFrame {
             JOptionPane.showMessageDialog(this, "충전 금액을 입력해주세요.", "알림", JOptionPane.WARNING_MESSAGE);
             return;
         }
+        
+        // 입력값이 -일 경우
+        else if (!str.isEmpty() && Integer.valueOf(str) < 0) {
+        	JOptionPane.showMessageDialog(this, " 올바른 충전 금액을 입력해주세요.", "알림", JOptionPane.WARNING_MESSAGE);
+        	textField.setText("");
+            return;
+        }
+        
+        // 입력값이 너무 클 경우(천만원)
+        else if (!str.isEmpty() && Integer.valueOf(str) > 10000000) {
+        	JOptionPane.showMessageDialog(this, " 천만원 이내에서만 충전가능합니다. 충전금액을 다시 입력해주세요.", "알림", JOptionPane.WARNING_MESSAGE);
+        	textField.setText("");
+            return;
+        }
+        
 
         Integer number ;
        
