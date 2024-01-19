@@ -99,7 +99,7 @@ public class PurchaseGUI extends JFrame {
 		checkBtn.addActionListener(new ActionListener() {
 			//private List<Integer> selectedNumbers = new ArrayList<>(); 
 			int selectCount = 0;
-			int now = 0;
+			
 			private Map<Integer, JLabel[]> map = new HashMap<>();
 			
 			public void actionPerformed(ActionEvent e) {
@@ -111,11 +111,10 @@ public class PurchaseGUI extends JFrame {
 				map.put(5, lbl5); 
 
 				int selectedCombo = comboBox.getSelectedIndex() + 1;
-				now += selectedCombo;
 				
 				
 				
-				for (int i = 1; i <= now; i++) { // 사용자가 몇 장을 선택했는지에 따라
+				for (int i = 1; i <= selectedCombo; i++) { // 사용자가 몇 장을 선택했는지에 따라
 					JLabel[] currentLabel = map.get(i);
 					int currentLabelIndex = 0;
 
