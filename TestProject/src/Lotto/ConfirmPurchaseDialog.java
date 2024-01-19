@@ -33,7 +33,6 @@ public class ConfirmPurchaseDialog extends JDialog {
 			        }
 			        Customer.lottoList.add(lottoNumbers);
 			        dispose();
-			       
 			    }
 			});
 
