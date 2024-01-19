@@ -61,7 +61,7 @@ public class PurchaseGUI extends JFrame {
 	private JPanel panel_5;
 	private JPanel panel_6;
 	private JPanel panel_7;
-	private List<Integer> selectedNumbers;
+	private List<Integer> selectedNumbers= new ArrayList<>();
 	
 
 	public PurchaseGUI(FirstPage firstpage, ChargeGUI chargeGUI) {
@@ -97,12 +97,13 @@ public class PurchaseGUI extends JFrame {
 
 		// 확인 버튼을 눌렀을 때 -------------------------------------------------
 		checkBtn.addActionListener(new ActionListener() {
-			private List<Integer> selectedNumbers = new ArrayList<>(); 
+			//private List<Integer> selectedNumbers = new ArrayList<>(); 
 			int selectCount = 0;
+			int now = 0;
+			private Map<Integer, JLabel[]> map = new HashMap<>();
 			
-
 			public void actionPerformed(ActionEvent e) {
-				Map<Integer, JLabel[]> map = new HashMap<>();
+				
 				map.put(1, lbl1);
 				map.put(2, lbl2);
 				map.put(3, lbl3);
@@ -110,8 +111,11 @@ public class PurchaseGUI extends JFrame {
 				map.put(5, lbl5); 
 
 				int selectedCombo = comboBox.getSelectedIndex() + 1;
-
-				for (int i = 1; i <= selectedCombo; i++) { // 사용자가 몇 장을 선택했는지에 따라
+				now += selectedCombo;
+				
+				
+				
+				for (int i = 1; i <= now; i++) { // 사용자가 몇 장을 선택했는지에 따라
 					JLabel[] currentLabel = map.get(i);
 					int currentLabelIndex = 0;
 
@@ -149,6 +153,7 @@ public class PurchaseGUI extends JFrame {
 				}
 			}
 		});
+		//-----------------------------------------------------------------
 		panel.add(checkBtn);
 		JPanel panel_2 = new JPanel();
 		panel_2.setBounds(369, 10, 519, 293);
@@ -414,7 +419,7 @@ public class PurchaseGUI extends JFrame {
 
 	// 토글 버튼에서 숫자를 추출하고, 그 숫자들을 리스트로 반환 메소드
 	private List<Integer> getSelectedNumbers() {
-		List<Integer> selectedNumbers = new ArrayList<>();
+		//List<Integer> selectedNumbers = new ArrayList<>();
 		for (JToggleButton button : toggleButtons) {
 			if (button.isSelected()) {
 				int num = Integer.parseInt(button.getText());
@@ -461,7 +466,7 @@ public class PurchaseGUI extends JFrame {
 		}
 	}
 
-	// 반자동으로 숫자를 생성하는 메소드
+	// 반자동으로 숫자를 생성하는 메소드--------------------------------------------------------------
 	private void 반자동으로_숫자_생성(JLabel[] currentLabel, Set<Integer> nonDuplicateNumber) {
 		selectedNumbers.addAll(getSelectedNumbers());
 		nonDuplicateNumber.addAll(selectedNumbers);
