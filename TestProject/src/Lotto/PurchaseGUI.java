@@ -980,7 +980,10 @@ public class PurchaseGUI extends JFrame {
 		if (selectedCount == 7) {
 			JOptionPane.showMessageDialog(this, "최대 6개까지 선택 가능합니다.");
 			// 모든 토글 버튼을 대상으로 확인하여 선택이 되어있는 경우 선택 취소
-			a.get(6).setSelected(false);
+			//a.get(6).setSelected(false);
+			if(a.get(6) != null) {
+				a.remove(6);
+			}
 
 		}
 	}
