@@ -110,6 +110,7 @@ public class PurchaseGUI extends JFrame {
 				map.put(4, lbl4);
 				map.put(5, lbl5); 
 
+				
 				int selectedCombo = comboBox.getSelectedIndex() + 1;
 				
 				
@@ -120,13 +121,27 @@ public class PurchaseGUI extends JFrame {
 
 					
 					if (!btnAuto.isSelected()) { // 수동 버튼
-						selectedNumbers.addAll(getSelectedNumbers());
-						Collections.sort(selectedNumbers);
+						if(selectCount == 0) {
+							try {
+								selectedNumbers.addAll(getSelectedNumbers());
+								Collections.sort(selectedNumbers);
 
-						for (int j = 2; j < 8; j++) {
-							currentLabel[1].setText("수동");
-							currentLabel[j].setText(String.valueOf(selectedNumbers.get(j - 2)));
+								for (int j = 2; j < 8; j++) {
+									currentLabel[1].setText("수동");
+									currentLabel[j].setText(String.valueOf(selectedNumbers.get(j - 2)));
+								}
+							}
+							catch(IndexOutOfBoundsException ee) {
+								JOptionPane.showMessageDialog(null, "숫자가 선택되지 않았습니다.");
+							}
 						}
+//						selectedNumbers.addAll(getSelectedNumbers());
+//						Collections.sort(selectedNumbers);
+//
+//						for (int j = 2; j < 8; j++) {
+//							currentLabel[1].setText("수동");
+//							currentLabel[j].setText(String.valueOf(selectedNumbers.get(j - 2)));
+//						}
 					} else { // 자동 버튼 눌렀을 때
 						Set<Integer> nonDuplicateNumber = new HashSet<>();
 
