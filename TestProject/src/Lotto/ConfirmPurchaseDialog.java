@@ -33,6 +33,8 @@ public class ConfirmPurchaseDialog extends JDialog {
                 dispose();
 			    firstPage.setVisible(true); 
 			    purchaseGUI.setVisible(false);
+				  
+			        dispose();
 			    }
 			});
 
