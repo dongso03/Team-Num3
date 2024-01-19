@@ -59,6 +59,9 @@ public class ChargeGUI extends JFrame {
             JOptionPane.showMessageDialog(this, "충전 금액을 입력해주세요.", "알림", JOptionPane.WARNING_MESSAGE);
             return;
         }
+        
+        
+        
 
         Integer number ;
        

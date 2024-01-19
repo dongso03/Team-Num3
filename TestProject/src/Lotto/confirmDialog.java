@@ -48,8 +48,8 @@ public class confirmDialog extends JDialog {
          @Override
          public void actionPerformed(ActionEvent e) {
             String str = chargeGUI.textField.getText();
-            Integer number = Integer.valueOf(str);
-            int a = FirstPage.customer.addToAmount(number);
+            int number = Integer.valueOf(str);
+            Integer a = FirstPage.customer.addToAmount(Integer.valueOf(number));
             FirstPage.customer.setAmount(a);
             
          

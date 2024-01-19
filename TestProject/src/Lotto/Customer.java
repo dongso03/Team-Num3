@@ -10,6 +10,7 @@ public  class Customer {
 	private int amount ;
 	private int lottoNums;
 	public static List<List<Integer>> lottoList = new ArrayList<>();
+	public static int value;
 
 	public Customer(int amount, int lottoNums) {
 		super();
@@ -62,9 +63,7 @@ public  class Customer {
 			return false;
 		return true;
 	}
-	public int addToAmount(int value) {
-	    return this.amount += value;
-	}
+
 
 
 }
