@@ -65,7 +65,7 @@ public  class Customer {
 	}
 
 	public int addToAmount(int value) {
-		if(value < 0) {
+		if(value < 0 || value > 10000000) {
 			return this.amount += 0;
 		} else {
 			return this.amount += value;
