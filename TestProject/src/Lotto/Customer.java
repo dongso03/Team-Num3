@@ -1,15 +1,20 @@
 package Lotto;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+
+import javax.swing.JLabel;
 
 public  class Customer {
 	// 금액저장
 	// 로또번호 저장
 	private int amount ;
 	private int lottoNums;
-	public static List<List<Integer>> lottoList = new ArrayList<>();
+	public static Map<Integer,JLabel[]> lottoList = new HashMap<>();
 	public static int value;
 
 	public Customer(int amount, int lottoNums) {

@@ -286,16 +286,7 @@ public class PurchaseGUI extends JFrame {
 					lbl4[i].setText(lbl5[i].getText());
 					lbl5[i].setText("");
 				}
-				sumSelectedCombo--;
-				nowPrice -= 1000;
-				if (nowPrice <= 0) {
-					nowPrice = 0;
-					priceLbl.setText("0");
-
-				} else {
-					priceLbl.setText(String.valueOf(Integer.parseInt(priceLbl.getText()) - 1000));
-				}
-
+				resetModify();
 			}
 		});
 		btnReset_2.addActionListener(new ActionListener() {
@@ -388,7 +379,7 @@ public class PurchaseGUI extends JFrame {
 		JButton btnNewButton_2 = new JButton("구매");
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JDialog jdp = new ConfirmPurchaseDialog(PurchaseGUI.this);
+				JDialog jdp = new ConfirmPurchaseDialog(PurchaseGUI.this, firstpage);
 				jdp.setVisible(true);
 			}
 		});
@@ -518,6 +509,9 @@ public class PurchaseGUI extends JFrame {
 		setSize(903, 566);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setVisible(false);
+	}
+	public Map<Integer, JLabel[]> getMap() {
+	    return map;
 	}
 
 	public void setFirstPage(FirstPage firstPage) {

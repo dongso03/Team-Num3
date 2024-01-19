@@ -7,33 +7,34 @@ import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.awt.Container;
 import java.awt.event.ActionEvent;
 
 public class ConfirmPurchaseDialog extends JDialog {
 	private PurchaseGUI purchaseGUI;
 	private JButton btnOkay;
 	private JButton btnNo;
-	private Customer customer;
+	private FirstPage firstPage;
 	
 	
-	public ConfirmPurchaseDialog(PurchaseGUI purchaseGUI) {
+	public ConfirmPurchaseDialog(PurchaseGUI purchaseGUI,FirstPage firstPage) {
 		super(purchaseGUI);
 		this.purchaseGUI = purchaseGUI;
+		this.firstPage= firstPage;
 		
-
 		extracted();
 
 		btnOkay.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				  List<Integer> lottoNumbers = new ArrayList<>();
-			        for (JLabel label : purchaseGUI.lbl1) {
-			            // 여기에서 label의 텍스트를 정수로 변환하여 리스트에 추가
-			            lottoNumbers.add(Integer.parseInt(label.getText()));
-			        }
-			        Customer.lottoList.add(lottoNumbers);
+				Map<Integer, JLabel[]> map = purchaseGUI.getMap();
+                FirstPage.customer.lottoList = map;
+                dispose();
+			    firstPage.setVisible(true); 
+			    purchaseGUI.setVisible(false);
+				  
 			        dispose();
-			       
 			    }
 			});
 
@@ -52,19 +53,7 @@ public class ConfirmPurchaseDialog extends JDialog {
 		getContentPane().setLayout(null);
 
 	}
-/*	private void minusvalue() {
-		btnOkay = new JButton("확인");
-		btnOkay.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnOkay.setBounds(31, 115, 97, 23);
-		getContentPane().add(btnOkay);
 
-		JLabel lblNewLabel = new JLabel("올바른 충전값을 입력해주세요.");
-		lblNewLabel.setBounds(68, 68, 131, 15);
-		getContentPane().add(lblNewLabel);
-	}*/
 	
 
 	private void extracted() {
