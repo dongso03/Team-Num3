@@ -64,6 +64,13 @@ public  class Customer {
 		return true;
 	}
 
+	public int addToAmount(int value) {
+		if(value < 0) {
+			return this.amount += 0;
+		} else {
+			return this.amount += value;
+		}
+	}
 
 
 }

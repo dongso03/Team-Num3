@@ -60,7 +60,12 @@ public class ChargeGUI extends JFrame {
             return;
         }
         
-        
+        // 입력값이 -일 경우
+        else if (!str.isEmpty() && Integer.valueOf(str) < 0) {
+        	JOptionPane.showMessageDialog(this, " 올바른 충전 금액을 입력해주세요.", "알림", JOptionPane.WARNING_MESSAGE);
+        	textField.setText("");
+            return;
+        }
         
 
         Integer number ;

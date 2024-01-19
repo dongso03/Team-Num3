@@ -32,6 +32,8 @@ public class ConfirmPurchaseDialog extends JDialog {
 			            lottoNumbers.add(Integer.parseInt(label.getText()));
 			        }
 			        Customer.lottoList.add(lottoNumbers);
+			        dispose();
+			       
 			    }
 			});
 
@@ -50,7 +52,7 @@ public class ConfirmPurchaseDialog extends JDialog {
 		getContentPane().setLayout(null);
 
 	}
-	private void minusvalue() {
+/*	private void minusvalue() {
 		btnOkay = new JButton("확인");
 		btnOkay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -62,7 +64,7 @@ public class ConfirmPurchaseDialog extends JDialog {
 		JLabel lblNewLabel = new JLabel("올바른 충전값을 입력해주세요.");
 		lblNewLabel.setBounds(68, 68, 131, 15);
 		getContentPane().add(lblNewLabel);
-	}
+	}*/
 	
 
 	private void extracted() {
