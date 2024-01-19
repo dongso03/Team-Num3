@@ -27,10 +27,10 @@ public class ConfirmPurchaseDialog extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				  List<Integer> lottoNumbers = new ArrayList<>();
-			        for (JLabel label : purchaseGUI.lbl1) {
-			            // 여기에서 label의 텍스트를 정수로 변환하여 리스트에 추가
-			            lottoNumbers.add(Integer.parseInt(label.getText()));
-			        }
+//			        for (JLabel label : purchaseGUI.) {
+//			            // 여기에서 label의 텍스트를 정수로 변환하여 리스트에 추가
+//			            lottoNumbers.add(Integer.parseInt(label.getText()));
+//			        }
 			        Customer.lottoList.add(lottoNumbers);
 			        dispose();
 			       
@@ -52,19 +52,7 @@ public class ConfirmPurchaseDialog extends JDialog {
 		getContentPane().setLayout(null);
 
 	}
-/*	private void minusvalue() {
-		btnOkay = new JButton("확인");
-		btnOkay.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnOkay.setBounds(31, 115, 97, 23);
-		getContentPane().add(btnOkay);
 
-		JLabel lblNewLabel = new JLabel("올바른 충전값을 입력해주세요.");
-		lblNewLabel.setBounds(68, 68, 131, 15);
-		getContentPane().add(lblNewLabel);
-	}*/
 	
 
 	private void extracted() {
