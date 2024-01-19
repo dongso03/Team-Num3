@@ -23,6 +23,7 @@ import java.awt.event.ActionEvent;
 
 public class WinningGUI extends JFrame{
 	FirstPage firstPage;
+	private JLabel lblNewLabel_5;
 	
 	public WinningGUI(FirstPage firstPage) {
 		setTitle("당첨확인");
@@ -37,7 +38,9 @@ public class WinningGUI extends JFrame{
 		comboBox.addItemListener(new ItemListener() {
 			@Override
 			public void itemStateChanged(ItemEvent e) {
-				
+//				if(comboBox.equals("1회차")) {
+//					lblNewLabel_5.setText(FirstPage.customer.lottoList);
+//				}
 			}
 		});
 		comboBox.setBounds(169, 21, 178, 21);
@@ -123,7 +126,7 @@ public class WinningGUI extends JFrame{
 		pnl.add(panel_1);
 		panel_1.setLayout(null);
 		
-		JLabel lblNewLabel_5 = new JLabel("New label");
+		lblNewLabel_5 = new JLabel("New label");
 		lblNewLabel_5.setBounds(0, 0, 305, 64);
 		panel_1.add(lblNewLabel_5);
 		

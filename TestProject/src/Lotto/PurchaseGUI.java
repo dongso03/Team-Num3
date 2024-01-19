@@ -52,7 +52,7 @@ public class PurchaseGUI extends JFrame {
    public JLabel[] lbl1;
    private JLabel[] lbl2;
    public JLabel lblNewLabel_10;
-   private JLabel lblNewLabel_12;
+   private JLabel priceLbl;
    private JLabel[] lbl3;
    private JLabel[] lbl4;
    private JLabel[] lbl5;
@@ -63,6 +63,9 @@ public class PurchaseGUI extends JFrame {
    private JPanel panel_7;
    private List<Integer> selectedNumbers = new ArrayList<>();
    int sumSelectedCombo = 0;
+   private int price = 0;
+   private Map<Integer, JLabel[]> map;
+   int nowPrice=0;
 
    public PurchaseGUI(FirstPage firstpage, ChargeGUI chargeGUI) {
       this.firstpage = firstpage;
@@ -92,13 +95,21 @@ public class PurchaseGUI extends JFrame {
       JButton checkBtn = new JButton("확인");
       sl_panel.putConstraint(SpringLayout.NORTH, checkBtn, -4, SpringLayout.NORTH, lblNewLabel);
       sl_panel.putConstraint(SpringLayout.WEST, checkBtn, 18, SpringLayout.EAST, comboBox);
+      map = new HashMap<>();
+      map.put(1, lbl1);
+      map.put(2, lbl2);
+      map.put(3, lbl3);
+      map.put(4, lbl4);
+      map.put(5, lbl5);
+      
 
       // 확인 버튼을 눌렀을 때 -------------------------------------------------
       checkBtn.addActionListener(new ActionListener() {
          // private List<Integer> selectedNumbers = new ArrayList<>();
          int selectCount = 0;
+         private int selectedCombo;
 
-         private Map<Integer, JLabel[]> map = new HashMap<>();
+         // private Map<Integer, JLabel[]> map = new HashMap<>();
 
          public void actionPerformed(ActionEvent e) {
 
@@ -108,7 +119,7 @@ public class PurchaseGUI extends JFrame {
             map.put(4, lbl4);
             map.put(5, lbl5);
 
-            int selectedCombo = comboBox.getSelectedIndex() + 1; // 2번째 선택 : 2장 선택
+            selectedCombo = comboBox.getSelectedIndex() + 1;
             sumSelectedCombo += selectedCombo; // 5이 됨. => lbl4,5가 채워져야됨(map의 키가 4,5임)
 
             if (sumSelectedCombo < 6) {
@@ -152,8 +163,14 @@ public class PurchaseGUI extends JFrame {
                   selectCount = 0;
 
                }
+               // 확인 버튼을 누를때마다 값을 추가 하여 priceLbl에 출력
+               nowPrice += (comboBox.getSelectedIndex() + 1)*1000 ;
+               
+               priceLbl.setText(String.valueOf(nowPrice));
+
             } else {
                JOptionPane.showMessageDialog(null, "한 번에 다섯 장 이상은 구매할 수 없습니다.");
+               sumSelectedCombo -= selectedCombo;
             }
 
             for (JToggleButton button : toggleButtons) {
@@ -228,7 +245,7 @@ public class PurchaseGUI extends JFrame {
       panel_8.setLayout(null);
 
       JButton btnReset = new JButton("초기화");
-      btnReset.setBounds(98, 10, 69, 23);
+      btnReset.setBounds(66, 0, 101, 33);
       panel_8.add(btnReset);
       sl_panel.putConstraint(SpringLayout.NORTH, btnReset, 0, SpringLayout.NORTH, checkBtn);
       sl_panel.putConstraint(SpringLayout.WEST, btnReset, 25, SpringLayout.WEST, panel);
@@ -263,10 +280,19 @@ public class PurchaseGUI extends JFrame {
       btnReset_1.addActionListener(new ActionListener() {
          @Override
          public void actionPerformed(ActionEvent e) {
-            for (int i = 2; i < 8; i++) {
-               lbl1[1].setText("미지정");
-               lbl1[i].setText("");
-               sumSelectedCombo--;
+            for (int i = 1; i < 8; i++) {
+               lbl1[i].setText(lbl2[i].getText());
+               lbl2[i].setText(lbl3[i].getText());
+               lbl3[i].setText(lbl4[i].getText());
+               lbl4[i].setText(lbl5[i].getText());
+               lbl5[i].setText("");
+            }
+            sumSelectedCombo--;
+            nowPrice -= 1000;
+            if(nowPrice <= 0) {
+               nowPrice =0;
+            }else {
+               priceLbl.setText(String.valueOf(Integer.parseInt(priceLbl.getText())-1000));
             }
 
          }
@@ -275,44 +301,47 @@ public class PurchaseGUI extends JFrame {
          @Override
          public void actionPerformed(ActionEvent e) {
             for (int i = 2; i < 8; i++) {
-               lbl2[1].setText("미지정");
-               lbl2[i].setText("");
-               sumSelectedCombo--;
+               lbl2[i].setText(lbl3[i].getText());
+               lbl3[i].setText(lbl4[i].getText());
+               lbl4[i].setText(lbl5[i].getText());
+               lbl5[i].setText("");
             }
-
+            sumSelectedCombo--;
+            nowPrice-=1000;
+            priceLbl.setText(String.valueOf(nowPrice)); // 이 방법도 실패
          }
       });
       btnReset_3.addActionListener(new ActionListener() {
          @Override
          public void actionPerformed(ActionEvent e) {
             for (int i = 2; i < 8; i++) {
-               lbl3[1].setText("미지정");
-               lbl3[i].setText("");
-               sumSelectedCombo--;
+               lbl3[i].setText(lbl4[i].getText());
+               lbl4[i].setText(lbl5[i].getText());
+               lbl5[i].setText("");
             }
-
+            sumSelectedCombo--;
+            priceLbl.setText(String.valueOf(Integer.parseInt(priceLbl.getText())-1000));
          }
       });
       btnReset_4.addActionListener(new ActionListener() {
          @Override
          public void actionPerformed(ActionEvent e) {
             for (int i = 2; i < 8; i++) {
-               lbl4[1].setText("미지정");
-               lbl4[i].setText("");
-               sumSelectedCombo--;
+               lbl4[i].setText(lbl5[i].getText());
+               lbl5[i].setText("");
             }
-
+            sumSelectedCombo--;
+            priceLbl.setText(String.valueOf(Integer.parseInt(priceLbl.getText())-1000));
          }
       });
       btnReset_5.addActionListener(new ActionListener() {
          @Override
          public void actionPerformed(ActionEvent e) {
             for (int i = 2; i < 8; i++) {
-               lbl5[1].setText("미지정");
                lbl5[i].setText("");
-               sumSelectedCombo--;
             }
-
+            sumSelectedCombo--;
+            priceLbl.setText(String.valueOf(Integer.parseInt(priceLbl.getText())-1000));
          }
       });
 
@@ -323,13 +352,13 @@ public class PurchaseGUI extends JFrame {
       // Random ran = new Random();
 
       btnAuto = new JToggleButton("자동");
-      btnAuto.setBounds(193, 10, 57, 23);
+      btnAuto.setBounds(193, 0, 86, 33);
       panel_8.add(btnAuto);
       sl_panel.putConstraint(SpringLayout.NORTH, btnAuto, 0, SpringLayout.NORTH, checkBtn);
       sl_panel.putConstraint(SpringLayout.EAST, btnAuto, -34, SpringLayout.WEST, checkBtn);
 
       JPanel panel_9 = new JPanel();
-      panel_9.setBounds(375, 337, 405, 108);
+      panel_9.setBounds(385, 330, 447, 108);
       getContentPane().add(panel_9);
       panel_9.setLayout(null);
 
@@ -349,30 +378,33 @@ public class PurchaseGUI extends JFrame {
             dispose();
          }
       });
-      btnNewButton_1.setBounds(76, 6, 57, 23);
+      btnNewButton_1.setBounds(76, 6, 87, 23);
       panel_9.add(btnNewButton_1);
 
       lblNewLabel_10 = new JLabel("보유금액: " + FirstPage.customer.getAmount());
-      lblNewLabel_10.setBounds(12, 46, 121, 15);
+      lblNewLabel_10.setBounds(12, 46, 163, 15);
       panel_9.add(lblNewLabel_10);
 
       JLabel lblNewLabel_11 = new JLabel("결제금액");
-      lblNewLabel_11.setBounds(182, 10, 57, 15);
+      lblNewLabel_11.setBounds(219, 10, 57, 15);
       panel_9.add(lblNewLabel_11);
 
       JButton btnNewButton_2 = new JButton("구매");
       btnNewButton_2.addActionListener(new ActionListener() {
          public void actionPerformed(ActionEvent e) {
-            JDialog jdp = new ConfirmPurchaseDialog(PurchaseGUI.this);
+            JDialog jdp = new ConfirmPurchaseDialog(PurchaseGUI.this, firstpage);
             jdp.setVisible(true);
          }
       });
-      btnNewButton_2.setBounds(296, 10, 97, 55);
+      btnNewButton_2.setBounds(338, 10, 97, 55);
       panel_9.add(btnNewButton_2);
 
-      lblNewLabel_12 = new JLabel("1000원");
-      lblNewLabel_12.setBounds(182, 46, 57, 15);
-      panel_9.add(lblNewLabel_12);
+      priceLbl = new JLabel("");
+      if(nowPrice <=0) {
+         priceLbl.setText("0");
+      }
+      priceLbl.setBounds(219, 46, 57, 15);
+      panel_9.add(priceLbl);
 
       JButton btnNewButton_3 = new JButton("돌아가기");
       btnNewButton_3.addActionListener(new ActionListener() {
@@ -386,25 +418,8 @@ public class PurchaseGUI extends JFrame {
             dispose();
          }
       });
-      btnNewButton_3.setBounds(296, 75, 97, 23);
+      btnNewButton_3.setBounds(338, 75, 97, 23);
       panel_9.add(btnNewButton_3);
-      comboBox.addActionListener(new ActionListener() {
-         @Override
-         public void actionPerformed(ActionEvent e) {
-            if (comboBox.getSelectedItem().toString().equals("1")) {
-               lblNewLabel_12.setText("1000원");
-            } else if (comboBox.getSelectedItem().toString().equals("2")) {
-               lblNewLabel_12.setText("2000원");
-            } else if (comboBox.getSelectedItem().toString().equals("3")) {
-               lblNewLabel_12.setText("3000원");
-            } else if (comboBox.getSelectedItem().toString().equals("4")) {
-               lblNewLabel_12.setText("4000원");
-            } else if (comboBox.getSelectedItem().toString().equals("5")) {
-               lblNewLabel_12.setText("5000원");
-            }
-
-         }
-      });
 
       btnReset.addActionListener(new ActionListener() {
          public void actionPerformed(ActionEvent e) {
@@ -503,6 +518,9 @@ public class PurchaseGUI extends JFrame {
       selectedNumbers.clear();
    }
 
+   public Map<Integer, JLabel[]> getMap() {
+	    return map;
+	}
    private void showGUI() {
       setSize(903, 566);
       setDefaultCloseOperation(DISPOSE_ON_CLOSE);
