@@ -65,7 +65,7 @@ public class PurchaseGUI extends JFrame {
 	int sumSelectedCombo = 0;
 	private int price = 0;
 	private Map<Integer, JLabel[]> map;
-	int nowPrice=0;
+	int nowPrice = 0;
 
 	public PurchaseGUI(FirstPage firstpage, ChargeGUI chargeGUI) {
 		this.firstpage = firstpage;
@@ -101,7 +101,6 @@ public class PurchaseGUI extends JFrame {
 		map.put(3, lbl3);
 		map.put(4, lbl4);
 		map.put(5, lbl5);
-		
 
 		// 확인 버튼을 눌렀을 때 -------------------------------------------------
 		checkBtn.addActionListener(new ActionListener() {
@@ -164,8 +163,8 @@ public class PurchaseGUI extends JFrame {
 
 					}
 					// 확인 버튼을 누를때마다 값을 추가 하여 priceLbl에 출력
-					nowPrice += (comboBox.getSelectedIndex() + 1)*1000 ;
-					
+					nowPrice += (comboBox.getSelectedIndex() + 1) * 1000;
+
 					priceLbl.setText(String.valueOf(nowPrice));
 
 				} else {
@@ -289,12 +288,13 @@ public class PurchaseGUI extends JFrame {
 				}
 				sumSelectedCombo--;
 				nowPrice -= 1000;
-//				if() {
-//					
-//				}else {
-//					
-//				}
-				priceLbl.setText(String.valueOf(Integer.parseInt(priceLbl.getText())-1000));
+				if (nowPrice <= 0) {
+					nowPrice = 0;
+					priceLbl.setText("0");
+
+				} else {
+					priceLbl.setText(String.valueOf(Integer.parseInt(priceLbl.getText()) - 1000));
+				}
 
 			}
 		});
@@ -307,9 +307,7 @@ public class PurchaseGUI extends JFrame {
 					lbl4[i].setText(lbl5[i].getText());
 					lbl5[i].setText("");
 				}
-				sumSelectedCombo--;
-				nowPrice-=1000;
-				priceLbl.setText(String.valueOf(nowPrice)); // 이 방법도 실패
+				resetModify();
 			}
 		});
 		btnReset_3.addActionListener(new ActionListener() {
@@ -320,8 +318,7 @@ public class PurchaseGUI extends JFrame {
 					lbl4[i].setText(lbl5[i].getText());
 					lbl5[i].setText("");
 				}
-				sumSelectedCombo--;
-				priceLbl.setText(String.valueOf(Integer.parseInt(priceLbl.getText())-1000));
+				resetModify();
 			}
 		});
 		btnReset_4.addActionListener(new ActionListener() {
@@ -331,8 +328,7 @@ public class PurchaseGUI extends JFrame {
 					lbl4[i].setText(lbl5[i].getText());
 					lbl5[i].setText("");
 				}
-				sumSelectedCombo--;
-				priceLbl.setText(String.valueOf(Integer.parseInt(priceLbl.getText())-1000));
+				resetModify();
 			}
 		});
 		btnReset_5.addActionListener(new ActionListener() {
@@ -341,8 +337,7 @@ public class PurchaseGUI extends JFrame {
 				for (int i = 2; i < 8; i++) {
 					lbl5[i].setText("");
 				}
-				sumSelectedCombo--;
-				priceLbl.setText(String.valueOf(Integer.parseInt(priceLbl.getText())-1000));
+				resetModify();
 			}
 		});
 
@@ -401,7 +396,7 @@ public class PurchaseGUI extends JFrame {
 		panel_9.add(btnNewButton_2);
 
 		priceLbl = new JLabel("");
-		if(nowPrice <=0) {
+		if (nowPrice <= 0) {
 			priceLbl.setText("0");
 		}
 		priceLbl.setBounds(219, 46, 57, 15);
@@ -527,6 +522,17 @@ public class PurchaseGUI extends JFrame {
 
 	public void setFirstPage(FirstPage firstPage) {
 		this.firstpage = firstPage;
+	}
+
+	public void resetModify() {
+		sumSelectedCombo--;
+		nowPrice -= 1000;
+		if (nowPrice <= 0) {
+			nowPrice = 0;
+			priceLbl.setText("0");
+		} else {
+			priceLbl.setText(String.valueOf(Integer.parseInt(priceLbl.getText()) - 1000));
+		}
 	}
 
 	public static void main(String[] args) {
