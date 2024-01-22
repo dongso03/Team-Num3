@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -54,6 +55,47 @@ public class FirstPage extends JFrame {
       btnWinning.addActionListener(new ActionListener() {
          @Override
          public void actionPerformed(ActionEvent e) {
+            
+    //       System.out.println(purchaseGUI.getMap()); 
+//            for(int i= 0; i< 8;i++) {
+//            winningGUI.lblAs[i].setText("하이");
+//            }
+    //        for(int i= 0; i< 8;i++) {
+           // winningGUI.lblB.setText("하이");
+//            }
+//            for(int i= 0; i<8;i++) {
+//            winningGUI.lblAs[i].setText(Arrays.toString(purchaseGUI.lbl1));
+//            }
+            for(int i= 0; i<8;i++) {
+            winningGUI.pirntNumbersA.add(customer.lottoList.get(1)[i]);
+            }
+            for(int i= 0; i<8;i++) {
+               winningGUI.pirntNumbersB.add(customer.lottoList.get(2)[i]);
+            }
+            for(int i= 0; i<8;i++) {
+               winningGUI.pirntNumbersC.add(customer.lottoList.get(3)[i]);
+            }
+            for(int i= 0; i<8;i++) {
+               winningGUI.pirntNumbersD.add(customer.lottoList.get(4)[i]);
+            }
+            for(int i= 0; i<8;i++) {
+               winningGUI.pirntNumbersE.add(customer.lottoList.get(5)[i]);
+            }
+//            for(int i= 0; i<8;i++) {
+//               winningGUI.pirntNumbersA.add(purchaseGUI.lbl1[i]);
+//            }
+//            for(int i= 0; i<8;i++) {
+//                winningGUI.pirntNumbersB.add(purchaseGUI.lbl2[i]);
+//                }
+//            for(int i= 0; i<8;i++) {
+//                winningGUI.pirntNumbersC.add(purchaseGUI.lbl3[i]);
+//                }
+//            for(int i= 0; i<8;i++) {
+//                winningGUI.pirntNumbersD.add(purchaseGUI.lbl4[i]);
+//                }
+//            for(int i= 0; i<8;i++) {
+//                winningGUI.pirntNumbersE.add(purchaseGUI.lbl5[i]);
+//                }
             setVisible(false);
             winningGUI.setVisible(true);
          }
@@ -66,6 +108,7 @@ public class FirstPage extends JFrame {
       setSize(597, 438);
       setDefaultCloseOperation(EXIT_ON_CLOSE);
       setVisible(true);
+      setLocationRelativeTo(null);
    }
 
    private void extracted() {

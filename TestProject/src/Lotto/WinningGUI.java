@@ -26,33 +26,32 @@ import javax.swing.JTextPane;
 public class WinningGUI extends JFrame {
 	FirstPage firstPage;
 	private JLabel lblNewLabel_5;
-	private JPanel pirntNumbersA;
-	private JPanel pirntNumbersB;
-	private JPanel pirntNumbersC;
-	private JPanel pirntNumbersD;
-	private JPanel pirntNumbersE;
-	private JLabel[] lblAs;
+	public JPanel pirntNumbersA;
+	 JPanel pirntNumbersB;
+	 JPanel pirntNumbersC;
+	 JPanel pirntNumbersD;
+	 JPanel pirntNumbersE;
+	public JLabel[] lblAs = new JLabel[] {new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel("")};
+	
 
+	private PurchaseGUI purchaseGUI;
+public JPanel pnl;
+private List<Integer> uniqueList;
+	
 	public WinningGUI(FirstPage firstPage) {
+		
+//		 for(int i= 0; i< 8;i++) {
+//        	 lblAs[i].setText("");
+//		 }
 		setTitle("당첨확인");
-		JPanel pnl = new JPanel();
+		pnl = new JPanel();
+		
 		pnl.setLayout(null);
-		JLabel lbl = new JLabel("구매 내역: ");
-		lbl.setBounds(73, 24, 84, 15);
+		JLabel lbl = new JLabel("당첨결과");
+		lbl.setBounds(210, 24, 84, 15);
 		pnl.add(lbl);
 
 		String[] list = new String[] { "", "1회차", "당첨된 것만 보기" };
-		JComboBox comboBox = new JComboBox(list);
-		comboBox.addItemListener(new ItemListener() {
-			@Override
-			public void itemStateChanged(ItemEvent e) {
-//            if(comboBox.equals("1회차")) {
-//               lblNewLabel_5.setText(FirstPage.customer.lottoList);
-//            }
-			}
-		});
-		comboBox.setBounds(169, 21, 178, 21);
-		pnl.add(comboBox);
 
 		getContentPane().add(pnl);
 
@@ -113,10 +112,10 @@ public class WinningGUI extends JFrame {
 			int randomNumber = ran.nextInt(45) + 1;
 			uniqueNumbers.add(randomNumber);
 		}
-
+		
 		// List<Integer> uniqueList = new ArrayList<>(uniqueNumbers);
 		Set<Integer> resultList = new TreeSet<>(uniqueNumbers);
-		List<Integer> uniqueList = new ArrayList<>(resultList);
+		uniqueList = new ArrayList<>(resultList);
 		result_1.setText(String.valueOf(uniqueList.get(0)));
 		result_2.setText(String.valueOf(uniqueList.get(1)));
 		result_3.setText(String.valueOf(uniqueList.get(2)));
@@ -165,26 +164,24 @@ public class WinningGUI extends JFrame {
 		pirntNumbersA = new JPanel();
 		pirntNumbersA.setBounds(64, 195, 283, 34);
 		pnl.add(pirntNumbersA);
-
-		lblAs = new JLabel[8];
+		for(int i =0; i<8;i++) {
+		pirntNumbersA.add(lblAs[i]);
+		System.out.println(lblAs[i]);
+		}
+	//	lblAs = new JLabel[8];
 
 		// "A"라벨을 패널에 추가
-		lblAs[0] = new JLabel("A");
-		pirntNumbersA.add(lblAs[0]);
-
-		// 로또 번호를 패널에 추가
-		if (FirstPage.customer.lottoList.containsKey(1)) {
-			JLabel[] lottoNumbers = FirstPage.customer.lottoList.get(1);
-
-			// lottoNumbers 배열이 null이 아닌지 확인
-			if (lottoNumbers != null) {
-				// pirntNumbersA.add(lottoNumbers[i - 1]);
-				for (int i = 1; i < 8 && i <= lottoNumbers.length; i++) {
-					lblAs[i] = lottoNumbers[i];
-					pirntNumbersA.add(lblAs[i]);
-				}
-			}
-		}
+//		lblAs[0] = new JLabel("A");
+//		pirntNumbersA.add(lblAs[0]);
+//		System.out.println(FirstPage.customer.lottoList.get(1));
+//		
+//		if (FirstPage.customer.lottoList.containsKey(1)) {
+//		    lblAs = FirstPage.customer.lottoList.get(1);
+//		    
+//		    for (int i = 1; i < lblAs.length; i++) {
+//		        pirntNumbersA.add(lblAs[i]);
+//		    }
+//		}
 
 		pirntNumbersB = new JPanel();
 		pirntNumbersB.setBounds(64, 239, 283, 34);
@@ -202,54 +199,46 @@ public class WinningGUI extends JFrame {
 		pirntNumbersE.setBounds(64, 370, 283, 34);
 		pnl.add(pirntNumbersE);
 
-		JTextPane txtpnA = new JTextPane();
-		txtpnA.setBounds(40, 195, 21, 34);
-		pnl.add(txtpnA);
-		txtpnA.setText("A");
-
-		JTextPane txtpnB = new JTextPane();
-		txtpnB.setText("B");
-		txtpnB.setBounds(40, 239, 21, 34);
-		pnl.add(txtpnB);
-
-		JTextPane txtpnC = new JTextPane();
-		txtpnC.setText("C");
-		txtpnC.setBounds(40, 283, 21, 34);
-		pnl.add(txtpnC);
-
-		JTextPane txtpnD = new JTextPane();
-		txtpnD.setText("D");
-		txtpnD.setBounds(40, 326, 21, 34);
-		pnl.add(txtpnD);
-
-		JTextPane txtpnE = new JTextPane();
-		txtpnE.setText("E");
-		txtpnE.setBounds(40, 370, 21, 34);
-		pnl.add(txtpnE);
-
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setBounds(359, 195, 92, 223);
-		pnl.add(lblNewLabel);
-
 		JPanel pirntResultA = new JPanel();
 		pirntResultA.setBounds(359, 195, 92, 34);
 		pnl.add(pirntResultA);
-
+		
+		JLabel lblNewLabel = new JLabel("");
+		pirntResultA.add(lblNewLabel);
+		if(uniqueList.contains((lblAs))) {
+			lblNewLabel.setText("당첨");
+		}else {
+			lblNewLabel.setText("낙첨");
+		}
+		
+		
 		JPanel pirntResultB = new JPanel();
 		pirntResultB.setBounds(359, 239, 92, 34);
 		pnl.add(pirntResultB);
+		
+		JLabel lblNewLabel_1 = new JLabel("New label");
+		pirntResultB.add(lblNewLabel_1);
 
 		JPanel pirntResultC = new JPanel();
 		pirntResultC.setBounds(359, 283, 92, 34);
 		pnl.add(pirntResultC);
+		
+		JLabel lblNewLabel_2 = new JLabel("New label");
+		pirntResultC.add(lblNewLabel_2);
 
 		JPanel pirntResultD = new JPanel();
 		pirntResultD.setBounds(359, 326, 92, 34);
 		pnl.add(pirntResultD);
+		
+		JLabel lblNewLabel_6 = new JLabel("New label");
+		pirntResultD.add(lblNewLabel_6);
 
 		JPanel pirntResultE = new JPanel();
 		pirntResultE.setBounds(359, 370, 92, 34);
 		pnl.add(pirntResultE);
+		
+		JLabel lblNewLabel_7 = new JLabel("New label");
+		pirntResultE.add(lblNewLabel_7);
 
 		showGUI();
 	}
