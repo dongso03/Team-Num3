@@ -36,7 +36,7 @@ import com.jgoodies.forms.layout.RowSpec;
 import java.awt.GridLayout;
 
 public class PurchaseGUI extends JFrame {
-   private List<JToggleButton> toggleButtons;
+   private static List<JToggleButton> toggleButtons;
    FirstPage firstpage;
    JToggleButton btnAuto;
    JToggleButton togbtn;
@@ -56,16 +56,17 @@ public class PurchaseGUI extends JFrame {
    private JLabel[] lbl3;
    private JLabel[] lbl4;
    private JLabel[] lbl5;
-   private JPanel panel_3;
-   private JPanel panel_4;
-   private JPanel panel_5;
-   private JPanel panel_6;
-   private JPanel panel_7;
-   private List<Integer> selectedNumbers = new ArrayList<>();
+   private JPanel panelA;
+   private JPanel panelB;
+   private JPanel panelC;
+   private JPanel panelD;
+   private JPanel panelE;
+   private static List<Integer> selectedNumbers = new ArrayList<>();
    int sumSelectedCombo = 0;
    private int price = 0;
    private Map<Integer, JLabel[]> map;
-   int nowPrice=0;
+   static int nowPrice = 0;
+   public static int SelectedNumbers;
 
    public PurchaseGUI(FirstPage firstpage, ChargeGUI chargeGUI) {
       this.firstpage = firstpage;
@@ -101,7 +102,6 @@ public class PurchaseGUI extends JFrame {
       map.put(3, lbl3);
       map.put(4, lbl4);
       map.put(5, lbl5);
-      
 
       // 확인 버튼을 눌렀을 때 -------------------------------------------------
       checkBtn.addActionListener(new ActionListener() {
@@ -164,9 +164,12 @@ public class PurchaseGUI extends JFrame {
 
                }
                // 확인 버튼을 누를때마다 값을 추가 하여 priceLbl에 출력
-               nowPrice += (comboBox.getSelectedIndex() + 1)*1000 ;
-               
-               priceLbl.setText(String.valueOf(nowPrice));
+               nowPrice += (comboBox.getSelectedIndex() + 1) * 1000;
+               if (nowPrice > Customer.amount) {
+                  JOptionPane.showMessageDialog(null, "충전 금액을 초과하였습니다.");
+               } else {
+                  priceLbl.setText(String.valueOf(nowPrice));
+               }
 
             } else {
                JOptionPane.showMessageDialog(null, "한 번에 다섯 장 이상은 구매할 수 없습니다.");
@@ -187,57 +190,57 @@ public class PurchaseGUI extends JFrame {
       panel_2.setLayout(null);
 
       JLabel lblNewLabel_1 = new JLabel("선택번호 확인");
-      lblNewLabel_1.setBounds(164, 5, 76, 15);
+      lblNewLabel_1.setBounds(164, 5, 114, 15);
       panel_2.add(lblNewLabel_1);
 
-      panel_3 = new JPanel();
-      panel_3.setBounds(24, 50, 371, 35);
-      panel_2.add(panel_3);
-      panel_3.setLayout(new GridLayout(1, 0, 0, 0));
+      panelA = new JPanel();
+      panelA.setBounds(24, 50, 371, 35);
+      panel_2.add(panelA);
+      panelA.setLayout(new GridLayout(1, 0, 0, 0));
       lbl1 = new JLabel[8];
       for (int i = 0; i < 8; i++) {
          lbl1[i] = new JLabel("");
          lbl1[0] = new JLabel("A");
-         panel_3.add(lbl1[i]);
+         panelA.add(lbl1[i]);
       }
 
-      panel_4 = new JPanel();
-      panel_4.setBounds(23, 95, 372, 35);
-      panel_2.add(panel_4);
-      panel_4.setLayout(new GridLayout(1, 0, 0, 0));
+      panelB = new JPanel();
+      panelB.setBounds(23, 95, 372, 35);
+      panel_2.add(panelB);
+      panelB.setLayout(new GridLayout(1, 0, 0, 0));
       lbl2 = new JLabel[8];
       for (int i = 0; i < 8; i++) {
          lbl2[i] = new JLabel("");
          lbl2[0] = new JLabel("B");
-         panel_4.add(lbl2[i]);
+         panelB.add(lbl2[i]);
       }
 
-      panel_5 = new JPanel();
-      panel_5.setBounds(24, 140, 371, 35);
-      panel_2.add(panel_5);
-      panel_5.setLayout(new GridLayout(1, 0, 0, 0));
+      panelC = new JPanel();
+      panelC.setBounds(24, 140, 371, 35);
+      panel_2.add(panelC);
+      panelC.setLayout(new GridLayout(1, 0, 0, 0));
       lbl3 = new JLabel[8];
       for (int i = 0; i < 8; i++) {
          lbl3[i] = new JLabel("");
          lbl3[0] = new JLabel("C");
-         panel_5.add(lbl3[i]);
+         panelC.add(lbl3[i]);
       }
 
-      panel_6 = new JPanel();
-      panel_6.setBounds(24, 185, 371, 35);
-      panel_2.add(panel_6);
-      panel_6.setLayout(new GridLayout(1, 0, 0, 0));
+      panelD = new JPanel();
+      panelD.setBounds(24, 185, 371, 35);
+      panel_2.add(panelD);
+      panelD.setLayout(new GridLayout(1, 0, 0, 0));
       lbl4 = new JLabel[8];
       for (int i = 0; i < 8; i++) {
          lbl4[i] = new JLabel("");
          lbl4[0] = new JLabel("D");
-         panel_6.add(lbl4[i]);
+         panelD.add(lbl4[i]);
       }
 
-      panel_7 = new JPanel();
-      panel_7.setBounds(24, 230, 371, 35);
-      panel_2.add(panel_7);
-      panel_7.setLayout(new GridLayout(1, 0, 0, 0));
+      panelE = new JPanel();
+      panelE.setBounds(24, 230, 371, 35);
+      panel_2.add(panelE);
+      panelE.setLayout(new GridLayout(1, 0, 0, 0));
 
       JPanel panel_8 = new JPanel();
       panel_8.setBounds(10, 337, 353, 31);
@@ -274,7 +277,7 @@ public class PurchaseGUI extends JFrame {
       for (int i = 0; i < 8; i++) {
          lbl5[i] = new JLabel("");
          lbl5[0] = new JLabel("E");
-         panel_7.add(lbl5[i]);
+         panelE.add(lbl5[i]);
       }
 
       btnReset_1.addActionListener(new ActionListener() {
@@ -287,14 +290,7 @@ public class PurchaseGUI extends JFrame {
                lbl4[i].setText(lbl5[i].getText());
                lbl5[i].setText("");
             }
-            sumSelectedCombo--;
-            nowPrice -= 1000;
-            if(nowPrice <= 0) {
-               nowPrice =0;
-            }else {
-               priceLbl.setText(String.valueOf(Integer.parseInt(priceLbl.getText())-1000));
-            }
-
+            resetModify();
          }
       });
       btnReset_2.addActionListener(new ActionListener() {
@@ -306,9 +302,7 @@ public class PurchaseGUI extends JFrame {
                lbl4[i].setText(lbl5[i].getText());
                lbl5[i].setText("");
             }
-            sumSelectedCombo--;
-            nowPrice-=1000;
-            priceLbl.setText(String.valueOf(nowPrice)); // 이 방법도 실패
+            resetModify();
          }
       });
       btnReset_3.addActionListener(new ActionListener() {
@@ -319,8 +313,7 @@ public class PurchaseGUI extends JFrame {
                lbl4[i].setText(lbl5[i].getText());
                lbl5[i].setText("");
             }
-            sumSelectedCombo--;
-            priceLbl.setText(String.valueOf(Integer.parseInt(priceLbl.getText())-1000));
+            resetModify();
          }
       });
       btnReset_4.addActionListener(new ActionListener() {
@@ -330,8 +323,7 @@ public class PurchaseGUI extends JFrame {
                lbl4[i].setText(lbl5[i].getText());
                lbl5[i].setText("");
             }
-            sumSelectedCombo--;
-            priceLbl.setText(String.valueOf(Integer.parseInt(priceLbl.getText())-1000));
+            resetModify();
          }
       });
       btnReset_5.addActionListener(new ActionListener() {
@@ -340,8 +332,7 @@ public class PurchaseGUI extends JFrame {
             for (int i = 2; i < 8; i++) {
                lbl5[i].setText("");
             }
-            sumSelectedCombo--;
-            priceLbl.setText(String.valueOf(Integer.parseInt(priceLbl.getText())-1000));
+            resetModify();
          }
       });
 
@@ -400,7 +391,7 @@ public class PurchaseGUI extends JFrame {
       panel_9.add(btnNewButton_2);
 
       priceLbl = new JLabel("");
-      if(nowPrice <=0) {
+      if (nowPrice <= 0) {
          priceLbl.setText("0");
       }
       priceLbl.setBounds(219, 46, 57, 15);
@@ -445,7 +436,7 @@ public class PurchaseGUI extends JFrame {
    }
 
    // 토글 버튼에서 숫자를 추출하고, 그 숫자들을 리스트로 반환 메소드
-   private List<Integer> getSelectedNumbers() {
+   static List<Integer> getSelectedNumbers() {
       // List<Integer> selectedNumbers = new ArrayList<>();
       for (JToggleButton button : toggleButtons) {
          if (button.isSelected()) {
@@ -518,17 +509,28 @@ public class PurchaseGUI extends JFrame {
       selectedNumbers.clear();
    }
 
-   public Map<Integer, JLabel[]> getMap() {
-	    return map;
-	}
    private void showGUI() {
       setSize(903, 566);
       setDefaultCloseOperation(DISPOSE_ON_CLOSE);
       setVisible(false);
    }
+   public Map<Integer, JLabel[]> getMap() {
+       return map;
+   }
 
    public void setFirstPage(FirstPage firstPage) {
       this.firstpage = firstPage;
+   }
+
+   public void resetModify() {
+      sumSelectedCombo--;
+      nowPrice -= 1000;
+      if (nowPrice <= 0) {
+         nowPrice = 0;
+         priceLbl.setText("0");
+      } else {
+         priceLbl.setText(String.valueOf(Integer.parseInt(priceLbl.getText()) - 1000));
+      }
    }
 
    public static void main(String[] args) {

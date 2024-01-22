@@ -29,7 +29,9 @@ public class ConfirmPurchaseDialog extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Map<Integer, JLabel[]> map = purchaseGUI.getMap();
+				//System.out.println(map);
                 FirstPage.customer.lottoList = map;
+                System.out.println(FirstPage.customer.lottoList);
                 dispose();
 			    firstPage.setVisible(true); 
 			    purchaseGUI.setVisible(false);
