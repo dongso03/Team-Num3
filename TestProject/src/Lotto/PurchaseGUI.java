@@ -53,8 +53,8 @@ public class PurchaseGUI extends JFrame {
     JLabel[] lbl2;
    public JLabel lblNewLabel_10;
    private JLabel priceLbl;
-    JLabel[] lbl3;
-    JLabel[] lbl4;
+   JLabel[] lbl3;
+   JLabel[] lbl4;
     JLabel[] lbl5;
    private JPanel panelA;
    private JPanel panelB;
@@ -64,7 +64,7 @@ public class PurchaseGUI extends JFrame {
    private static List<Integer> selectedNumbers = new ArrayList<>();
    int sumSelectedCombo = 0;
    private int price = 0;
-   private Map<Integer, JLabel[]> map;
+  public Map<Integer, JLabel[]> map;
    static int nowPrice = 0;
    public static int SelectedNumbers;
 
@@ -513,7 +513,6 @@ public class PurchaseGUI extends JFrame {
       setSize(903, 566);
       setDefaultCloseOperation(DISPOSE_ON_CLOSE);
       setVisible(false);
-      setLocationRelativeTo(null);
    }
    public Map<Integer, JLabel[]> getMap() {
        return map;
