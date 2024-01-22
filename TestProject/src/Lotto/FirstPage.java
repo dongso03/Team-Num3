@@ -48,7 +48,7 @@ public class FirstPage extends JFrame {
          public void actionPerformed(ActionEvent e) {
             setVisible(false);
             purchaseGUI.setVisible(true);
-            purchaseGUI.lblNewLabel_10.setText("(현재 잔액: " + FirstPage.customer.getAmount() + "원)");
+            purchaseGUI.lblNewLabel_10.setText("(현재 잔액: " + (FirstPage.customer.getAmount() - PurchaseGUI.nowPrice) + "원)");
          }
       });
       btnWinning.addActionListener(new ActionListener() {
