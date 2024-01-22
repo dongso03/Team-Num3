@@ -20,6 +20,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JTextPane;
 
 public class WinningGUI extends JFrame{
 	FirstPage firstPage;
@@ -50,7 +51,7 @@ public class WinningGUI extends JFrame{
 		getContentPane().add(pnl);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(40, 88, 363, 64);
+		panel.setBounds(79, 65, 372, 64);
 		pnl.add(panel);
 		panel.setLayout(null);
 		
@@ -122,17 +123,20 @@ public class WinningGUI extends JFrame{
         
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(40, 162, 363, 64);
+		panel_1.setBounds(40, 162, 411, 23);
 		pnl.add(panel_1);
 		panel_1.setLayout(null);
 		
-		lblNewLabel_5 = new JLabel("New label");
-		lblNewLabel_5.setBounds(0, 0, 305, 64);
-		panel_1.add(lblNewLabel_5);
+		JLabel purchaseNumber = new JLabel("구매 번호");
+		purchaseNumber.setBounds(131, 0, 191, 29);
+		panel_1.add(purchaseNumber);
 		
-		JLabel lblNewLabel_6 = new JLabel("New label");
-		lblNewLabel_6.setBounds(306, 0, 57, 64);
-		panel_1.add(lblNewLabel_6);
+		
+		JLabel winningResult = new JLabel("당첨 결과");
+		winningResult.setBounds(334, 0, 77, 29);
+		panel_1.add(winningResult);
+		
+		
 		
 		JButton btnNewButton = new JButton("처음 화면으로 돌아가기");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -143,7 +147,7 @@ public class WinningGUI extends JFrame{
 			}
 		});
 		
-		btnNewButton.setBounds(294, 236, 178, 23);
+		btnNewButton.setBounds(273, 428, 178, 23);
 		pnl.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("당첨규칙 확인하기");
@@ -155,8 +159,77 @@ public class WinningGUI extends JFrame{
 				
 			}
 		});
-		btnNewButton_1.setBounds(294, 269, 178, 23);
+		btnNewButton_1.setBounds(12, 428, 178, 23);
 		pnl.add(btnNewButton_1);
+		
+		JPanel pirntNumbersA = new JPanel();
+		pirntNumbersA.setBounds(64, 195, 283, 34);
+		pnl.add(pirntNumbersA);
+		
+		JPanel pirntNumbersB = new JPanel();
+		pirntNumbersB.setBounds(64, 239, 283, 34);
+		pnl.add(pirntNumbersB);
+		
+		JPanel pirntNumbersC = new JPanel();
+		pirntNumbersC.setBounds(64, 283, 283, 34);
+		pnl.add(pirntNumbersC);
+		
+		JPanel pirntNumbersD = new JPanel();
+		pirntNumbersD.setBounds(64, 326, 283, 34);
+		pnl.add(pirntNumbersD);
+		
+		JPanel pirntNumbersE = new JPanel();
+		pirntNumbersE.setBounds(64, 370, 283, 34);
+		pnl.add(pirntNumbersE);
+		
+		JTextPane txtpnA = new JTextPane();
+		txtpnA.setBounds(40, 195, 21, 34);
+		pnl.add(txtpnA);
+		txtpnA.setText("A");
+		
+		JTextPane txtpnB = new JTextPane();
+		txtpnB.setText("B");
+		txtpnB.setBounds(40, 239, 21, 34);
+		pnl.add(txtpnB);
+		
+		JTextPane txtpnC = new JTextPane();
+		txtpnC.setText("C");
+		txtpnC.setBounds(40, 283, 21, 34);
+		pnl.add(txtpnC);
+		
+		JTextPane txtpnD = new JTextPane();
+		txtpnD.setText("D");
+		txtpnD.setBounds(40, 326, 21, 34);
+		pnl.add(txtpnD);
+		
+		JTextPane txtpnE = new JTextPane();
+		txtpnE.setText("E");
+		txtpnE.setBounds(40, 370, 21, 34);
+		pnl.add(txtpnE);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setBounds(359, 195, 92, 223);
+		pnl.add(lblNewLabel);
+		
+		JPanel pirntResultA = new JPanel();
+		pirntResultA.setBounds(359, 195, 92, 34);
+		pnl.add(pirntResultA);
+		
+		JPanel pirntResultB = new JPanel();
+		pirntResultB.setBounds(359, 239, 92, 34);
+		pnl.add(pirntResultB);
+		
+		JPanel pirntResultC = new JPanel();
+		pirntResultC.setBounds(359, 283, 92, 34);
+		pnl.add(pirntResultC);
+		
+		JPanel pirntResultD = new JPanel();
+		pirntResultD.setBounds(359, 326, 92, 34);
+		pnl.add(pirntResultD);
+		
+		JPanel pirntResultE = new JPanel();
+		pirntResultE.setBounds(359, 370, 92, 34);
+		pnl.add(pirntResultE);
 		
 		showGUI();
 	}

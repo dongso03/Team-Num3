@@ -22,10 +22,8 @@ public class Round {
 
     // 사용자가 선택한 로또 번호를 받아오기
     public static JLabel[] yourSelectedLottoNumbers() {
-        // 여기에 사용자가 선택한 로또 번호 생성 로직을 추가
-        // 예를 들어, 랜덤으로 6개의 번호를 생성하여 JLabel 배열에 저장하는 등의 로직
-        // 임시로 빈 배열을 반환하도록 설정
-        return new JLabel[6];
+    	PurchaseGUI.getSelectedNumbers();
+        return new JLabel[currentRound];
     }
 
     // 사용자가 로또 번호를 선택할 때마다 회차를 생성하고 저장

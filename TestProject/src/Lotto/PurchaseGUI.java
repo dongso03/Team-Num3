@@ -36,7 +36,7 @@ import com.jgoodies.forms.layout.RowSpec;
 import java.awt.GridLayout;
 
 public class PurchaseGUI extends JFrame {
-	private List<JToggleButton> toggleButtons;
+	private static List<JToggleButton> toggleButtons;
 	FirstPage firstpage;
 	JToggleButton btnAuto;
 	JToggleButton togbtn;
@@ -56,16 +56,17 @@ public class PurchaseGUI extends JFrame {
 	private JLabel[] lbl3;
 	private JLabel[] lbl4;
 	private JLabel[] lbl5;
-	private JPanel panel_3;
-	private JPanel panel_4;
-	private JPanel panel_5;
-	private JPanel panel_6;
-	private JPanel panel_7;
-	private List<Integer> selectedNumbers = new ArrayList<>();
+	private JPanel panelA;
+	private JPanel panelB;
+	private JPanel panelC;
+	private JPanel panelD;
+	private JPanel panelE;
+	private static List<Integer> selectedNumbers = new ArrayList<>();
 	int sumSelectedCombo = 0;
 	private int price = 0;
 	private Map<Integer, JLabel[]> map;
 	static int nowPrice = 0;
+	public static int SelectedNumbers;
 
 	public PurchaseGUI(FirstPage firstpage, ChargeGUI chargeGUI) {
 		this.firstpage = firstpage;
@@ -189,57 +190,57 @@ public class PurchaseGUI extends JFrame {
 		panel_2.setLayout(null);
 
 		JLabel lblNewLabel_1 = new JLabel("선택번호 확인");
-		lblNewLabel_1.setBounds(164, 5, 76, 15);
+		lblNewLabel_1.setBounds(164, 5, 114, 15);
 		panel_2.add(lblNewLabel_1);
 
-		panel_3 = new JPanel();
-		panel_3.setBounds(24, 50, 371, 35);
-		panel_2.add(panel_3);
-		panel_3.setLayout(new GridLayout(1, 0, 0, 0));
+		panelA = new JPanel();
+		panelA.setBounds(24, 50, 371, 35);
+		panel_2.add(panelA);
+		panelA.setLayout(new GridLayout(1, 0, 0, 0));
 		lbl1 = new JLabel[8];
 		for (int i = 0; i < 8; i++) {
 			lbl1[i] = new JLabel("");
 			lbl1[0] = new JLabel("A");
-			panel_3.add(lbl1[i]);
+			panelA.add(lbl1[i]);
 		}
 
-		panel_4 = new JPanel();
-		panel_4.setBounds(23, 95, 372, 35);
-		panel_2.add(panel_4);
-		panel_4.setLayout(new GridLayout(1, 0, 0, 0));
+		panelB = new JPanel();
+		panelB.setBounds(23, 95, 372, 35);
+		panel_2.add(panelB);
+		panelB.setLayout(new GridLayout(1, 0, 0, 0));
 		lbl2 = new JLabel[8];
 		for (int i = 0; i < 8; i++) {
 			lbl2[i] = new JLabel("");
 			lbl2[0] = new JLabel("B");
-			panel_4.add(lbl2[i]);
+			panelB.add(lbl2[i]);
 		}
 
-		panel_5 = new JPanel();
-		panel_5.setBounds(24, 140, 371, 35);
-		panel_2.add(panel_5);
-		panel_5.setLayout(new GridLayout(1, 0, 0, 0));
+		panelC = new JPanel();
+		panelC.setBounds(24, 140, 371, 35);
+		panel_2.add(panelC);
+		panelC.setLayout(new GridLayout(1, 0, 0, 0));
 		lbl3 = new JLabel[8];
 		for (int i = 0; i < 8; i++) {
 			lbl3[i] = new JLabel("");
 			lbl3[0] = new JLabel("C");
-			panel_5.add(lbl3[i]);
+			panelC.add(lbl3[i]);
 		}
 
-		panel_6 = new JPanel();
-		panel_6.setBounds(24, 185, 371, 35);
-		panel_2.add(panel_6);
-		panel_6.setLayout(new GridLayout(1, 0, 0, 0));
+		panelD = new JPanel();
+		panelD.setBounds(24, 185, 371, 35);
+		panel_2.add(panelD);
+		panelD.setLayout(new GridLayout(1, 0, 0, 0));
 		lbl4 = new JLabel[8];
 		for (int i = 0; i < 8; i++) {
 			lbl4[i] = new JLabel("");
 			lbl4[0] = new JLabel("D");
-			panel_6.add(lbl4[i]);
+			panelD.add(lbl4[i]);
 		}
 
-		panel_7 = new JPanel();
-		panel_7.setBounds(24, 230, 371, 35);
-		panel_2.add(panel_7);
-		panel_7.setLayout(new GridLayout(1, 0, 0, 0));
+		panelE = new JPanel();
+		panelE.setBounds(24, 230, 371, 35);
+		panel_2.add(panelE);
+		panelE.setLayout(new GridLayout(1, 0, 0, 0));
 
 		JPanel panel_8 = new JPanel();
 		panel_8.setBounds(10, 337, 353, 31);
@@ -276,7 +277,7 @@ public class PurchaseGUI extends JFrame {
 		for (int i = 0; i < 8; i++) {
 			lbl5[i] = new JLabel("");
 			lbl5[0] = new JLabel("E");
-			panel_7.add(lbl5[i]);
+			panelE.add(lbl5[i]);
 		}
 
 		btnReset_1.addActionListener(new ActionListener() {
@@ -435,7 +436,7 @@ public class PurchaseGUI extends JFrame {
 	}
 
 	// 토글 버튼에서 숫자를 추출하고, 그 숫자들을 리스트로 반환 메소드
-	private List<Integer> getSelectedNumbers() {
+	static List<Integer> getSelectedNumbers() {
 		// List<Integer> selectedNumbers = new ArrayList<>();
 		for (JToggleButton button : toggleButtons) {
 			if (button.isSelected()) {
