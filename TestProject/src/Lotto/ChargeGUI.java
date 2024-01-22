@@ -96,6 +96,7 @@ public class ChargeGUI extends JFrame {
 		setSize(500, 500);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setVisible(false);
+		setLocationRelativeTo(null);
 	}
 
 	private void extracted() {

@@ -12,7 +12,7 @@ import javax.swing.JLabel;
 public  class Customer {
 	// 금액저장
 	// 로또번호 저장
-	private int amount ;
+	static int amount ;
 	private int lottoNums;
 	public static Map<Integer,JLabel[]> lottoList = new HashMap<>();
 	public static int value;
@@ -21,6 +21,13 @@ public  class Customer {
 		super();
 		this.amount = amount;
 		this.lottoNums = lottoNums;
+		
+		JLabel[] j = new JLabel[] {new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel("")};
+		lottoList.put(1,j);
+		lottoList.put(2,j);
+		lottoList.put(3,j);
+		lottoList.put(4,j);
+		lottoList.put(5,j);
 	}
 
 
