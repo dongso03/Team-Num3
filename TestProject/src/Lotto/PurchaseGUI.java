@@ -32,6 +32,10 @@ import java.awt.Insets;
 import javax.swing.JPanel;
 
 import java.awt.GridLayout;
+import java.awt.Color;
+import javax.swing.JTextPane;
+import java.awt.SystemColor;
+import java.awt.Font;
 
 public class PurchaseGUI extends JFrame {
    private static List<JToggleButton> toggleButtons;
@@ -68,6 +72,7 @@ public class PurchaseGUI extends JFrame {
 
 
 public PurchaseGUI(FirstPage firstpage, ChargeGUI chargeGUI) {
+	getContentPane().setBackground(Color.WHITE);
       this.firstpage = firstpage;
       this.chargeGUI = chargeGUI;
       getContentPane().setLayout(null);
@@ -101,8 +106,6 @@ public PurchaseGUI(FirstPage firstpage, ChargeGUI chargeGUI) {
       map.put(3, lbl3);
       map.put(4, lbl4);
       map.put(5, lbl5);
-      
-      
 
       // 확인 버튼을 눌렀을 때 -------------------------------------------------
       checkBtn.addActionListener(new ActionListener() {
@@ -190,65 +193,69 @@ public PurchaseGUI(FirstPage firstpage, ChargeGUI chargeGUI) {
       // -----------------------------------------------------------------
       panel.add(checkBtn);
       JPanel panel_2 = new JPanel();
+      panel_2.setBackground(Color.WHITE);
       panel_2.setBounds(369, 10, 519, 293);
       getContentPane().add(panel_2);
 
       panel_2.setLayout(null);
 
       JLabel lblNewLabel_1 = new JLabel("선택번호 확인");
-      lblNewLabel_1.setBounds(164, 5, 114, 15);
+      lblNewLabel_1.setFont(new Font("굴림", Font.BOLD, 12));
+      lblNewLabel_1.setBackground(new Color(25, 25, 112));
+      lblNewLabel_1.setBounds(186, 5, 95, 35);
       panel_2.add(lblNewLabel_1);
 
       panelA = new JPanel();
-      panelA.setBounds(24, 50, 371, 35);
+      panelA.setBounds(54, 50, 341, 35);
       panel_2.add(panelA);
       panelA.setLayout(new GridLayout(1, 0, 0, 0));
       lbl1 = new JLabel[8];
       for (int i = 0; i < 8; i++) {
          lbl1[i] = new JLabel("");
-         lbl1[0] = new JLabel("A");
+         //lbl1[0] = new JLabel("A");
          panelA.add(lbl1[i]);
       }
 
       panelB = new JPanel();
-      panelB.setBounds(23, 95, 372, 35);
+      panelB.setBounds(54, 95, 341, 35);
       panel_2.add(panelB);
       panelB.setLayout(new GridLayout(1, 0, 0, 0));
       lbl2 = new JLabel[8];
       for (int i = 0; i < 8; i++) {
          lbl2[i] = new JLabel("");
-         lbl2[0] = new JLabel("B");
+         //lbl2[0] = new JLabel("B");
          panelB.add(lbl2[i]);
       }
 
       panelC = new JPanel();
-      panelC.setBounds(24, 140, 371, 35);
+      panelC.setBounds(54, 140, 341, 35);
       panel_2.add(panelC);
       panelC.setLayout(new GridLayout(1, 0, 0, 0));
       lbl3 = new JLabel[8];
       for (int i = 0; i < 8; i++) {
          lbl3[i] = new JLabel("");
-         lbl3[0] = new JLabel("C");
+         //lbl3[0] = new JLabel("C");
          panelC.add(lbl3[i]);
       }
 
       panelD = new JPanel();
-      panelD.setBounds(24, 185, 371, 35);
+      panelD.setBounds(54, 185, 341, 35);
       panel_2.add(panelD);
       panelD.setLayout(new GridLayout(1, 0, 0, 0));
       lbl4 = new JLabel[8];
       for (int i = 0; i < 8; i++) {
          lbl4[i] = new JLabel("");
-         lbl4[0] = new JLabel("D");
+         //lbl4[0] = new JLabel("D");
          panelD.add(lbl4[i]);
       }
 
       panelE = new JPanel();
-      panelE.setBounds(24, 230, 371, 35);
+      panelE.setBounds(54, 230, 341, 35);
       panel_2.add(panelE);
       panelE.setLayout(new GridLayout(1, 0, 0, 0));
 
       JPanel panel_8 = new JPanel();
+      panel_8.setBackground(Color.WHITE);
       panel_8.setBounds(10, 337, 353, 31);
       getContentPane().add(panel_8);
       panel_8.setLayout(null);
@@ -279,12 +286,32 @@ public PurchaseGUI(FirstPage firstpage, ChargeGUI chargeGUI) {
       JButton btnReset_5 = new JButton("초기화");
       btnReset_5.setBounds(407, 230, 89, 23);
       panel_2.add(btnReset_5);
-      lbl5 = new JLabel[8];
-      for (int i = 0; i < 8; i++) {
-         lbl5[i] = new JLabel("");
-         lbl5[0] = new JLabel("E");
-         panelE.add(lbl5[i]);
-      }
+      
+      JLabel lblNewLabel_12 = new JLabel("  A");
+      lblNewLabel_12.setFont(new Font("Segoe UI Black", Font.BOLD, 23));
+      lblNewLabel_12.setBounds(12, 50, 43, 35);
+      panel_2.add(lblNewLabel_12);
+      
+      JLabel lblNewLabel_13 = new JLabel("  B");
+      lblNewLabel_13.setFont(new Font("Segoe UI Black", Font.BOLD, 23));
+      lblNewLabel_13.setBounds(12, 95, 43, 35);
+      panel_2.add(lblNewLabel_13);
+      
+      JLabel lblNewLabel_14 = new JLabel("  C");
+      lblNewLabel_14.setFont(new Font("Segoe UI Black", Font.BOLD, 23));
+      lblNewLabel_14.setBounds(12, 140, 43, 35);
+      panel_2.add(lblNewLabel_14);
+      
+      JLabel lblNewLabel_15 = new JLabel("  D");
+      lblNewLabel_15.setFont(new Font("Segoe UI Black", Font.BOLD, 23));
+      lblNewLabel_15.setBounds(12, 185, 43, 35);
+      panel_2.add(lblNewLabel_15);
+      
+      JLabel lblNewLabel_16 = new JLabel("  E");
+      lblNewLabel_16.setFont(new Font("Segoe UI Black", Font.BOLD, 23));
+      lblNewLabel_16.setBounds(12, 230, 43, 35);
+      panel_2.add(lblNewLabel_16);
+    
 
       btnReset_1.addActionListener(new ActionListener() {
          @Override
@@ -343,7 +370,8 @@ public PurchaseGUI(FirstPage firstpage, ChargeGUI chargeGUI) {
       });
 
       JPanel panel_1 = new JPanel();
-      panel_1.setBounds(12, 10, 345, 317);
+      panel_1.setBackground(Color.WHITE);
+      panel_1.setBounds(18, 62, 345, 241);
       getContentPane().add(panel_1);
 
       // Random ran = new Random();
@@ -355,6 +383,7 @@ public PurchaseGUI(FirstPage firstpage, ChargeGUI chargeGUI) {
       sl_panel.putConstraint(SpringLayout.EAST, btnAuto, -34, SpringLayout.WEST, checkBtn);
 
       JPanel panel_9 = new JPanel();
+      panel_9.setBackground(Color.WHITE);
       panel_9.setBounds(385, 330, 447, 108);
       getContentPane().add(panel_9);
       panel_9.setLayout(null);
@@ -390,17 +419,9 @@ public PurchaseGUI(FirstPage firstpage, ChargeGUI chargeGUI) {
       btnNewButton_2.addActionListener(new ActionListener() {
          public void actionPerformed(ActionEvent e) {
             JDialog jdp = new ConfirmPurchaseDialog(PurchaseGUI.this, firstpage, chargeGUI);
-            
             jdp.setVisible(true);
          }
       });
-      
-      
-      
-      
-      
-      
-      
       btnNewButton_2.setBounds(338, 10, 97, 55);
       panel_9.add(btnNewButton_2);
 
@@ -426,6 +447,10 @@ public PurchaseGUI(FirstPage firstpage, ChargeGUI chargeGUI) {
       });
       btnNewButton_3.setBounds(338, 75, 97, 23);
       panel_9.add(btnNewButton_3);
+      
+      JLabel lblNewLabel_17 = new JLabel(" 번호 선택");
+      lblNewLabel_17.setBounds(156, 26, 207, 15);
+      getContentPane().add(lblNewLabel_17);
 
       btnReset.addActionListener(new ActionListener() {
          public void actionPerformed(ActionEvent e) {
@@ -549,6 +574,7 @@ public PurchaseGUI(FirstPage firstpage, ChargeGUI chargeGUI) {
          priceLbl.setText(String.valueOf(Integer.parseInt(priceLbl.getText()) - 1000));
       }
    }
+   
 
    public static void main(String[] args) {
       FirstPage firstpage = new FirstPage();
