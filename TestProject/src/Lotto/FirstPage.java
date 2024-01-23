@@ -116,12 +116,13 @@ public class FirstPage extends JFrame {
       getContentPane().add(panel);
       panel.setLayout(null);
 
-      btnPuchase = new JButton("구매하기");
+      btnPuchase = new JButton("");
+      btnPuchase.setIcon(new ImageIcon(FirstPage.class.getResource("/Image/구매2.jpg")));
       btnPuchase.setFont(new Font("굴림", Font.BOLD, 15));
-      btnPuchase.setBounds(54, 358, 98, 23);
-      btnPuchase.setContentAreaFilled(false);
-      btnPuchase.setBorderPainted(false);
-      btnPuchase.setFocusPainted(false);
+      btnPuchase.setBounds(12, 301, 203, 77);
+     // btnPuchase.setContentAreaFilled(false);
+      //btnPuchase.setBorderPainted(false);
+      //btnPuchase.setFocusPainted(false);
       panel.add(btnPuchase);
       springLayout.putConstraint(SpringLayout.SOUTH, btnPuchase, -10, SpringLayout.SOUTH, getContentPane());
       btnPuchase.addActionListener(new ActionListener() {
@@ -156,11 +157,6 @@ public class FirstPage extends JFrame {
       springLayout.putConstraint(SpringLayout.SOUTH, btnWinning, -21, SpringLayout.SOUTH, getContentPane());
       springLayout.putConstraint(SpringLayout.EAST, btnWinning, -105, SpringLayout.EAST, getContentPane());
       springLayout.putConstraint(SpringLayout.EAST, btnPuchase, -93, SpringLayout.WEST, btnWinning);
-      
-      JLabel lblNewLabel = new JLabel("New label");
-      lblNewLabel.setIcon(new ImageIcon(FirstPage.class.getResource("/Image/청룡.jpg")));
-      lblNewLabel.setBounds(-16, 0, 620, 399);
-      panel.add(lblNewLabel);
       btnCharge.addActionListener(new ActionListener() {
          public void actionPerformed(ActionEvent e) {
          }
