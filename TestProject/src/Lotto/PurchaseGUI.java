@@ -101,6 +101,8 @@ public PurchaseGUI(FirstPage firstpage, ChargeGUI chargeGUI) {
       map.put(3, lbl3);
       map.put(4, lbl4);
       map.put(5, lbl5);
+      
+      
 
       // 확인 버튼을 눌렀을 때 -------------------------------------------------
       checkBtn.addActionListener(new ActionListener() {
@@ -392,6 +394,13 @@ public PurchaseGUI(FirstPage firstpage, ChargeGUI chargeGUI) {
             jdp.setVisible(true);
          }
       });
+      
+      
+      
+      
+      
+      
+      
       btnNewButton_2.setBounds(338, 10, 97, 55);
       panel_9.add(btnNewButton_2);
 
