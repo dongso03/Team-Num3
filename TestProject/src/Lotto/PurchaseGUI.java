@@ -30,12 +30,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JPanel;
-
 import java.awt.GridLayout;
-import java.awt.Color;
-import javax.swing.JTextPane;
-import java.awt.SystemColor;
-import java.awt.Font;
 
 public class PurchaseGUI extends JFrame {
    private static List<JToggleButton> toggleButtons;
@@ -52,12 +47,12 @@ public class PurchaseGUI extends JFrame {
    private JLabel lblNewLabel_8;
    private JLabel lblNewLabel_9;
    public JLabel[] lbl1;
-    JLabel[] lbl2;
+   JLabel[] lbl2;
    public JLabel lblNewLabel_10;
-   private JLabel priceLbl;
-    JLabel[] lbl3;
-    JLabel[] lbl4;
-    JLabel[] lbl5;
+   public JLabel priceLbl;
+   JLabel[] lbl3;
+   JLabel[] lbl4;
+   JLabel[] lbl5;
    private JPanel panelA;
    private JPanel panelB;
    private JPanel panelC;
@@ -67,12 +62,10 @@ public class PurchaseGUI extends JFrame {
    int sumSelectedCombo = 0;
    private int price = 0;
    public Map<Integer, JLabel[]> map;
-  
+   
    public static int SelectedNumbers;
 
-
-public PurchaseGUI(FirstPage firstpage, ChargeGUI chargeGUI) {
-	getContentPane().setBackground(Color.WHITE);
+   public PurchaseGUI(FirstPage firstpage, ChargeGUI chargeGUI) {
       this.firstpage = firstpage;
       this.chargeGUI = chargeGUI;
       getContentPane().setLayout(null);
@@ -134,24 +127,24 @@ public PurchaseGUI(FirstPage firstpage, ChargeGUI chargeGUI) {
 
                   if (!btnAuto.isSelected()) { // 수동 버튼
                      for (JToggleButton button : toggleButtons) {
-                          if (button.isSelected()) {
-                             selectCount++;
-                          }
-                       }
-                    // if (selectCount == 0) {
-                        if (selectCount != 0) {
-                           selectedNumbers.addAll(getSelectedNumbers());
-                           Collections.sort(selectedNumbers);
-
-                           for (int j = 2; j < 8; j++) {
-                              currentLabel[1].setText("수동");
-                              currentLabel[j].setText(String.valueOf(selectedNumbers.get(j - 2)));
-                           }
-                        } else {
-                           JOptionPane.showMessageDialog(null, "숫자가 선택되지 않았습니다.");
+                        if (button.isSelected()) {
+                           selectCount++;
                         }
+                     }
+                     // if (selectCount == 0) {
+                     if (selectCount != 0) {
+                        selectedNumbers.addAll(getSelectedNumbers());
+                        Collections.sort(selectedNumbers);
 
-                    // }
+                        for (int j = 2; j < 8; j++) {
+                           currentLabel[1].setText("수동");
+                           currentLabel[j].setText(String.valueOf(selectedNumbers.get(j - 2)));
+                        }
+                     } else {
+                        JOptionPane.showMessageDialog(null, "숫자가 선택되지 않았습니다.");
+                     }
+
+                     // }
 
                   } else { // 자동 버튼 눌렀을 때
                      Set<Integer> nonDuplicateNumber = new HashSet<>();
@@ -173,9 +166,34 @@ public PurchaseGUI(FirstPage firstpage, ChargeGUI chargeGUI) {
 
                }
                // 확인 버튼을 누를때마다 값을 추가 하여 priceLbl에 출력
+               
                FirstPage.nowPrice += (comboBox.getSelectedIndex() + 1) * 1000;
                if (FirstPage.nowPrice > Customer.amount) {
-                  JOptionPane.showMessageDialog(null, "충전 금액을 초과하였습니다.");
+                  // 새로 작성한 코드 시작
+                  int result = JOptionPane.showOptionDialog(
+                           null,
+                           "충전 금액을 초과하였습니다.",
+                           "경고",
+                           JOptionPane.DEFAULT_OPTION,
+                           JOptionPane.WARNING_MESSAGE,
+                           null,
+                           new Object[]{"확인"}, // 버튼 텍스트를 "확인"으로 설정
+                           "확인" // 기본 선택 버튼
+                   );
+
+                   if (result == JOptionPane.OK_OPTION) {
+                       // "확인" 버튼을 눌렀을 때 수행할 동작
+                      for (int i = 1; i < 8; i++) {
+                        lbl1[i].setText("");
+                        lbl2[i].setText("");
+                        lbl3[i].setText("");
+                        lbl4[i].setText("");
+                        lbl5[i].setText("");
+                     }
+                      FirstPage.nowPrice = 0;
+                      sumSelectedCombo=0;
+                   }
+                  
                } else {
                   priceLbl.setText(String.valueOf(FirstPage.nowPrice));
                }
@@ -193,69 +211,65 @@ public PurchaseGUI(FirstPage firstpage, ChargeGUI chargeGUI) {
       // -----------------------------------------------------------------
       panel.add(checkBtn);
       JPanel panel_2 = new JPanel();
-      panel_2.setBackground(Color.WHITE);
       panel_2.setBounds(369, 10, 519, 293);
       getContentPane().add(panel_2);
 
       panel_2.setLayout(null);
 
       JLabel lblNewLabel_1 = new JLabel("선택번호 확인");
-      lblNewLabel_1.setFont(new Font("굴림", Font.BOLD, 12));
-      lblNewLabel_1.setBackground(new Color(25, 25, 112));
-      lblNewLabel_1.setBounds(186, 5, 95, 35);
+      lblNewLabel_1.setBounds(164, 5, 114, 15);
       panel_2.add(lblNewLabel_1);
 
       panelA = new JPanel();
-      panelA.setBounds(54, 50, 341, 35);
+      panelA.setBounds(24, 50, 371, 35);
       panel_2.add(panelA);
       panelA.setLayout(new GridLayout(1, 0, 0, 0));
       lbl1 = new JLabel[8];
       for (int i = 0; i < 8; i++) {
          lbl1[i] = new JLabel("");
-         //lbl1[0] = new JLabel("A");
+         lbl1[0] = new JLabel("A");
          panelA.add(lbl1[i]);
       }
 
       panelB = new JPanel();
-      panelB.setBounds(54, 95, 341, 35);
+      panelB.setBounds(23, 95, 372, 35);
       panel_2.add(panelB);
       panelB.setLayout(new GridLayout(1, 0, 0, 0));
       lbl2 = new JLabel[8];
       for (int i = 0; i < 8; i++) {
          lbl2[i] = new JLabel("");
-         //lbl2[0] = new JLabel("B");
+         lbl2[0] = new JLabel("B");
          panelB.add(lbl2[i]);
       }
 
       panelC = new JPanel();
-      panelC.setBounds(54, 140, 341, 35);
+      panelC.setBounds(24, 140, 371, 35);
       panel_2.add(panelC);
       panelC.setLayout(new GridLayout(1, 0, 0, 0));
       lbl3 = new JLabel[8];
       for (int i = 0; i < 8; i++) {
          lbl3[i] = new JLabel("");
-         //lbl3[0] = new JLabel("C");
+         lbl3[0] = new JLabel("C");
          panelC.add(lbl3[i]);
       }
 
       panelD = new JPanel();
-      panelD.setBounds(54, 185, 341, 35);
+      panelD.setBounds(24, 185, 371, 35);
       panel_2.add(panelD);
       panelD.setLayout(new GridLayout(1, 0, 0, 0));
       lbl4 = new JLabel[8];
       for (int i = 0; i < 8; i++) {
          lbl4[i] = new JLabel("");
-         //lbl4[0] = new JLabel("D");
+         lbl4[0] = new JLabel("D");
          panelD.add(lbl4[i]);
       }
 
       panelE = new JPanel();
-      panelE.setBounds(54, 230, 341, 35);
+      panelE.setBounds(24, 230, 371, 35);
       panel_2.add(panelE);
       panelE.setLayout(new GridLayout(1, 0, 0, 0));
 
       JPanel panel_8 = new JPanel();
-      panel_8.setBackground(Color.WHITE);
       panel_8.setBounds(10, 337, 353, 31);
       getContentPane().add(panel_8);
       panel_8.setLayout(null);
@@ -286,32 +300,12 @@ public PurchaseGUI(FirstPage firstpage, ChargeGUI chargeGUI) {
       JButton btnReset_5 = new JButton("초기화");
       btnReset_5.setBounds(407, 230, 89, 23);
       panel_2.add(btnReset_5);
-      
-      JLabel lblNewLabel_12 = new JLabel("  A");
-      lblNewLabel_12.setFont(new Font("Segoe UI Black", Font.BOLD, 23));
-      lblNewLabel_12.setBounds(12, 50, 43, 35);
-      panel_2.add(lblNewLabel_12);
-      
-      JLabel lblNewLabel_13 = new JLabel("  B");
-      lblNewLabel_13.setFont(new Font("Segoe UI Black", Font.BOLD, 23));
-      lblNewLabel_13.setBounds(12, 95, 43, 35);
-      panel_2.add(lblNewLabel_13);
-      
-      JLabel lblNewLabel_14 = new JLabel("  C");
-      lblNewLabel_14.setFont(new Font("Segoe UI Black", Font.BOLD, 23));
-      lblNewLabel_14.setBounds(12, 140, 43, 35);
-      panel_2.add(lblNewLabel_14);
-      
-      JLabel lblNewLabel_15 = new JLabel("  D");
-      lblNewLabel_15.setFont(new Font("Segoe UI Black", Font.BOLD, 23));
-      lblNewLabel_15.setBounds(12, 185, 43, 35);
-      panel_2.add(lblNewLabel_15);
-      
-      JLabel lblNewLabel_16 = new JLabel("  E");
-      lblNewLabel_16.setFont(new Font("Segoe UI Black", Font.BOLD, 23));
-      lblNewLabel_16.setBounds(12, 230, 43, 35);
-      panel_2.add(lblNewLabel_16);
-    
+      lbl5 = new JLabel[8];
+      for (int i = 0; i < 8; i++) {
+         lbl5[i] = new JLabel("");
+         lbl5[0] = new JLabel("E");
+         panelE.add(lbl5[i]);
+      }
 
       btnReset_1.addActionListener(new ActionListener() {
          @Override
@@ -370,8 +364,7 @@ public PurchaseGUI(FirstPage firstpage, ChargeGUI chargeGUI) {
       });
 
       JPanel panel_1 = new JPanel();
-      panel_1.setBackground(Color.WHITE);
-      panel_1.setBounds(18, 62, 345, 241);
+      panel_1.setBounds(12, 10, 345, 317);
       getContentPane().add(panel_1);
 
       // Random ran = new Random();
@@ -383,7 +376,6 @@ public PurchaseGUI(FirstPage firstpage, ChargeGUI chargeGUI) {
       sl_panel.putConstraint(SpringLayout.EAST, btnAuto, -34, SpringLayout.WEST, checkBtn);
 
       JPanel panel_9 = new JPanel();
-      panel_9.setBackground(Color.WHITE);
       panel_9.setBounds(385, 330, 447, 108);
       getContentPane().add(panel_9);
       panel_9.setLayout(null);
@@ -406,7 +398,6 @@ public PurchaseGUI(FirstPage firstpage, ChargeGUI chargeGUI) {
       });
       btnNewButton_1.setBounds(76, 6, 87, 23);
       panel_9.add(btnNewButton_1);
-
       lblNewLabel_10 = new JLabel("보유금액: " + FirstPage.customer.getAmount());
       lblNewLabel_10.setBounds(12, 46, 163, 15);
       panel_9.add(lblNewLabel_10);
@@ -419,6 +410,7 @@ public PurchaseGUI(FirstPage firstpage, ChargeGUI chargeGUI) {
       btnNewButton_2.addActionListener(new ActionListener() {
          public void actionPerformed(ActionEvent e) {
             JDialog jdp = new ConfirmPurchaseDialog(PurchaseGUI.this, firstpage, chargeGUI);
+
             jdp.setVisible(true);
          }
       });
@@ -435,7 +427,7 @@ public PurchaseGUI(FirstPage firstpage, ChargeGUI chargeGUI) {
       JButton btnNewButton_3 = new JButton("돌아가기");
       btnNewButton_3.addActionListener(new ActionListener() {
          public void actionPerformed(ActionEvent arg0) {
-           
+
             firstpage.setVisible(true);
             dispose();
 
@@ -447,10 +439,6 @@ public PurchaseGUI(FirstPage firstpage, ChargeGUI chargeGUI) {
       });
       btnNewButton_3.setBounds(338, 75, 97, 23);
       panel_9.add(btnNewButton_3);
-      
-      JLabel lblNewLabel_17 = new JLabel(" 번호 선택");
-      lblNewLabel_17.setBounds(156, 26, 207, 15);
-      getContentPane().add(lblNewLabel_17);
 
       btnReset.addActionListener(new ActionListener() {
          public void actionPerformed(ActionEvent e) {
@@ -477,7 +465,7 @@ public PurchaseGUI(FirstPage firstpage, ChargeGUI chargeGUI) {
 
    // 토글 버튼에서 숫자를 추출하고, 그 숫자들을 리스트로 반환 메소드
    static List<Integer> getSelectedNumbers() {
-       List<Integer> selectedNumbers00 = new ArrayList<>();
+      List<Integer> selectedNumbers00 = new ArrayList<>();
       for (JToggleButton button : toggleButtons) {
          if (button.isSelected()) {
             int num = Integer.parseInt(button.getText());
@@ -555,9 +543,9 @@ public PurchaseGUI(FirstPage firstpage, ChargeGUI chargeGUI) {
       setVisible(false);
       setLocationRelativeTo(null);
    }
-   
+
    public Map<Integer, JLabel[]> getMap() {
-       return map;
+      return map;
    }
 
    public void setFirstPage(FirstPage firstPage) {
@@ -574,7 +562,6 @@ public PurchaseGUI(FirstPage firstpage, ChargeGUI chargeGUI) {
          priceLbl.setText(String.valueOf(Integer.parseInt(priceLbl.getText()) - 1000));
       }
    }
-   
 
    public static void main(String[] args) {
       FirstPage firstpage = new FirstPage();

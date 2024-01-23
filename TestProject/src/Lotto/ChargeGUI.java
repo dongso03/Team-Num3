@@ -87,6 +87,7 @@ public class ChargeGUI extends JFrame {
 				lblNewLabel.setText("(현재 잔액: " + (FirstPage.customer.getAmount()) +"원)");
 				lblNewLabel.setText("(현재 잔액: " + (FirstPage.customer.getAmount() -FirstPage.nowPrice) +"원)");
 
+				lblNewLabel.setText("(현재 잔액: " + (FirstPage.customer.getAmount() - FirstPage.nowPrice) +"원)");
 				
         		
         	} catch (NumberFormatException e) {
