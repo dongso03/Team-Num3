@@ -140,9 +140,9 @@ public class ChargeGUI extends JFrame {
 		getContentPane().add(btnReset);
 		
 		lblNewLabel = new JLabel("(현재 잔액: " + FirstPage.customer.getAmount() +"원)");
-		springLayout.putConstraint(SpringLayout.WEST, lblNewLabel, 163, SpringLayout.WEST, getContentPane());
-		springLayout.putConstraint(SpringLayout.SOUTH, lblNewLabel, -52, SpringLayout.NORTH, btnReset);
-		springLayout.putConstraint(SpringLayout.EAST, lblNewLabel, -205, SpringLayout.EAST, getContentPane());
+		springLayout.putConstraint(SpringLayout.NORTH, lblNewLabel, 21, SpringLayout.SOUTH, btn);
+		springLayout.putConstraint(SpringLayout.WEST, lblNewLabel, 148, SpringLayout.WEST, getContentPane());
+		springLayout.putConstraint(SpringLayout.EAST, lblNewLabel, -124, SpringLayout.EAST, getContentPane());
 		getContentPane().add(lblNewLabel);
 		
 		Panel panel = new Panel();

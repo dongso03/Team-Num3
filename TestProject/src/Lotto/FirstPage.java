@@ -12,6 +12,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -27,13 +28,20 @@ public class FirstPage extends JFrame {
    public static Customer customer;
    private JPanel panel;
    static int nowPrice = 0;
+   List<Integer> uniqueList;
+   int[] uniqueArray;
+   
+   
    public FirstPage() {
       customer = new Customer(1000, 1);
       chargGUI = new ChargeGUI(this);
       winningGUI = new WinningGUI(this);
       purchaseGUI = new PurchaseGUI(this, chargGUI);
       ImageIcon icon = new ImageIcon("Image/캡처.PNG");
-
+      uniqueList = winningGUI.uniqueList;
+      uniqueArray = uniqueList.stream().mapToInt(Integer::intValue).toArray();
+      
+      
       extracted();
       btnCharge.addActionListener(new ActionListener() {
          @Override
@@ -54,29 +62,89 @@ public class FirstPage extends JFrame {
          }
       });
       btnWinning.addActionListener(new ActionListener() {
-         @Override
-         public void actionPerformed(ActionEvent e) {
-            
-  
-            for(int i= 0; i<8;i++) {
-            winningGUI.pirntNumbersA.add(customer.lottoList.get(1)[i]);
-            }
-            for(int i= 0; i<8;i++) {
-            	winningGUI.pirntNumbersB.add(customer.lottoList.get(2)[i]);
-            }
-            for(int i= 0; i<8;i++) {
-            	winningGUI.pirntNumbersC.add(customer.lottoList.get(3)[i]);
-            }
-            for(int i= 0; i<8;i++) {
-            	winningGUI.pirntNumbersD.add(customer.lottoList.get(4)[i]);
-            }
-            for(int i= 0; i<8;i++) {
-            	winningGUI.pirntNumbersE.add(customer.lottoList.get(5)[i]);
-            }
-            setVisible(false);
-            winningGUI.setVisible(true);
-         }
-      });
+          @Override
+          public void actionPerformed(ActionEvent e) {
+
+             for (int i = 0; i < 8; i++) {
+                winningGUI.pirntNumbersA.add(customer.lottoList.get(1)[i]);
+             }
+             for (int i = 0; i < 8; i++) {
+                winningGUI.pirntNumbersB.add(customer.lottoList.get(2)[i]);
+             }
+             for (int i = 0; i < 8; i++) {
+                winningGUI.pirntNumbersC.add(customer.lottoList.get(3)[i]);
+             }
+             for (int i = 0; i < 8; i++) {
+                winningGUI.pirntNumbersD.add(customer.lottoList.get(4)[i]);
+             }
+             for (int i = 0; i < 8; i++) {
+                winningGUI.pirntNumbersE.add(customer.lottoList.get(5)[i]);
+             }
+             
+             // 각 숫자를 문자열로 변환하여 일치 여부 체크하여 당첨, 낙첨 확인하는 부분
+             for(int a = 1; a< 6; a++) {
+                // 최소 6개의 일치 여부를 체크하는 변수 matchingCount
+                int matchingCount = 0;
+                // 사용자가 선택한  1장을 배열에 집어 넣음
+                JLabel[] lottoListLabels = customer.lottoList.get(a);
+                for (int i = 0; i < 7; i++) { // 복권 당첨 숫자 7개
+                   for (int j = 2; j < 8; j++) { // 사용자가 선택한 숫자들을 6개
+                      
+                      String uniqueNumber = String.valueOf(uniqueArray[i]);
+                      String labelNumber = lottoListLabels[j].getText();
+                      
+                      if (uniqueNumber.equals(labelNumber)) { // 복권당첨 숫자와 사용자가 선택한 숫자가 같은 게 있다면 매칭카운트 1증가
+                         matchingCount++;
+                      }
+                   }
+                }
+                switch(a) {
+                case 1:
+                   // 최소 6개 이상의 일치 여부 확인
+                   if (matchingCount >= 6) {
+                      winningGUI.lblNewLabel.setText("당첨");
+                   } else {
+                      winningGUI.lblNewLabel.setText("낙첨");
+                   }
+                   break;
+                case 2:
+                   if (matchingCount >= 6) {
+                      winningGUI.lblNewLabel_1.setText("당첨");
+                   } else {
+                      winningGUI.lblNewLabel_1.setText("낙첨");
+                   }
+                   
+                   break;
+                case 3:
+                   if (matchingCount >= 6) {
+                      winningGUI.lblNewLabel_2.setText("당첨");
+                   } else {
+                      winningGUI.lblNewLabel_2.setText("낙첨");
+                   }
+                   
+                   break;
+                case 4:
+                   if (matchingCount >= 6) {
+                      winningGUI.lblNewLabel_6.setText("당첨");
+                   } else {
+                      winningGUI.lblNewLabel_6.setText("낙첨");
+                   }
+                   
+                   break;
+                case 5:
+                   if (matchingCount >= 6) {
+                      winningGUI.lblNewLabel_7.setText("당첨");
+                   } else {
+                      winningGUI.lblNewLabel_7.setText("낙첨");
+                   }
+                   
+                   break;
+                }
+             }
+             setVisible(false);
+             winningGUI.setVisible(true);
+          }
+       });
 
       showGUI();
    }
