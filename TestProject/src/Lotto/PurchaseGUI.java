@@ -30,9 +30,6 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JPanel;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
 import java.awt.GridLayout;
 
 public class PurchaseGUI extends JFrame {
@@ -131,6 +128,12 @@ public PurchaseGUI(FirstPage firstpage, ChargeGUI chargeGUI) {
 
                   if (!btnAuto.isSelected()) { // 수동 버튼
                      for (JToggleButton button : toggleButtons) {
+                          if (button.isSelected()) {
+                             selectCount++;
+                          }
+                       }
+                    // if (selectCount == 0) {
+                	  for (JToggleButton button : toggleButtons) {
                           if (button.isSelected()) {
                              selectCount++;
                           }
