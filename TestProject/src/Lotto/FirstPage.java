@@ -57,16 +57,7 @@ public class FirstPage extends JFrame {
          @Override
          public void actionPerformed(ActionEvent e) {
             
-    //       System.out.println(purchaseGUI.getMap()); 
-//            for(int i= 0; i< 8;i++) {
-//            winningGUI.lblAs[i].setText("하이");
-//            }
-    //        for(int i= 0; i< 8;i++) {
-           // winningGUI.lblB.setText("하이");
-//            }
-//            for(int i= 0; i<8;i++) {
-//            winningGUI.lblAs[i].setText(Arrays.toString(purchaseGUI.lbl1));
-//            }
+  
             for(int i= 0; i<8;i++) {
             winningGUI.pirntNumbersA.add(customer.lottoList.get(1)[i]);
             }
@@ -91,7 +82,7 @@ public class FirstPage extends JFrame {
    }
 
    private void showGUI() {
-      setSize(597, 438);
+      setSize(793, 533);
       setDefaultCloseOperation(EXIT_ON_CLOSE);
       setVisible(true);
       setLocationRelativeTo(null);
@@ -111,7 +102,7 @@ public class FirstPage extends JFrame {
 
       btnPuchase = new JButton("구매하기");
       btnPuchase.setFont(new Font("굴림", Font.BOLD, 15));
-      btnPuchase.setBounds(54, 358, 98, 23);
+      btnPuchase.setBounds(100, 415, 98, 23);
       btnPuchase.setContentAreaFilled(false);
       btnPuchase.setBorderPainted(false);
       btnPuchase.setFocusPainted(false);
@@ -126,7 +117,7 @@ public class FirstPage extends JFrame {
 
       btnCharge = new JButton("충전하기");
       btnCharge.setFont(new Font("굴림", Font.BOLD, 15));
-      btnCharge.setBounds(253, 360, 98, 18);
+      btnCharge.setBounds(337, 417, 98, 18);
       btnCharge.setContentAreaFilled(false);
       btnCharge.setBorderPainted(false);
       btnCharge.setFocusPainted(false);
@@ -142,7 +133,7 @@ public class FirstPage extends JFrame {
       btnWinning.setContentAreaFilled(false);
       btnWinning.setBorderPainted(false);
       btnWinning.setFocusPainted(false);
-      btnWinning.setBounds(417, 358, 111, 23);
+      btnWinning.setBounds(549, 415, 111, 23);
       panel.add(btnWinning);
       springLayout.putConstraint(SpringLayout.WEST, btnWinning, 529, SpringLayout.WEST, getContentPane());
       springLayout.putConstraint(SpringLayout.NORTH, btnWinning, 233, SpringLayout.NORTH, getContentPane());
@@ -151,8 +142,8 @@ public class FirstPage extends JFrame {
       springLayout.putConstraint(SpringLayout.EAST, btnPuchase, -93, SpringLayout.WEST, btnWinning);
       
       JLabel lblNewLabel = new JLabel("New label");
-      lblNewLabel.setIcon(new ImageIcon(FirstPage.class.getResource("/Image/청룡.jpg")));
-      lblNewLabel.setBounds(-16, 0, 620, 399);
+      lblNewLabel.setIcon(new ImageIcon(FirstPage.class.getResource("/Image/sfdasfdasfda.jpg")));
+      lblNewLabel.setBounds(-184, -11, 1361, 624);
       panel.add(lblNewLabel);
       btnCharge.addActionListener(new ActionListener() {
          public void actionPerformed(ActionEvent e) {

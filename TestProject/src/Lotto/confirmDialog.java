@@ -10,6 +10,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SpringLayout;
+import java.awt.Color;
+import java.awt.Font;
 
 public class confirmDialog extends JDialog {
 
@@ -29,18 +31,21 @@ public class confirmDialog extends JDialog {
       //customer = new Customer();
       JPanel pnl = new JPanel();
       JLabel lblcon = new JLabel("정말 충전하시겠습니까?");
+      lblcon.setFont(new Font("궁서체", Font.ITALIC, 16));
       JLabel lblcon2 = new JLabel("");
       JButton btn2 = new JButton("확인");
+      btn2.setBackground(Color.BLUE);
       JButton btn3 = new JButton("취소");
+      btn3.setBackground(Color.RED);
       SpringLayout sl_pnl = new SpringLayout();
-      sl_pnl.putConstraint(SpringLayout.NORTH, btn2, 0, SpringLayout.NORTH, btn3);
-      sl_pnl.putConstraint(SpringLayout.WEST, btn2, 0, SpringLayout.WEST, lblcon);
-      sl_pnl.putConstraint(SpringLayout.NORTH, btn3, 37, SpringLayout.SOUTH, lblcon);
-      sl_pnl.putConstraint(SpringLayout.EAST, btn3, 0, SpringLayout.EAST, lblcon2);
+      sl_pnl.putConstraint(SpringLayout.NORTH, btn2, 28, SpringLayout.SOUTH, lblcon);
+      sl_pnl.putConstraint(SpringLayout.WEST, lblcon, 0, SpringLayout.WEST, btn2);
+      sl_pnl.putConstraint(SpringLayout.SOUTH, lblcon, -6, SpringLayout.NORTH, lblcon2);
+      sl_pnl.putConstraint(SpringLayout.NORTH, btn3, 0, SpringLayout.NORTH, btn2);
+      sl_pnl.putConstraint(SpringLayout.WEST, btn3, 51, SpringLayout.EAST, btn2);
+      sl_pnl.putConstraint(SpringLayout.WEST, btn2, 47, SpringLayout.WEST, pnl);
       sl_pnl.putConstraint(SpringLayout.NORTH, lblcon2, 98, SpringLayout.NORTH, pnl);
       sl_pnl.putConstraint(SpringLayout.EAST, lblcon2, -62, SpringLayout.EAST, pnl);
-      sl_pnl.putConstraint(SpringLayout.WEST, lblcon, 71, SpringLayout.WEST, pnl);
-      sl_pnl.putConstraint(SpringLayout.SOUTH, lblcon, -15, SpringLayout.NORTH, lblcon2);
       
       
       btn2.addActionListener(new ActionListener() {

@@ -36,6 +36,7 @@ public class WinningGUI extends JFrame {
 
    private PurchaseGUI purchaseGUI;
 public JPanel pnl;
+private List<Integer> uniqueList;
    
    public WinningGUI(FirstPage firstPage) {
       
@@ -114,7 +115,7 @@ public JPanel pnl;
       
       // List<Integer> uniqueList = new ArrayList<>(uniqueNumbers);
       Set<Integer> resultList = new TreeSet<>(uniqueNumbers);
-      List<Integer> uniqueList = new ArrayList<>(resultList);
+      uniqueList = new ArrayList<>(resultList);
       result_1.setText(String.valueOf(uniqueList.get(0)));
       result_2.setText(String.valueOf(uniqueList.get(1)));
       result_3.setText(String.valueOf(uniqueList.get(2)));
@@ -191,35 +192,34 @@ public JPanel pnl;
       
       JLabel lblNewLabel = new JLabel("");
       pirntResultA.add(lblNewLabel);
-      
-      
 
       JPanel pirntResultB = new JPanel();
       pirntResultB.setBounds(359, 239, 92, 34);
       pnl.add(pirntResultB);
       
-      JLabel lblNewLabel_1 = new JLabel("New label");
+      JLabel lblNewLabel_1 = new JLabel("");
       pirntResultB.add(lblNewLabel_1);
+      
 
       JPanel pirntResultC = new JPanel();
       pirntResultC.setBounds(359, 283, 92, 34);
       pnl.add(pirntResultC);
       
-      JLabel lblNewLabel_2 = new JLabel("New label");
+      JLabel lblNewLabel_2 = new JLabel("");
       pirntResultC.add(lblNewLabel_2);
 
       JPanel pirntResultD = new JPanel();
       pirntResultD.setBounds(359, 326, 92, 34);
       pnl.add(pirntResultD);
       
-      JLabel lblNewLabel_6 = new JLabel("New label");
+      JLabel lblNewLabel_6 = new JLabel("");
       pirntResultD.add(lblNewLabel_6);
 
       JPanel pirntResultE = new JPanel();
       pirntResultE.setBounds(359, 370, 92, 34);
       pnl.add(pirntResultE);
       
-      JLabel lblNewLabel_7 = new JLabel("New label");
+      JLabel lblNewLabel_7 = new JLabel("");
       pirntResultE.add(lblNewLabel_7);
 
       showGUI();

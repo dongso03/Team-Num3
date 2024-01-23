@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Map;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
+import java.awt.Font;
 
 public class ConfirmPurchaseDialog extends JDialog {
 	private PurchaseGUI purchaseGUI;
@@ -36,7 +38,7 @@ public class ConfirmPurchaseDialog extends JDialog {
 				purchaseGUI.setVisible(false);
 				chargGUI.lblNewLabel.setText("(현재 잔액: " + (FirstPage.customer.getAmount() - FirstPage.nowPrice) + "원)");
 
-				//purchaseGUI.
+				
 				
 			}
 		});
@@ -59,19 +61,22 @@ public class ConfirmPurchaseDialog extends JDialog {
 
 	private void extracted() {
 		btnOkay = new JButton("확인");
+		btnOkay.setBackground(Color.BLUE);
 		btnOkay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnOkay.setBounds(31, 115, 97, 23);
+		btnOkay.setBounds(27, 140, 97, 23);
 		getContentPane().add(btnOkay);
 
 		btnNo = new JButton("취소");
-		btnNo.setBounds(140, 115, 97, 23);
+		btnNo.setBackground(Color.RED);
+		btnNo.setBounds(153, 140, 97, 23);
 		getContentPane().add(btnNo);
 
 		JLabel lblNewLabel = new JLabel("정말 구매하시겠습니까?");
-		lblNewLabel.setBounds(68, 68, 131, 15);
+		lblNewLabel.setFont(new Font("궁서체", Font.ITALIC, 16));
+		lblNewLabel.setBounds(50, 88, 187, 15);
 		getContentPane().add(lblNewLabel);
 	}
 }
