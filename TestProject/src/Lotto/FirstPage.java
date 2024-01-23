@@ -40,6 +40,7 @@ public class FirstPage extends JFrame {
          public void actionPerformed(ActionEvent e) {
             setVisible(false);
             chargGUI.setVisible(true);
+            //chargGUI.lblNewLabel.setText(text);
             
          }
       });
