@@ -70,32 +70,17 @@ public class FirstPage extends JFrame {
             winningGUI.pirntNumbersA.add(customer.lottoList.get(1)[i]);
             }
             for(int i= 0; i<8;i++) {
-               winningGUI.pirntNumbersB.add(customer.lottoList.get(2)[i]);
+            	winningGUI.pirntNumbersB.add(customer.lottoList.get(2)[i]);
             }
             for(int i= 0; i<8;i++) {
-               winningGUI.pirntNumbersC.add(customer.lottoList.get(3)[i]);
+            	winningGUI.pirntNumbersC.add(customer.lottoList.get(3)[i]);
             }
             for(int i= 0; i<8;i++) {
-               winningGUI.pirntNumbersD.add(customer.lottoList.get(4)[i]);
+            	winningGUI.pirntNumbersD.add(customer.lottoList.get(4)[i]);
             }
             for(int i= 0; i<8;i++) {
-               winningGUI.pirntNumbersE.add(customer.lottoList.get(5)[i]);
+            	winningGUI.pirntNumbersE.add(customer.lottoList.get(5)[i]);
             }
-//            for(int i= 0; i<8;i++) {
-//               winningGUI.pirntNumbersA.add(purchaseGUI.lbl1[i]);
-//            }
-//            for(int i= 0; i<8;i++) {
-//                winningGUI.pirntNumbersB.add(purchaseGUI.lbl2[i]);
-//                }
-//            for(int i= 0; i<8;i++) {
-//                winningGUI.pirntNumbersC.add(purchaseGUI.lbl3[i]);
-//                }
-//            for(int i= 0; i<8;i++) {
-//                winningGUI.pirntNumbersD.add(purchaseGUI.lbl4[i]);
-//                }
-//            for(int i= 0; i<8;i++) {
-//                winningGUI.pirntNumbersE.add(purchaseGUI.lbl5[i]);
-//                }
             setVisible(false);
             winningGUI.setVisible(true);
          }
