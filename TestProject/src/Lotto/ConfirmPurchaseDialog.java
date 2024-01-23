@@ -16,7 +16,7 @@ public class ConfirmPurchaseDialog extends JDialog {
 	private JButton btnOkay;
 	private JButton btnNo;
 	private FirstPage firstPage;
-	private WinningGUI winningGUI;
+	
 	
 	public ConfirmPurchaseDialog(PurchaseGUI purchaseGUI,FirstPage firstPage) {
 		super(purchaseGUI);
@@ -29,12 +29,11 @@ public class ConfirmPurchaseDialog extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Map<Integer, JLabel[]> map = purchaseGUI.getMap();
-				//System.out.println(map);
                 FirstPage.customer.lottoList = map;
-                
                 dispose();
 			    firstPage.setVisible(true); 
 			    purchaseGUI.setVisible(false);
+				  
 			        dispose();
 			    }
 			});
