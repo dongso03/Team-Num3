@@ -63,7 +63,15 @@ public class PurchaseGUI extends JFrame {
    private int price = 0;
    public Map<Integer, JLabel[]> map;
    static int nowPrice = 0;
-   public static int SelectedNumbers;
+   public static int getNowPrice() {
+	return nowPrice;
+}
+
+public static void setNowPrice(int nowPrice) {
+	PurchaseGUI.nowPrice = nowPrice;
+}
+
+public static int SelectedNumbers;
 
 
 public PurchaseGUI(FirstPage firstpage, ChargeGUI chargeGUI) {

@@ -83,7 +83,7 @@ public class ChargeGUI extends JFrame {
         		JDialog jd = new confirmDialog(ChargeGUI.this);
 				jd.setVisible(true);
 				//구매확인하고 값 저장해서 ..... ***********수정해야함**********
-				lblNewLabel.setText("(현재 잔액: " + (FirstPage.customer.getAmount() - PurchaseGUI.nowPrice) +"원)");
+				lblNewLabel.setText("(현재 잔액: " + (FirstPage.customer.getAmount()) +"원)");
 				
         		
         	} catch (NumberFormatException e) {
