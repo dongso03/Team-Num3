@@ -102,6 +102,8 @@ public class PurchaseGUI extends JFrame {
       map.put(3, lbl3);
       map.put(4, lbl4);
       map.put(5, lbl5);
+      
+      
 
       // 확인 버튼을 눌렀을 때 -------------------------------------------------
       checkBtn.addActionListener(new ActionListener() {
@@ -212,6 +214,11 @@ public class PurchaseGUI extends JFrame {
          }
       });
       // -----------------------------------------------------------------
+      if(FirstPage.nowPrice<0) {
+    	  FirstPage.nowPrice = 0;
+      }else if(FirstPage.nowPrice > 5000) {
+    	  FirstPage.nowPrice = 5000;
+      }
       panel.add(checkBtn);
       JPanel panel_2 = new JPanel();
       panel_2.setBounds(369, 10, 519, 293);
@@ -326,7 +333,7 @@ public class PurchaseGUI extends JFrame {
       btnReset_2.addActionListener(new ActionListener() {
          @Override
          public void actionPerformed(ActionEvent e) {
-            for (int i = 2; i < 8; i++) {
+            for (int i = 1; i < 8; i++) {
                lbl2[i].setText(lbl3[i].getText());
                lbl3[i].setText(lbl4[i].getText());
                lbl4[i].setText(lbl5[i].getText());
@@ -338,7 +345,7 @@ public class PurchaseGUI extends JFrame {
       btnReset_3.addActionListener(new ActionListener() {
          @Override
          public void actionPerformed(ActionEvent e) {
-            for (int i = 2; i < 8; i++) {
+            for (int i = 1; i < 8; i++) {
                lbl3[i].setText(lbl4[i].getText());
                lbl4[i].setText(lbl5[i].getText());
                lbl5[i].setText("");
@@ -349,7 +356,7 @@ public class PurchaseGUI extends JFrame {
       btnReset_4.addActionListener(new ActionListener() {
          @Override
          public void actionPerformed(ActionEvent e) {
-            for (int i = 2; i < 8; i++) {
+            for (int i = 1; i < 8; i++) {
                lbl4[i].setText(lbl5[i].getText());
                lbl5[i].setText("");
             }
@@ -359,7 +366,7 @@ public class PurchaseGUI extends JFrame {
       btnReset_5.addActionListener(new ActionListener() {
          @Override
          public void actionPerformed(ActionEvent e) {
-            for (int i = 2; i < 8; i++) {
+            for (int i = 1; i < 8; i++) {
                lbl5[i].setText("");
             }
             resetModify();
