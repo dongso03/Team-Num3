@@ -166,10 +166,6 @@ public class WinningGUI extends JFrame {
 		pirntNumbersA = new JPanel();
 		pirntNumbersA.setBounds(40, 195, 283, 34);
 		pnl.add(pirntNumbersA);
-//      for(int i =0; i<8;i++) {
-//      pirntNumbersA.add(lblAs[i]);
-//      System.out.println(lblAs[i]);
-//      }
 
 		pirntNumbersB = new JPanel();
 		pirntNumbersB.setBounds(40, 239, 283, 34);
