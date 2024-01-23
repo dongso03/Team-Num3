@@ -26,7 +26,7 @@ public class FirstPage extends JFrame {
    private WinningGUI winningGUI;
    public static Customer customer;
    private JPanel panel;
-
+   static int nowPrice = 0;
    public FirstPage() {
       customer = new Customer(1000, 1);
       chargGUI = new ChargeGUI(this);
@@ -49,7 +49,7 @@ public class FirstPage extends JFrame {
          public void actionPerformed(ActionEvent e) {
             setVisible(false);
             purchaseGUI.setVisible(true);
-            purchaseGUI.lblNewLabel_10.setText("(현재 잔액: " + (FirstPage.customer.getAmount() - PurchaseGUI.nowPrice) + "원)");
+            purchaseGUI.lblNewLabel_10.setText("(현재 잔액: " + (FirstPage.customer.getAmount() - nowPrice) + "원)");
          }
       });
       btnWinning.addActionListener(new ActionListener() {

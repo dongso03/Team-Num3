@@ -30,9 +30,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JPanel;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
+
 import java.awt.GridLayout;
 
 public class PurchaseGUI extends JFrame {
@@ -65,7 +63,7 @@ public class PurchaseGUI extends JFrame {
    int sumSelectedCombo = 0;
    private int price = 0;
    public Map<Integer, JLabel[]> map;
-   static int nowPrice = 0;
+  
    public static int SelectedNumbers;
 
 
@@ -170,11 +168,11 @@ public PurchaseGUI(FirstPage firstpage, ChargeGUI chargeGUI) {
 
                }
                // 확인 버튼을 누를때마다 값을 추가 하여 priceLbl에 출력
-               nowPrice += (comboBox.getSelectedIndex() + 1) * 1000;
-               if (nowPrice > Customer.amount) {
+               FirstPage.nowPrice += (comboBox.getSelectedIndex() + 1) * 1000;
+               if (FirstPage.nowPrice > Customer.amount) {
                   JOptionPane.showMessageDialog(null, "충전 금액을 초과하였습니다.");
                } else {
-                  priceLbl.setText(String.valueOf(nowPrice));
+                  priceLbl.setText(String.valueOf(FirstPage.nowPrice));
                }
 
             } else {
@@ -389,7 +387,7 @@ public PurchaseGUI(FirstPage firstpage, ChargeGUI chargeGUI) {
       JButton btnNewButton_2 = new JButton("구매");
       btnNewButton_2.addActionListener(new ActionListener() {
          public void actionPerformed(ActionEvent e) {
-            JDialog jdp = new ConfirmPurchaseDialog(PurchaseGUI.this, firstpage);
+            JDialog jdp = new ConfirmPurchaseDialog(PurchaseGUI.this, firstpage, chargeGUI);
             
             jdp.setVisible(true);
          }
@@ -398,7 +396,7 @@ public PurchaseGUI(FirstPage firstpage, ChargeGUI chargeGUI) {
       panel_9.add(btnNewButton_2);
 
       priceLbl = new JLabel("");
-      if (nowPrice <= 0) {
+      if (FirstPage.nowPrice <= 0) {
          priceLbl.setText("0");
       }
       priceLbl.setBounds(219, 46, 57, 15);
@@ -534,9 +532,9 @@ public PurchaseGUI(FirstPage firstpage, ChargeGUI chargeGUI) {
 
    public void resetModify() {
       sumSelectedCombo--;
-      nowPrice -= 1000;
-      if (nowPrice <= 0) {
-         nowPrice = 0;
+      FirstPage.nowPrice -= 1000;
+      if (FirstPage.nowPrice <= 0) {
+    	  FirstPage.nowPrice = 0;
          priceLbl.setText("0");
       } else {
          priceLbl.setText(String.valueOf(Integer.parseInt(priceLbl.getText()) - 1000));
