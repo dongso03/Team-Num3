@@ -161,41 +161,28 @@ public JPanel pnl;
       pnl.add(btnNewButton_1);
 
       pirntNumbersA = new JPanel();
-      pirntNumbersA.setBounds(64, 195, 283, 34);
+      pirntNumbersA.setBounds(40, 195, 283, 34);
       pnl.add(pirntNumbersA);
       for(int i =0; i<8;i++) {
       pirntNumbersA.add(lblAs[i]);
       System.out.println(lblAs[i]);
       }
-   //   lblAs = new JLabel[8];
 
-      // "A"라벨을 패널에 추가
-//      lblAs[0] = new JLabel("A");
-//      pirntNumbersA.add(lblAs[0]);
-//      System.out.println(FirstPage.customer.lottoList.get(1));
-//      
-//      if (FirstPage.customer.lottoList.containsKey(1)) {
-//          lblAs = FirstPage.customer.lottoList.get(1);
-//          
-//          for (int i = 1; i < lblAs.length; i++) {
-//              pirntNumbersA.add(lblAs[i]);
-//          }
-//      }
 
       pirntNumbersB = new JPanel();
-      pirntNumbersB.setBounds(64, 239, 283, 34);
+      pirntNumbersB.setBounds(40, 239, 283, 34);
       pnl.add(pirntNumbersB);
 
       pirntNumbersC = new JPanel();
-      pirntNumbersC.setBounds(64, 283, 283, 34);
+      pirntNumbersC.setBounds(40, 283, 283, 34);
       pnl.add(pirntNumbersC);
 
       pirntNumbersD = new JPanel();
-      pirntNumbersD.setBounds(64, 326, 283, 34);
+      pirntNumbersD.setBounds(40, 326, 283, 34);
       pnl.add(pirntNumbersD);
 
       pirntNumbersE = new JPanel();
-      pirntNumbersE.setBounds(64, 370, 283, 34);
+      pirntNumbersE.setBounds(40, 370, 283, 34);
       pnl.add(pirntNumbersE);
 
       JPanel pirntResultA = new JPanel();

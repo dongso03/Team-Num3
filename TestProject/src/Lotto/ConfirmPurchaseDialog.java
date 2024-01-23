@@ -6,7 +6,6 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.awt.Container;
@@ -17,41 +16,20 @@ public class ConfirmPurchaseDialog extends JDialog {
 	private JButton btnOkay;
 	private JButton btnNo;
 	private FirstPage firstPage;
-	public Map<Integer, JLabel[]> map = new HashMap<>();
-	public WinningGUI winningGUI;
-	public Customer customer;
 	
-	public Map<Integer, JLabel[]> lottoList() {
-			return map;
-		}
 	
-		public ConfirmPurchaseDialog(PurchaseGUI purchaseGUI,FirstPage firstPage) {
+	public ConfirmPurchaseDialog(PurchaseGUI purchaseGUI,FirstPage firstPage) {
 		super(purchaseGUI);
 		this.purchaseGUI = purchaseGUI;
 		this.firstPage= firstPage;
 		
 		extracted();
-		
-		
 
 		btnOkay.addActionListener(new ActionListener() {
-			//private Map<Integer, JLabel[]> map;
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				map = purchaseGUI.getMap();
-				System.out.println(map);
-                customer.lottoList = map;
-				
-//				for(int i = 0; i < purchaseGUI.map.size(); i++) {
-//					JLabel[] value = purchaseGUI.map.get(i+1);
-//					mapp.put(i+1, value);
-//				}
-//				System.out.println(mapp.get(1)[1]);
-				
-				//winningGUI.setLblAs(purchaseGUI.map.get(1));
-				
-				
+				Map<Integer, JLabel[]> map = purchaseGUI.getMap();
+                FirstPage.customer.lottoList = map;
                 dispose();
 			    firstPage.setVisible(true); 
 			    purchaseGUI.setVisible(false);
@@ -82,7 +60,6 @@ public class ConfirmPurchaseDialog extends JDialog {
 		btnOkay = new JButton("확인");
 		btnOkay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
 			}
 		});
 		btnOkay.setBounds(31, 115, 97, 23);

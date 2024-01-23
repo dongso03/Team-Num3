@@ -130,7 +130,12 @@ public PurchaseGUI(FirstPage firstpage, ChargeGUI chargeGUI) {
                   int currentLabelIndex = 0;
 
                   if (!btnAuto.isSelected()) { // 수동 버튼
-                     if (selectCount == 0) {
+                	  for (JToggleButton button : toggleButtons) {
+                          if (button.isSelected()) {
+                             selectCount++;
+                          }
+                       }
+                    // if (selectCount == 0) {
                         if (selectCount != 0) {
                            selectedNumbers.addAll(getSelectedNumbers());
                            Collections.sort(selectedNumbers);
@@ -143,7 +148,7 @@ public PurchaseGUI(FirstPage firstpage, ChargeGUI chargeGUI) {
                            JOptionPane.showMessageDialog(null, "숫자가 선택되지 않았습니다.");
                         }
 
-                     }
+                    // }
 
                   } else { // 자동 버튼 눌렀을 때
                      Set<Integer> nonDuplicateNumber = new HashSet<>();
@@ -440,14 +445,14 @@ public PurchaseGUI(FirstPage firstpage, ChargeGUI chargeGUI) {
 
    // 토글 버튼에서 숫자를 추출하고, 그 숫자들을 리스트로 반환 메소드
    static List<Integer> getSelectedNumbers() {
-      // List<Integer> selectedNumbers = new ArrayList<>();
+       List<Integer> selectedNumbers00 = new ArrayList<>();
       for (JToggleButton button : toggleButtons) {
          if (button.isSelected()) {
             int num = Integer.parseInt(button.getText());
-            selectedNumbers.add(num);
+            selectedNumbers00.add(num);
          }
       }
-      return selectedNumbers;
+      return selectedNumbers00;
    }
 
    private void handleToggleButtonAction(JToggleButton togbtn) {
