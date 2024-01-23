@@ -20,7 +20,7 @@ public class ChargeGUI extends JFrame {
 	PurchaseGUI purchaseGUI;
 	private JButton btnReset;
 	FirstPage firstPage;
-	private JLabel lblNewLabel;
+	public JLabel lblNewLabel;
 
 	public ChargeGUI(FirstPage firstPage) {
 		extracted();
