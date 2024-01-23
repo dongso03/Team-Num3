@@ -189,8 +189,9 @@ public JPanel pnl;
       pirntResultA.setBounds(359, 195, 92, 34);
       pnl.add(pirntResultA);
       
-      JLabel lblNewLabel = new JLabel("New label");
+      JLabel lblNewLabel = new JLabel("");
       pirntResultA.add(lblNewLabel);
+      
       
 
       JPanel pirntResultB = new JPanel();

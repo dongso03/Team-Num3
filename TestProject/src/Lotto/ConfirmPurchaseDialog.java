@@ -16,27 +16,30 @@ public class ConfirmPurchaseDialog extends JDialog {
 	private JButton btnOkay;
 	private JButton btnNo;
 	private FirstPage firstPage;
-	
-	
-	public ConfirmPurchaseDialog(PurchaseGUI purchaseGUI,FirstPage firstPage) {
+	private ChargeGUI chargeGUI;
+
+	public ConfirmPurchaseDialog(PurchaseGUI purchaseGUI, FirstPage firstPage, ChargeGUI chargGUI) {
 		super(purchaseGUI);
 		this.purchaseGUI = purchaseGUI;
-		this.firstPage= firstPage;
-		
+		this.firstPage = firstPage;
+		this.chargeGUI = chargGUI;
+
 		extracted();
 
 		btnOkay.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Map<Integer, JLabel[]> map = purchaseGUI.getMap();
-                FirstPage.customer.lottoList = map;
-                dispose();
-			    firstPage.setVisible(true); 
-			    purchaseGUI.setVisible(false);
-				  
-			        dispose();
-			    }
-			});
+				FirstPage.customer.lottoList = map;
+				dispose();
+				firstPage.setVisible(true);
+				purchaseGUI.setVisible(false);
+				chargGUI.lblNewLabel.setText("(현재 잔액: " + (FirstPage.customer.getAmount() - FirstPage.nowPrice) + "원)");
+
+				//purchaseGUI.
+				
+			}
+		});
 
 		btnNo.addActionListener(new ActionListener() {
 			@Override
@@ -53,8 +56,6 @@ public class ConfirmPurchaseDialog extends JDialog {
 		getContentPane().setLayout(null);
 
 	}
-
-	
 
 	private void extracted() {
 		btnOkay = new JButton("확인");
