@@ -26,7 +26,7 @@ public class FirstPage extends JFrame {
    private WinningGUI winningGUI;
    public static Customer customer;
    private JPanel panel;
-
+   static int nowPrice = 0;
    public FirstPage() {
       customer = new Customer(1000, 1);
       chargGUI = new ChargeGUI(this);
@@ -40,6 +40,7 @@ public class FirstPage extends JFrame {
          public void actionPerformed(ActionEvent e) {
             setVisible(false);
             chargGUI.setVisible(true);
+            //chargGUI.lblNewLabel.setText(text);
             
          }
       });
@@ -49,7 +50,7 @@ public class FirstPage extends JFrame {
          public void actionPerformed(ActionEvent e) {
             setVisible(false);
             purchaseGUI.setVisible(true);
-            purchaseGUI.lblNewLabel_10.setText("(현재 잔액: " + (FirstPage.customer.getAmount() - PurchaseGUI.nowPrice) + "원)");
+            purchaseGUI.lblNewLabel_10.setText("(현재 잔액: " + (FirstPage.customer.getAmount() - nowPrice) + "원)");
          }
       });
       btnWinning.addActionListener(new ActionListener() {
@@ -69,17 +70,24 @@ public class FirstPage extends JFrame {
             for(int i= 0; i<8;i++) {
             winningGUI.pirntNumbersA.add(customer.lottoList.get(1)[i]);
             }
+            // customer.lottoList.get(1) 이게 A라벨들(스트링임.)(앞에 두 개빼고 숫자 6개)인데. 
+            // 이걸 uniqueList integer(숫자 7개)들과 비교하여 
+            // 포함을 x개 하고  있다면 1등이니깐 settext "당첨" 아니면 "낙첨"    66000 32000
+            
+            
+            
+            
             for(int i= 0; i<8;i++) {
-            	winningGUI.pirntNumbersB.add(customer.lottoList.get(2)[i]);
+               winningGUI.pirntNumbersB.add(customer.lottoList.get(2)[i]);
             }
             for(int i= 0; i<8;i++) {
-            	winningGUI.pirntNumbersC.add(customer.lottoList.get(3)[i]);
+               winningGUI.pirntNumbersC.add(customer.lottoList.get(3)[i]);
             }
             for(int i= 0; i<8;i++) {
-            	winningGUI.pirntNumbersD.add(customer.lottoList.get(4)[i]);
+               winningGUI.pirntNumbersD.add(customer.lottoList.get(4)[i]);
             }
             for(int i= 0; i<8;i++) {
-            	winningGUI.pirntNumbersE.add(customer.lottoList.get(5)[i]);
+               winningGUI.pirntNumbersE.add(customer.lottoList.get(5)[i]);
             }
             setVisible(false);
             winningGUI.setVisible(true);

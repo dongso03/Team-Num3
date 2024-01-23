@@ -31,11 +31,16 @@ public class WinningGUI extends JFrame {
     JPanel pirntNumbersC;
     JPanel pirntNumbersD;
     JPanel pirntNumbersE;
-   public JLabel[] lblAs = new JLabel[] {new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel("")};
    
 
    private PurchaseGUI purchaseGUI;
 public JPanel pnl;
+public List<Integer> uniqueList;
+JLabel lblNewLabel;
+ JLabel lblNewLabel_1;
+ JLabel lblNewLabel_2;
+ JLabel lblNewLabel_6;
+ JLabel lblNewLabel_7;
    
    public WinningGUI(FirstPage firstPage) {
       
@@ -114,7 +119,7 @@ public JPanel pnl;
       
       // List<Integer> uniqueList = new ArrayList<>(uniqueNumbers);
       Set<Integer> resultList = new TreeSet<>(uniqueNumbers);
-      List<Integer> uniqueList = new ArrayList<>(resultList);
+      uniqueList = new ArrayList<>(resultList);
       result_1.setText(String.valueOf(uniqueList.get(0)));
       result_2.setText(String.valueOf(uniqueList.get(1)));
       result_3.setText(String.valueOf(uniqueList.get(2)));
@@ -163,10 +168,10 @@ public JPanel pnl;
       pirntNumbersA = new JPanel();
       pirntNumbersA.setBounds(40, 195, 283, 34);
       pnl.add(pirntNumbersA);
-      for(int i =0; i<8;i++) {
-      pirntNumbersA.add(lblAs[i]);
-      System.out.println(lblAs[i]);
-      }
+//      for(int i =0; i<8;i++) {
+//      pirntNumbersA.add(lblAs[i]);
+//      System.out.println(lblAs[i]);
+//      }
 
 
       pirntNumbersB = new JPanel();
@@ -189,7 +194,8 @@ public JPanel pnl;
       pirntResultA.setBounds(359, 195, 92, 34);
       pnl.add(pirntResultA);
       
-      JLabel lblNewLabel = new JLabel("New label");
+      lblNewLabel = new JLabel("New label");
+      
       pirntResultA.add(lblNewLabel);
       
 
@@ -197,28 +203,28 @@ public JPanel pnl;
       pirntResultB.setBounds(359, 239, 92, 34);
       pnl.add(pirntResultB);
       
-      JLabel lblNewLabel_1 = new JLabel("New label");
+      lblNewLabel_1 = new JLabel("New label");
       pirntResultB.add(lblNewLabel_1);
 
       JPanel pirntResultC = new JPanel();
       pirntResultC.setBounds(359, 283, 92, 34);
       pnl.add(pirntResultC);
       
-      JLabel lblNewLabel_2 = new JLabel("New label");
+      lblNewLabel_2 = new JLabel("New label");
       pirntResultC.add(lblNewLabel_2);
 
       JPanel pirntResultD = new JPanel();
       pirntResultD.setBounds(359, 326, 92, 34);
       pnl.add(pirntResultD);
       
-      JLabel lblNewLabel_6 = new JLabel("New label");
+      lblNewLabel_6 = new JLabel("New label");
       pirntResultD.add(lblNewLabel_6);
 
       JPanel pirntResultE = new JPanel();
       pirntResultE.setBounds(359, 370, 92, 34);
       pnl.add(pirntResultE);
       
-      JLabel lblNewLabel_7 = new JLabel("New label");
+      lblNewLabel_7 = new JLabel("New label");
       pirntResultE.add(lblNewLabel_7);
 
       showGUI();

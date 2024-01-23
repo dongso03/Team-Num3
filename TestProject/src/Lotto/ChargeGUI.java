@@ -82,8 +82,8 @@ public class ChargeGUI extends JFrame {
         		number =  Integer.valueOf(str);
         		JDialog jd = new confirmDialog(ChargeGUI.this);
 				jd.setVisible(true);
-				 
-				lblNewLabel.setText("(현재 잔액: " + FirstPage.customer.getAmount() +"원)");
+				//구매확인하고 값 저장해서 ..... ***********수정해야함**********
+				lblNewLabel.setText("(현재 잔액: " + (FirstPage.customer.getAmount() - FirstPage.nowPrice) +"원)");
 				
         		
         	} catch (NumberFormatException e) {
