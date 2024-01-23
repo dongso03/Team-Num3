@@ -169,9 +169,33 @@ public class PurchaseGUI extends JFrame {
 
 					}
 					// 확인 버튼을 누를때마다 값을 추가 하여 priceLbl에 출력
+					
 					nowPrice += (comboBox.getSelectedIndex() + 1) * 1000;
 					if (nowPrice > Customer.amount) {
-						JOptionPane.showMessageDialog(null, "충전 금액을 초과하였습니다.");
+						// 새로 작성한 코드 시작
+						int result = JOptionPane.showOptionDialog(
+					            null,
+					            "충전 금액을 초과하였습니다.",
+					            "경고",
+					            JOptionPane.DEFAULT_OPTION,
+					            JOptionPane.WARNING_MESSAGE,
+					            null,
+					            new Object[]{"확인"}, // 버튼 텍스트를 "확인"으로 설정
+					            "확인" // 기본 선택 버튼
+					    );
+
+					    if (result == JOptionPane.OK_OPTION) {
+					        // "확인" 버튼을 눌렀을 때 수행할 동작
+					    	for (int i = 1; i < 8; i++) {
+								lbl1[i].setText("");
+								lbl2[i].setText("");
+								lbl3[i].setText("");
+								lbl4[i].setText("");
+								lbl5[i].setText("");
+							}
+					    	nowPrice = 0;
+					    }
+						
 					} else {
 						priceLbl.setText(String.valueOf(nowPrice));
 					}
