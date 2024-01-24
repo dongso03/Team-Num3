@@ -22,6 +22,8 @@ import java.awt.event.ActionListener;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextPane;
+import java.awt.Font;
+import java.awt.Color;
 
 public class WinningGUI extends JFrame {
 	FirstPage firstPage;
@@ -31,6 +33,7 @@ public class WinningGUI extends JFrame {
 	JPanel pirntNumbersC;
 	JPanel pirntNumbersD;
 	JPanel pirntNumbersE;
+
 	private PurchaseGUI purchaseGUI;
 	public JPanel pnl;
 	public List<Integer> uniqueList;
@@ -39,75 +42,98 @@ public class WinningGUI extends JFrame {
 	JLabel lblNewLabel_2;
 	JLabel lblNewLabel_6;
 	JLabel lblNewLabel_7;
+	JLabel result_1;
+	JLabel result_2;
+	JLabel result_3;
+	JLabel result_4;
+	JLabel result_5;
+	JLabel result_6;
+	JLabel result_7;
+	Set<Integer> resultList;
+	Set<Integer> uniqueNumbers;
+	private JLabel lblNewLabel_9;
+	private JLabel lblNewLabel_10;
 
 	public WinningGUI(FirstPage firstPage) {
 
-//       for(int i= 0; i< 8;i++) {
-//            lblAs[i].setText("");
-//       }
 		setTitle("당첨확인");
 		pnl = new JPanel();
+		pnl.setBackground(new Color(250, 250, 210));
 
 		pnl.setLayout(null);
 		JLabel lbl = new JLabel("당첨결과");
-		lbl.setBounds(210, 24, 84, 15);
+		lbl.setForeground(new Color(0, 0, 128));
+		lbl.setFont(new Font("맑은 고딕", Font.BOLD, 19));
+		lbl.setBounds(193, 28, 84, 39);
 		pnl.add(lbl);
 
 		String[] list = new String[] { "", "1회차", "당첨된 것만 보기" };
 
+		
+		
+		
 		getContentPane().add(pnl);
 
 		JPanel panel = new JPanel();
-		panel.setBounds(79, 65, 372, 64);
+		panel.setBackground(new Color(255, 218, 185));
+		panel.setBounds(77, 77, 336, 64);
 		pnl.add(panel);
 		panel.setLayout(null);
 
-		// 당첨 숫자 라벨
-		JLabel result_1 = new JLabel("");
+		result_1 = new JLabel("");
+		result_1.setFont(new Font("맑은 고딕", Font.BOLD, 14));
 		result_1.setBounds(12, 10, 28, 27);
 		panel.add(result_1);
 
-		JLabel result_2 = new JLabel("");
+		result_2 = new JLabel("");
+		result_2.setFont(new Font("맑은 고딕", Font.BOLD, 14));
 		result_2.setBounds(52, 10, 28, 27);
 		panel.add(result_2);
 
-		JLabel result_3 = new JLabel("");
-		result_3.setBounds(92, 10, 28, 27);
+		result_3 = new JLabel("");
+		result_3.setFont(new Font("돋움체", Font.BOLD, 14));
+		result_3.setBounds(92, 10, 40, 27);
 		panel.add(result_3);
 
-		JLabel result_4 = new JLabel("");
+		result_4 = new JLabel("");
+		result_4.setFont(new Font("맑은 고딕", Font.BOLD, 14));
 		result_4.setBounds(132, 10, 28, 27);
 		panel.add(result_4);
 
-		JLabel result_5 = new JLabel("");
+		result_5 = new JLabel("");
+		result_5.setFont(new Font("맑은 고딕", Font.BOLD, 14));
 		result_5.setBounds(171, 9, 28, 27);
 		panel.add(result_5);
 
-		JLabel result_6 = new JLabel("");
+		result_6 = new JLabel("");
+		result_6.setFont(new Font("맑은 고딕", Font.BOLD, 14));
 		result_6.setBounds(211, 9, 28, 27);
 		panel.add(result_6);
 
 		JLabel lblNewLabel_2_1_1 = new JLabel("+");
+		lblNewLabel_2_1_1.setFont(new Font("맑은 고딕", Font.BOLD, 14));
 		lblNewLabel_2_1_1.setBounds(251, 10, 17, 27);
 		panel.add(lblNewLabel_2_1_1);
 
 		JLabel lblNewLabel_3 = new JLabel("당첨 번호");
-		lblNewLabel_3.setBounds(102, 39, 57, 15);
+		lblNewLabel_3.setForeground(new Color(165, 42, 42));
+		lblNewLabel_3.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		lblNewLabel_3.setBounds(102, 39, 75, 25);
 		panel.add(lblNewLabel_3);
 
-		JLabel result_7 = new JLabel("");
+		result_7 = new JLabel("");
+		result_7.setFont(new Font("맑은 고딕", Font.BOLD, 14));
 		result_7.setBounds(292, 10, 28, 27);
 		panel.add(result_7);
-
+		
 		JLabel lblNewLabel_4 = new JLabel("보너스");
-		lblNewLabel_4.setBounds(292, 39, 57, 15);
+		lblNewLabel_4.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		lblNewLabel_4.setForeground(new Color(255, 140, 0));
+		lblNewLabel_4.setBounds(273, 44, 57, 15);
 		panel.add(lblNewLabel_4);
 
 		Random ran = new Random();
-		// 숫자 7개를 랜덤으로 뽑아내는데 6개는 오름차순으로, 하나는 보너스
-		// n1~n7까지 숫자가 중복안되게 수정 필요!!!!
-		// ----------------------------
-		Set<Integer> uniqueNumbers = new HashSet<>();
+		uniqueNumbers = new HashSet<>();
 
 		// 중복되지 않는 6개의 난수 생성(보너스 숫자 포함x)
 		while (uniqueNumbers.size() < 7) {
@@ -115,8 +141,7 @@ public class WinningGUI extends JFrame {
 			uniqueNumbers.add(randomNumber);
 		}
 
-		// List<Integer> uniqueList = new ArrayList<>(uniqueNumbers);
-		Set<Integer> resultList = new TreeSet<>(uniqueNumbers);
+		resultList = new TreeSet<>(uniqueNumbers);
 		uniqueList = new ArrayList<>(resultList);
 		result_1.setText(String.valueOf(uniqueList.get(0)));
 		result_2.setText(String.valueOf(uniqueList.get(1)));
@@ -125,33 +150,56 @@ public class WinningGUI extends JFrame {
 		result_5.setText(String.valueOf(uniqueList.get(5)));
 		result_6.setText(String.valueOf(uniqueList.get(6)));
 		result_7.setText(String.valueOf(uniqueList.get(3)));
-
+		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(40, 162, 411, 23);
+		panel_1.setBackground(new Color(250, 250, 210));
+		panel_1.setBounds(40, 151, 411, 34);
 		pnl.add(panel_1);
 		panel_1.setLayout(null);
 
 		JLabel purchaseNumber = new JLabel("구매 번호");
-		purchaseNumber.setBounds(131, 0, 191, 29);
+		purchaseNumber.setBackground(new Color(250, 250, 210));
+		purchaseNumber.setForeground(new Color(0, 0, 128));
+		purchaseNumber.setFont(new Font("맑은 고딕", Font.BOLD, 16));
+		purchaseNumber.setBounds(131, 0, 129, 29);
 		panel_1.add(purchaseNumber);
 
 		JLabel winningResult = new JLabel("당첨 결과");
-		winningResult.setBounds(334, 0, 77, 29);
+		winningResult.setForeground(new Color(0, 0, 128));
+		winningResult.setFont(new Font("맑은 고딕", Font.BOLD, 16));
+		winningResult.setBounds(322, 0, 77, 29);
 		panel_1.add(winningResult);
-
-		JButton btnNewButton = new JButton("처음 화면으로 돌아가기");
+		
+		JButton btnNewButton = new JButton("");
+		btnNewButton.setContentAreaFilled(false);
+		btnNewButton.setBorderPainted(false);
+		btnNewButton.setFocusPainted(false);
+		btnNewButton.setIcon(new ImageIcon(WinningGUI.class.getResource("/Image/시작화면돌아가기버튼44.png")));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				FirstPage.resetLottoList();
+				FirstPage.resetLottoList();
+				clearLabels(pirntNumbersA);
+				clearLabels(pirntNumbersB);
+				clearLabels(pirntNumbersC);
+				clearLabels(pirntNumbersD);
+				clearLabels(pirntNumbersE);
+				firstPage.setVisible(true);
+				dispose();
 				firstPage.setVisible(true);
 				dispose();
 
 			}
 		});
-
+		
 		btnNewButton.setBounds(273, 428, 178, 23);
 		pnl.add(btnNewButton);
 
-		JButton btnNewButton_1 = new JButton("당첨규칙 확인하기");
+		JButton btnNewButton_1 = new JButton("");
+		btnNewButton_1.setContentAreaFilled(false);
+		btnNewButton_1.setBorderPainted(false);
+		btnNewButton_1.setFocusPainted(false);
+		btnNewButton_1.setIcon(new ImageIcon(WinningGUI.class.getResource("/Image/당첨규칙확인하기버튼2.png")));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// 다이얼로그 만들기
@@ -162,68 +210,110 @@ public class WinningGUI extends JFrame {
 		});
 		btnNewButton_1.setBounds(12, 428, 178, 23);
 		pnl.add(btnNewButton_1);
-
+		
 		pirntNumbersA = new JPanel();
+		pirntNumbersA.setBackground(new Color(255, 228, 181));
 		pirntNumbersA.setBounds(40, 195, 283, 34);
 		pnl.add(pirntNumbersA);
 
 		pirntNumbersB = new JPanel();
+		pirntNumbersB.setBackground(new Color(255, 228, 181));
 		pirntNumbersB.setBounds(40, 239, 283, 34);
 		pnl.add(pirntNumbersB);
 
 		pirntNumbersC = new JPanel();
+		pirntNumbersC.setBackground(new Color(255, 228, 181));
 		pirntNumbersC.setBounds(40, 283, 283, 34);
 		pnl.add(pirntNumbersC);
 
 		pirntNumbersD = new JPanel();
+		pirntNumbersD.setBackground(new Color(255, 228, 181));
 		pirntNumbersD.setBounds(40, 326, 283, 34);
 		pnl.add(pirntNumbersD);
 
 		pirntNumbersE = new JPanel();
+		pirntNumbersE.setBackground(new Color(255, 228, 181));
 		pirntNumbersE.setBounds(40, 370, 283, 34);
 		pnl.add(pirntNumbersE);
 
 		JPanel pirntResultA = new JPanel();
+		pirntResultA.setBackground(new Color(255, 248, 220));
 		pirntResultA.setBounds(359, 195, 92, 34);
 		pnl.add(pirntResultA);
 
-		lblNewLabel = new JLabel("New label");
-
+		lblNewLabel = new JLabel("");
 		pirntResultA.add(lblNewLabel);
 
 		JPanel pirntResultB = new JPanel();
+		pirntResultB.setBackground(new Color(255, 248, 220));
 		pirntResultB.setBounds(359, 239, 92, 34);
 		pnl.add(pirntResultB);
 
-		lblNewLabel_1 = new JLabel("New label");
+		lblNewLabel_1 = new JLabel("");
 		pirntResultB.add(lblNewLabel_1);
 
 		JPanel pirntResultC = new JPanel();
+		pirntResultC.setBackground(new Color(255, 248, 220));
 		pirntResultC.setBounds(359, 283, 92, 34);
 		pnl.add(pirntResultC);
 
-		lblNewLabel_2 = new JLabel("New label");
+		lblNewLabel_2 = new JLabel("");
 		pirntResultC.add(lblNewLabel_2);
 
 		JPanel pirntResultD = new JPanel();
+		pirntResultD.setBackground(new Color(255, 248, 220));
 		pirntResultD.setBounds(359, 326, 92, 34);
 		pnl.add(pirntResultD);
 
-		lblNewLabel_6 = new JLabel("New label");
+		lblNewLabel_6 = new JLabel("");
 		pirntResultD.add(lblNewLabel_6);
 
 		JPanel pirntResultE = new JPanel();
+		pirntResultE.setBackground(new Color(255, 248, 220));
 		pirntResultE.setBounds(359, 370, 92, 34);
 		pnl.add(pirntResultE);
 
-		lblNewLabel_7 = new JLabel("New label");
+		lblNewLabel_7 = new JLabel("");
 		pirntResultE.add(lblNewLabel_7);
 
+		JPanel panel_2 = new JPanel();
+		panel_2.setBackground(new Color(250, 250, 210));
+		panel_2.setBounds(484, 24, 449, 427);
+		pnl.add(panel_2);
+		panel_2.setLayout(null);
+
+		JLabel lblNewLabel_8 = new JLabel("");
+		lblNewLabel_8.setBackground(new Color(250, 250, 210));
+		lblNewLabel_8.setIcon(new ImageIcon(WinningGUI.class.getResource("/Image/dddddd.gif")));
+		lblNewLabel_8.setBounds(0, 0, 449, 427);
+		panel_2.add(lblNewLabel_8);
+		
+		lblNewLabel_9 = new JLabel("");
+		lblNewLabel_9.setIcon(new ImageIcon(WinningGUI.class.getResource("/Image/페페얼굴3.png")));
+		lblNewLabel_9.setBounds(141, 28, 40, 39);
+		pnl.add(lblNewLabel_9);
+		
+		lblNewLabel_10 = new JLabel("");
+		lblNewLabel_10.setIcon(new ImageIcon(WinningGUI.class.getResource("/Image/페페얼굴3.png")));
+		lblNewLabel_10.setBounds(283, 28, 40, 39);
+		pnl.add(lblNewLabel_10);
+		
 		showGUI();
 	}
-
+	private void clearLabels(JPanel panel) {
+	       // 패널에 속한 모든 컴포넌트를 가져와서 제거
+	       Component[] components = panel.getComponents();
+	       for (Component component : components) {
+	           if (component instanceof JLabel) {
+	               panel.remove(component);
+	           }
+	       }
+	       // 변경된 내용을 적용
+	       panel.revalidate();
+	       panel.repaint();
+	   }
 	private void showGUI() {
-		setSize(500, 500);
+		setSize(800, 499);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setVisible(false);
 		setLocationRelativeTo(null);
