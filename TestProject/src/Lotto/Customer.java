@@ -16,11 +16,22 @@ public  class Customer {
    private int lottoNums;
    public static Map<Integer,JLabel[]> lottoList = new HashMap<>();
    public static int value;
-
+   private Map<Integer, List<Integer[]>> lottoPurchaseHistory;
+   
    public Customer(int amount, int lottoNums) {
       super();
       this.amount = amount;
       this.lottoNums = lottoNums;
+      this.lottoPurchaseHistory = new HashMap<>();
+      
+      for (int i = 1; i <= lottoNums; i++) {
+          List<Integer[]> purchaseList = new ArrayList<>();
+          for (int j = 0; j < 5; j++) {
+             purchaseList.add(new Integer[8]); // assuming 8 elements in each lotto ticket
+          }
+          lottoPurchaseHistory.put(i, purchaseList);
+       }
+    
       
       JLabel[] j = new JLabel[] {new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel(""),new JLabel("")};
       lottoList.put(1,j);
@@ -51,6 +62,18 @@ public  class Customer {
       this.lottoNums = lottoNums;
    }
 
+
+   public Map<Integer, List<Integer[]>> getLottoPurchaseHistory() {
+      return lottoPurchaseHistory;
+   }
+
+   public void setLottoPurchaseHistory(Map<Integer, List<Integer[]>> lottoPurchaseHistory) {
+      this.lottoPurchaseHistory = lottoPurchaseHistory;
+   }
+
+   public List<Integer[]> getRecentPurchaseNumbers() {
+      return lottoPurchaseHistory.get(lottoNums);
+   }
    @Override
    public int hashCode() {
       final int prime = 31;

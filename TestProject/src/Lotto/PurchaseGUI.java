@@ -26,14 +26,18 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.RowSpec;
+
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JPanel;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
+
 import java.awt.GridLayout;
+import java.awt.Font;
+import java.awt.Color;
 
 public class PurchaseGUI extends JFrame {
    private static List<JToggleButton> toggleButtons;
@@ -227,7 +231,9 @@ public class PurchaseGUI extends JFrame {
       panel_2.setLayout(null);
 
       JLabel lblNewLabel_1 = new JLabel("선택번호 확인");
-      lblNewLabel_1.setBounds(164, 5, 114, 15);
+      lblNewLabel_1.setForeground(Color.RED);
+      lblNewLabel_1.setFont(new Font("맑은 고딕", Font.BOLD, 17));
+      lblNewLabel_1.setBounds(159, 10, 130, 15);
       panel_2.add(lblNewLabel_1);
 
       panelA = new JPanel();
@@ -420,8 +426,8 @@ public class PurchaseGUI extends JFrame {
       btnNewButton_2.addActionListener(new ActionListener() {
          public void actionPerformed(ActionEvent e) {
             JDialog jdp = new ConfirmPurchaseDialog(PurchaseGUI.this, firstpage, chargeGUI);
-
             jdp.setVisible(true);
+            
          }
       });
       btnNewButton_2.setBounds(338, 10, 97, 55);

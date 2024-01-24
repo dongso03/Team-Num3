@@ -35,10 +35,10 @@ public class ConfirmPurchaseDialog extends JDialog {
 				FirstPage.customer.lottoList = map;
 				dispose();
 				firstPage.setVisible(true);
-				purchaseGUI.setVisible(false);
+				purchaseGUI.dispose();
 				chargGUI.lblNewLabel.setText("(현재 잔액: " + (FirstPage.customer.getAmount() - FirstPage.nowPrice) + "원)");
-
-				
+//				PurchaseGUI purchaseGUI2 = new PurchaseGUI(firstPage, chargGUI);
+//				WinningGUI winningGUI2 = new WinningGUI(firstPage);
 				
 			}
 		});
