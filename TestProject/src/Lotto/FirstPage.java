@@ -77,6 +77,8 @@ public class FirstPage extends JFrame {
 		btnPuchase.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+			
+				
 				// 현재 PurchaseGUI를 숨기고, 다음 PurchaseGUI를 보여줌
 				purchaseGUIList.get(currentPurchaseGUIIndex).setVisible(false);
 
@@ -92,6 +94,7 @@ public class FirstPage extends JFrame {
 				purchaseGUIList.get(currentPurchaseGUIIndex).setVisible(true);
 				purchaseGUIList.get(currentPurchaseGUIIndex).lblNewLabel_10
 						.setText("(현재 잔액: " + (FirstPage.customer.getAmount() - nowPrice) + "원)");
+				nowPrice = 0;
 			}
 		});
 		btnWinning.addActionListener(new ActionListener() {
