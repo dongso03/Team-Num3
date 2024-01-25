@@ -2,15 +2,20 @@ package Lotto;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JToggleButton;
 import javax.swing.SpringLayout;
 
 import com.sun.prism.Image;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -20,6 +25,8 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JEditorPane;
 
@@ -32,34 +39,34 @@ public class FirstPage extends JFrame {
 	public static Customer customer;
 	private JPanel panel;
 	static int nowPrice = 0;
+	static int finalNowPrice = 0;
 	List<Integer> uniqueList;
 	int[] uniqueArray;
 
-	private PurchaseGUI purchaseGUI;
 	private List<PurchaseGUI> purchaseGUIList;
 	private int currentPurchaseGUIIndex;
 	
 	Set<Integer> resultList;
 	Set<Integer> uniqueNumbers;
 
-
 	public FirstPage() {
 		customer = new Customer(10000, 1);
 		chargGUI = new ChargeGUI(this);
 		winningGUI = new WinningGUI(this);
-		purchaseGUI = new PurchaseGUI(this, chargGUI);
+		
+		// Sound 클래스의 인스턴스 생성
+        Sound sound = new Sound();
 
 		ImageIcon icon = new ImageIcon("Image/캡처.PNG");
 		uniqueList = winningGUI.uniqueList;
 		uniqueArray = uniqueList.stream().mapToInt(Integer::intValue).toArray();
 
 		purchaseGUIList = new ArrayList<>();
-		purchaseGUIList.add(new PurchaseGUI(this, chargGUI)); // 0번째 PurchaseGUI
-		purchaseGUIList.add(new PurchaseGUI(this, chargGUI)); // 1번째 PurchaseGUI
-		purchaseGUIList.add(new PurchaseGUI(this, chargGUI));
-		purchaseGUIList.add(new PurchaseGUI(this, chargGUI));
-		purchaseGUIList.add(new PurchaseGUI(this, chargGUI));
-		
+		purchaseGUIList.add(new PurchaseGUI(this, chargGUI, nowPrice)); // 0번째 PurchaseGUI
+		purchaseGUIList.add(new PurchaseGUI(this, chargGUI, nowPrice)); // 1번째 PurchaseGUI
+		purchaseGUIList.add(new PurchaseGUI(this, chargGUI, nowPrice));
+		purchaseGUIList.add(new PurchaseGUI(this, chargGUI, nowPrice));
+		purchaseGUIList.add(new PurchaseGUI(this, chargGUI, nowPrice));
 
 		currentPurchaseGUIIndex = 0;
 
@@ -69,16 +76,15 @@ public class FirstPage extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
 				chargGUI.setVisible(true);
-				// chargGUI.lblNewLabel.setText(text);
-
 			}
 		});
 
 		btnPuchase.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-			
 				
+				// 구매하기 버튼을 눌렀을 때 소리 나옴
+				sound.Play("C:\\으악2.wav");
 				// 현재 PurchaseGUI를 숨기고, 다음 PurchaseGUI를 보여줌
 				purchaseGUIList.get(currentPurchaseGUIIndex).setVisible(false);
 
@@ -90,17 +96,45 @@ public class FirstPage extends JFrame {
 					currentPurchaseGUIIndex = 0;
 				}
 
-				// 새로운 PurchaseGUI를 보여줌
+				handleToggleButtonAction(purchaseGUIList.get(currentPurchaseGUIIndex).togbtn);
+				for (int i = 1; i <= 45; i++) {
+					purchaseGUIList.get(currentPurchaseGUIIndex).togbtn = new JToggleButton(String.valueOf(i));
+					 Color customColor = new Color(255,228,181);
+					purchaseGUIList.get(currentPurchaseGUIIndex).togbtn.setBackground(customColor);
+					purchaseGUIList.get(currentPurchaseGUIIndex).togbtn.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							handleToggleButtonAction(purchaseGUIList.get(currentPurchaseGUIIndex).togbtn);
+						}
+					});
+					purchaseGUIList.get(currentPurchaseGUIIndex).panel_1
+							.add(purchaseGUIList.get(currentPurchaseGUIIndex).togbtn);
+					purchaseGUIList.get(currentPurchaseGUIIndex).toggleButtons
+							.add(purchaseGUIList.get(currentPurchaseGUIIndex).togbtn);
+				}
+//				for(int i = 1; i <= 45; i++) {
+//					purchaseGUIList.get(currentPurchaseGUIIndex).togbtn.setBackground(Color.BLUE);
+//				}
+
+				setVisible(false);
 				purchaseGUIList.get(currentPurchaseGUIIndex).setVisible(true);
+				FirstPage.customer.subtractToAmount(nowPrice);
 				purchaseGUIList.get(currentPurchaseGUIIndex).lblNewLabel_10
-						.setText("(현재 잔액: " + (FirstPage.customer.getAmount() - nowPrice) + "원)");
-				nowPrice = 0;
+						.setText(FirstPage.customer.getAmount()+"원");
+				purchaseGUIList.get(currentPurchaseGUIIndex).resetNowPrice();
+
 			}
 		});
+		
+		
+		
+		
+		
+		
+		
+		
 		btnWinning.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
 				Random ran = new Random();
 				uniqueNumbers = new HashSet<>();
 
@@ -109,10 +143,9 @@ public class FirstPage extends JFrame {
 					int randomNumber = ran.nextInt(45) + 1;
 					uniqueNumbers.add(randomNumber);
 				}
-
+				
 				resultList = new TreeSet<>(uniqueNumbers);
 				uniqueList = new ArrayList<>(resultList);
-			   
 				winningGUI.result_1.setText(String.valueOf(uniqueList.get(0)));
 				winningGUI.result_2.setText(String.valueOf(uniqueList.get(1)));
 				winningGUI.result_3.setText(String.valueOf(uniqueList.get(2)));
@@ -120,8 +153,6 @@ public class FirstPage extends JFrame {
 				winningGUI.result_5.setText(String.valueOf(uniqueList.get(5)));
 				winningGUI.result_6.setText(String.valueOf(uniqueList.get(6)));
 				winningGUI.result_7.setText(String.valueOf(uniqueList.get(3)));
-			      
-			      
 				for (int i = 0; i < 8; i++) {
 					winningGUI.pirntNumbersA.add(customer.lottoList.get(1)[i]);
 				}
@@ -146,7 +177,6 @@ public class FirstPage extends JFrame {
 					JLabel[] lottoListLabels = customer.lottoList.get(a);
 					for (int i = 0; i < 7; i++) { // 복권 당첨 숫자 7개
 						for (int j = 2; j < 8; j++) { // 사용자가 선택한 숫자들을 6개
-
 							String uniqueNumber = String.valueOf(uniqueArray[i]);
 							String labelNumber = lottoListLabels[j].getText();
 
@@ -324,6 +354,27 @@ public class FirstPage extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
+	}
+
+	public void handleToggleButtonAction(JToggleButton togbtn) {
+		int selectedCount = 0;
+		purchaseGUIList.get(currentPurchaseGUIIndex).togbtn = togbtn;
+		List<JToggleButton> a = new ArrayList<>();
+
+		for (JToggleButton button : purchaseGUIList.get(currentPurchaseGUIIndex).toggleButtons) {
+			if (button.isSelected()) {
+				a.add(button);
+				selectedCount++;
+			}
+		}
+
+		//System.out.println(selectedCount);
+		if (selectedCount == 7) {
+			JOptionPane.showMessageDialog(this, "최대 6개까지 선택 가능합니다.");
+			// 모든 토글 버튼을 대상으로 확인하여 선택이 되어있는 경우 선택 취소
+			a.get(6).setSelected(false);
+
+		}
 	}
 
 	public static void main(String[] args) {
